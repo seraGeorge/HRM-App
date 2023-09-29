@@ -1,4 +1,4 @@
-# hrm_app
+# HRM App
 
 **Overview**
 
