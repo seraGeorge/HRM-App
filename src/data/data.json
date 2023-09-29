@@ -1,15 +1,25 @@
 {
     "employees": [
         {
+            "id":"EMP001",
             "first_name": "John",
             "last_name": "Doe",
             "email": "john.doe@example.com",
             "phone": "8451234567",
             "address": "123 Main Street, Anytown, CA, 12345, USA",
             "skills": [
-                "PYT789",
-                "JAV456",
-                "JVS123"
+                {
+                    "id": "PYT789",
+                    "name": "Python"
+                },
+                {
+                    "id": "JAV456",
+                    "name": "Java"
+                },
+                {
+                    "id": "JVS123",
+                    "name": "JavaScript"
+                }
             ],
             "gender": "Male",
             "date_of_birth": "15-04-1985",
@@ -25,9 +35,14 @@
             "phone": "845987-6543",
             "address": "456 Elm Street, Another Town, NY, 54321, USA",
             "skills": [
-                "MKT789",
-                "SLS456",
-                "CSV123"
+                {
+                    "id": "SLS456",
+                    "name": "Sales"
+                },
+                {
+                    "id": "CSV123",
+                    "name": "Customer Service"
+                }
             ],
             "gender": "Female",
             "date_of_birth": "25-08-1990",
@@ -70,7 +85,7 @@
     "designations": [
         "Intern",
         "Engineer",
-        "Assosciate_engineer",
+        "Assosciate Engineer",
         "Director",
         "CTO",
         "CFO"
@@ -82,7 +97,7 @@
         "Database Management",
         "Web Development",
         "IT Support",
-        "Quality Assurance (QA)",
+        "Quality Assurance",
         "Project Management",
         "Business Analysis",
         "UI/UX Design",
@@ -98,7 +113,6 @@
         "Remote",
         "Consultant",
         "Permanent",
-        "Project-Based",
-        "Temporary-to-Permanent"
+        "Probationary"
     ]
 }
