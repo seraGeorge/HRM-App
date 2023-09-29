@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+import { getDatabase, ref, set,onValue } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 
 // Web app's Firebase configuration
 const firebaseConfig = {
@@ -19,3 +19,11 @@ export const app = initializeApp(firebaseConfig);
 
 // Initialize Realtime Database and get a reference to the service
 export const database = getDatabase(app);
+
+//Writing data into your Realtime Database
+export function writeUserData(path,data) {
+    set(ref(database, path), data);
+}
+
+//Reading data into your Realtime Database
+export const readUserData = ref(database, '/');
