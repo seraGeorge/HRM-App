@@ -9,3 +9,7 @@ export const getData = (url) => fetch(url)
     .catch((error) => {
         console.log(error)
     });
+export const titleCase = (first, last) => {
+    return first[0].toUpperCase() + first.substring(1) +" "+ last[0].toUpperCase() + last.substring(1)
+
+}

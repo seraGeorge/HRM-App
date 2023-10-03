@@ -7,7 +7,6 @@
   align-items: center;
 }
 
-
 .header {
   background-color: black;
 }
@@ -17,7 +16,6 @@
 .main-content {
   margin-top: 20px;
 }
-
 
 .heading-section {
   padding: 20px 24px;
@@ -30,51 +28,92 @@
   line-height: 1.5;
   color: #000;
 }
-.heading-section .common-button-container{
-    background-color: black;
-    font-size: 18px;
+.heading-section .common-button-container {
+  background-color: black;
+  font-size: 18px;
 }
 
+.actions-section {
+  gap: 30px;
+  padding: 15px;
+  margin-bottom: 30px;
+  background-color: cadetblue;
+  border-radius: 10px;
+}
+.search-bar {
+  flex: 1;
+  gap: 10px;
+  background-color: brown;
+  border-radius: 10px;
+  padding: 10px;
+}
+.search-form {
+  flex: 1;
+  gap: 10px;
+}
+.search-text {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: 0;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+.search-bar .common-button-container {
+  padding: 10px;
+  gap: 20px;
+  border-radius: 0;
+  background: none;
+  border-left: 2px solid black;
+}
+.actions-section .button-decoration {
+  font-size: 18px;
+}
+.filters {
+  gap: 10px;
+}
+.filters .common-button-container {
+  background-color: black;
+}
 
-.actions-section{
-    gap: 30px;
-    padding: 15px;
-    background-color: cadetblue;
-    border-radius: 10px;
+.employee-table,
+.table-row {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
 }
-.search-bar{
-    flex: 1;
-    gap: 10px;
-    background-color:brown;
-    border-radius: 10px;
-    padding: 10px;
+
+.table-heading,
+.employee-data {
+  border: 1px solid black;
+  padding: 20px;
 }
-.search-form{
-    flex: 1;
-    gap: 10px;
+.table-heading {
+  background-color: aqua;
 }
-.search-text{
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: 0;
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
+.employee-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.search-bar .common-button-container{
-    padding: 10px;
-    gap: 20px;  
-    border-radius: 0;
-    background: none;
-    border-left: 2px solid black;
+.employee-data {
+  background-color: white;
 }
-.actions-section .button-decoration{
-    font-size: 18px;
+.no-entry {
+  column-span: all;
 }
-.filters{
-    gap: 10px;
+.skill-list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.filters .common-button-container{
-    background-color: black;
+.skill-card {
+  background-color: blue;
+  padding: 10px;
+  border-radius: 10px;
+}
+.actions-list .material-symbols-outlined {
+  color: #000;
+  gap: 10px;
 }
