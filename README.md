@@ -1,5 +1,4 @@
-# HRM App
-
+# Human Resources Management Application
 **Overview**
 
 A JSON-based web application to manage an organization's human resources.
