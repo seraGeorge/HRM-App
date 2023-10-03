@@ -37,11 +37,13 @@
 
 
 .actions-section{
+    gap: 30px;
     padding: 15px;
     background-color: cadetblue;
     border-radius: 10px;
 }
 .search-bar{
+    flex: 1;
     gap: 10px;
     background-color:brown;
     border-radius: 10px;
