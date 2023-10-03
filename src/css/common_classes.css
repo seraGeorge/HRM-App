@@ -1,22 +1,71 @@
 :root {
-    --primary-color: #709d61;
-    --text-color: gray;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  .body {
-    margin: 0 auto;
-    padding: 0;
-    background-color: #f7f6f4;
-    font-family: "Manrope";
-  }
-    
-  .ul-reset {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  
+  --primary-color: #709d61;
+  --text-color: gray;
+}
+
+* {
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: Manrope;
+  font-weight: 700;
+  src: url("../fonts/Manrope-Bold.ttf");
+}
+@font-face {
+  font-family: Manrope;
+  font-weight: 500;
+  src: url("../fonts/Manrope-Medium.ttf");
+}
+
+.body {
+  margin: 0 auto;
+  padding: 0;
+  background-color: #f7f6f4;
+  font-family: "Manrope";
+}
+
+.ul-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.global-width {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.common-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.common-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.common-button-container {
+  padding: 15px 20px 15px 20px;
+  gap: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.material-symbols-outlined {
+  color: white;
+}
+.button-decoration {
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+}
+::placeholder {
+  color: rgb(203, 203, 203);
+  font-size: 20px;
+  font-family: "Manrope";
+}
+.button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}

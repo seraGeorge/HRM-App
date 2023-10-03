@@ -1,9 +1,78 @@
+.header-content {
+  margin: 0 auto;
+  padding: 29px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 .header {
-    margin: 0 auto;
-    padding: 10px 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
+  background-color: black;
+}
+.main-section {
+  background-color: blueviolet;
+}
+.main-content {
+  margin-top: 20px;
+}
+
+
+.heading-section {
+  padding: 20px 24px;
+  margin-bottom: 80px;
+}
+.heading1 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #000;
+}
+.heading-section .common-button-container{
+    background-color: black;
+    font-size: 18px;
+}
+
+
+.actions-section{
+    padding: 15px;
+    background-color: cadetblue;
+    border-radius: 10px;
+}
+.search-bar{
+    gap: 10px;
+    background-color:brown;
+    border-radius: 10px;
+    padding: 10px;
+}
+.search-form{
+    flex: 1;
+    gap: 10px;
+}
+.search-text{
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: 0;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.search-bar .common-button-container{
+    padding: 10px;
+    gap: 20px;  
+    border-radius: 0;
+    background: none;
+    border-left: 2px solid black;
+}
+.actions-section .button-decoration{
+    font-size: 18px;
+}
+.filters{
+    gap: 10px;
+}
+.filters .common-button-container{
+    background-color: black;
+}
