@@ -1,0 +1,22 @@
+:root {
+    --primary-color: #709d61;
+    --text-color: gray;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .body {
+    margin: 0 auto;
+    padding: 0;
+    background-color: #f7f6f4;
+    font-family: "Manrope";
+  }
+    
+  .ul-reset {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
