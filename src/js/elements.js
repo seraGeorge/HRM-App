@@ -1,3 +1,5 @@
 export const tableData = document.getElementById("table-data")
 export const loader = document.getElementById("loader")
 export const year = document.getElementById("year")
+export const sortButtonsList = document.querySelectorAll(".sort")
+export const sortIconsList = document.querySelectorAll(".sort-icon")

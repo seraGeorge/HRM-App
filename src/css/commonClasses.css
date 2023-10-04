@@ -1,8 +1,8 @@
 :root {
-  --primary-color: #7E3AF2;
-  --text-color: rgba(36,38,45);
-  --secondary-color : rgba(112,114,117);
-  --background-color: #F9FAFB;
+  --primary-color: #7e3af2;
+  --text-color: rgba(36, 38, 45);
+  --secondary-color: rgba(112, 114, 117);
+  --background-color: #f9fafb;
 }
 
 * {
@@ -11,21 +11,21 @@
 @font-face {
   font-family: Manrope;
   font-weight: 700;
-  src: url("../fonts/Manrope-Bold.ttf");
+  src: url('../fonts/Manrope-Bold.ttf');
 }
 @font-face {
   font-family: Manrope;
   font-weight: 500;
-  src: url("../fonts/Manrope-Medium.ttf");
+  src: url('../fonts/Manrope-Medium.ttf');
 }
-html{
+html {
   height: 100%;
 }
 .body {
   margin: 0 auto;
   padding: 0;
   background-color: var(--background-color);
-  font-family: "Manrope";
+  font-family: 'Manrope';
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@ html{
   cursor: pointer;
   text-decoration: none;
 }
-.logo-wrap{
+.logo-wrap {
   text-decoration: none;
 }
 .material-symbols-outlined {
@@ -71,7 +71,7 @@ html{
 ::placeholder {
   color: rgb(203, 203, 203);
   font-size: 20px;
-  font-family: "Manrope";
+  font-family: 'Manrope';
 }
 .button {
   padding: 0;
@@ -79,4 +79,8 @@ html{
   background: none;
   cursor: pointer;
 }
-
+.rotate {
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transform: rotate(180deg);
+}
