@@ -7,7 +7,6 @@ displayLoading()
 onValue(readUserData, (snapshot) => {
     hideLoading();
     const data = snapshot.val();
-    console.log(data)
     const employees = data.employees;
     let temp = ""
     if (employees.length == 0) {
