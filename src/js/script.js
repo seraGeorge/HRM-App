@@ -1,15 +1,14 @@
 import { tableData } from "./elements.js";
 import { readUserData } from "./firebase.js";
 import { onValue } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-import { titleCase } from "./helperFunctions.js";
+import { displayLoading, hideLoading, titleCase } from "./helperFunctions.js";
+displayLoading()
 
 onValue(readUserData, (snapshot) => {
+    hideLoading();
     const data = snapshot.val();
-    console.log(data);
+    console.log(data)
     const employees = data.employees;
-    console.log(tableData)
-
-
     let temp = ""
     if (employees.length == 0) {
         temp = `<tr class="table-row">         
@@ -22,7 +21,6 @@ onValue(readUserData, (snapshot) => {
             const empName = titleCase(element.first_name, element.last_name);
 
             let skillSet = element.skills;
-            console.log(skillSet)
             let skills = ""
             for (let j = 0; j < skillSet.length; j++) {
                 let skill = skillSet[j]
@@ -48,16 +46,4 @@ onValue(readUserData, (snapshot) => {
     }
     tableData.innerHTML += temp
 });
-document.onreadystatechange = function () {
-    if (document.readyState !== "complete") {
-        document.querySelector(
-            "body").style.visibility = "hidden";
-        document.querySelector(
-            "#loader").style.visibility = "visible";
-    } else {
-        document.querySelector(
-            "#loader").style.display = "none";
-        document.querySelector(
-            "body").style.visibility = "visible";
-    }
-};
+

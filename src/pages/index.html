@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
+    <title>Human Resources Management App</title>
+    <link rel="icon" type="image/x-icon" href="../images/logo.png">
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../css/normalize.css" />
     <link rel="stylesheet" href="../css/common_classes.css" />
     <link rel="stylesheet" href="../css/styles.css" />
   </head>
+
   <body class="body">
     <header class="header">
       <div class="header-content global-width">
@@ -21,106 +23,76 @@
     </header>
     <main class="main-section">
       <div class="global-width main-content">
-        <div class="heading-section common-section">
+        <section class="heading-section common-section">
           <h1 class="heading1">List of Employees</h1>
-          <span class="common-button-container common-flex">
-            <span class="material-symbols-outlined"> add_circle </span>
-            <a href="#" class="button button-decoration"> Add New Employee </a>
-          </span>
-        </div>
+          <!-- TODO: Add new Employee -->
+        </section>
         <div class="employee-listing-section">
-          <div class="actions-section common-flex">
-            <div class="search-bar common-flex">
-              <form action="" id="searchForm" class="search-form common-flex">
-                <button class="button">
-                  <span class="material-symbols-outlined" class="search-icon">
-                    search
-                  </span>
-                </button>
-                <input type="text" class="search-text" placeholder="Search" />
-              </form>
-              <span class="common-button-container common-flex">
-                <a href="#" class="button button-decoration"> All </a>
-                <span class="material-symbols-outlined">
-                  <span class="material-symbols-outlined"> expand_more </span>
-                </span>
-              </span>
-            </div>
-            <div class="filters common-flex">
-              <span class="common-button-container common-flex">
-                <span class="material-symbols-outlined"> data_table </span>
-                <a href="#" class="button button-decoration"> Columns </a>
-              </span>
-              <span class="common-button-container common-flex">
-                <span class="material-symbols-outlined"> filter_list </span>
-                <a href="#" class="button button-decoration"> Filters </a>
-              </span>
-            </div>
-          </div>
+          <!-- TODO: Actions Bar -->
           <div class="employee-list">
-            <div id="loader" class="center">
-              <img src="../images/spinner.svg" alt="spinner" class="spin-loader">
-            </div>
+            <div id="loader" class="loader"></div>
             <table class="employee-table" id="table-data">
-              <tr class="table-row" id="head-row">
-                <th class="table-heading">
-                  <span class="employee-heading">
-                    <span class="heading-title"> Employee Id </span>
-                    <span class="sort-icon material-symbols-outlined">
-                      expand_more
+              <thead>
+                <tr class="table-row" id="head-row">
+                  <th class="table-heading">
+                    <span class="employee-heading">
+                      <span class="heading-title"> Employee Id </span>
+                      <span class="sort-icon material-symbols-outlined">
+                        expand_more
+                      </span>
                     </span>
-                  </span>
-                </th>
-                <th class="table-heading">
-                  <span class="employee-heading">
-                    <span class="heading-title"> Name </span>
-                    <span class="sort-icon material-symbols-outlined">
-                      expand_more
+                  </th>
+                  <th class="table-heading">
+                    <span class="employee-heading">
+                      <span class="heading-title"> Name </span>
+                      <span class="sort-icon material-symbols-outlined">
+                        expand_more
+                      </span>
                     </span>
-                  </span>
-                </th>
-                <th class="table-heading">
-                  <span class="employee-heading">
-                    <span class="heading-title"> Designation </span>
-                    <span class="sort-icon material-symbols-outlined">
-                      expand_more
+                  </th>
+                  <th class="table-heading">
+                    <span class="employee-heading">
+                      <span class="heading-title"> Designation </span>
+                      <span class="sort-icon material-symbols-outlined">
+                        expand_more
+                      </span>
                     </span>
-                  </span>
-                </th>
-                <th class="table-heading">
-                  <span class="employee-heading">
-                    <span class="heading-title"> Department </span>
-                    <span class="sort-icon material-symbols-outlined">
-                      expand_more
+                  </th>
+                  <th class="table-heading">
+                    <span class="employee-heading">
+                      <span class="heading-title"> Department </span>
+                      <span class="sort-icon material-symbols-outlined">
+                        expand_more
+                      </span>
                     </span>
-                  </span>
-                </th>
-                <th class="table-heading">
-                  <span class="employee-heading">
-                    <span class="heading-title"> Skills </span>
-                    <span class="sort-icon material-symbols-outlined">
-                      expand_more
+                  </th>
+                  <th class="table-heading">
+                    <span class="employee-heading">
+                      <span class="heading-title"> Skills </span>
+                      <span class="sort-icon material-symbols-outlined">
+                        expand_more
+                      </span>
                     </span>
-                  </span>
-                </th>
-                <th class="table-heading">
-                  <span class="employee-heading">
-                    <span class="heading-title"> Actions </span>
-                    <span class="sort-icon material-symbols-outlined">
-                      expand_more
+                  </th>
+                  <th class="table-heading">
+                    <span class="employee-heading">
+                      <span class="heading-title"> Actions </span>
+                      <span class="sort-icon material-symbols-outlined">
+                        expand_more
+                      </span>
                     </span>
-                  </span>
-                </th>
-              </tr>
+                  </th>
+                </tr>
+              </thead>
             </table>
           </div>
         </div>
       </div>
     </main>
     <script type="module" src="../js/helperFunctions.js"></script>
-    <!-- <script type="module" src="../js/writeData.js"></script> -->
     <script type="module" src="../js/firebase.js"></script>
     <script type="module" src="../js/script.js"></script>
     <script type="module" src="../js/elements.js"></script>
   </body>
+
 </html>
