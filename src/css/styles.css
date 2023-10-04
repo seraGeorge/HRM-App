@@ -78,25 +78,23 @@
   background-color: black;
 }
 
-.employee-table {
-      -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-
-}
-.employee-table,
-.table-row {
-  border-collapse: separate;
-  border-radius: 6px;
+.employee-table{
   border: 1px solid black;
+}
+.employee-table,.table-row {
+  border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
 }
+tr{
+  border-bottom: 1px solid black;
+}
 .table-heading,
 .employee-data {
-  border-bottom: 1px solid black;
   padding: 20px;
+  border-spacing: 0;
 }
+
 .table-heading {
   border-top: none;
   background-color: var(--primary-color);
@@ -110,9 +108,7 @@
 .employee-data {
   background-color: white;
 }
-.no-entry {
-  column-span: all;
-}
+
 .skill-list {
   display: flex;
   align-items: center;
@@ -153,4 +149,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.footer{
+  margin-top: auto;
+}
+.copyright-section {
+  border-top: 1px solid var(--text-color);
+  padding: 30px 0 30px 0;
+  text-align: center;
 }

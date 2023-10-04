@@ -15,6 +15,10 @@ export const titleCase = (first, last) => {
     return first[0].toUpperCase() + first.substring(1) + " " + last[0].toUpperCase() + last.substring(1)
 
 }
+export function getYear() {
+    const now = new Date();
+    return now.getFullYear().toString()
+}
 
 export const displayLoading = () => {
     loader.classList.add("display");

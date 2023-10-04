@@ -18,12 +18,17 @@
   font-weight: 500;
   src: url("../fonts/Manrope-Medium.ttf");
 }
-
+html{
+  height: 100%;
+}
 .body {
   margin: 0 auto;
   padding: 0;
   background-color: var(--background-color);
   font-family: "Manrope";
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .ul-reset {
