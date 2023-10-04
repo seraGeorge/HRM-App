@@ -24,7 +24,7 @@ onValue(readUserData, (snapshot) => {
             let skills = ""
             for (let j = 0; j < skillSet.length; j++) {
                 let skill = skillSet[j]
-                skills += `<div class="skill-card"><a href="#" class="button button-decoration skill"> ${skill.name} </a></div>`
+                skills += `<div class="skill-card"><a href="#" class="skill"> ${skill.name} </a></div>`
             }
 
 

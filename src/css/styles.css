@@ -1,3 +1,7 @@
+.header{
+  z-index: 10;
+  box-shadow:0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+}
 .header-content {
   margin: 0 auto;
   padding: 29px 0px;
@@ -7,7 +11,9 @@
   align-items: center;
 }
 
-
+.main-section {
+  height: 100%;
+}
 .main-content {
   margin-top: 20px;
 }
@@ -21,10 +27,10 @@
   font-size: 40px;
   font-weight: 700;
   line-height: 1.5;
-  color: #000;
+  color: var(--text-color);
 }
 .heading-section .common-button-container {
-  background-color: black;
+  background-color: var(--secondary-color);
   font-size: 18px;
 }
 
@@ -72,20 +78,29 @@
   background-color: black;
 }
 
+.employee-table {
+      -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+}
 .employee-table,
 .table-row {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-radius: 6px;
+  border: 1px solid black;
   border-spacing: 0;
   width: 100%;
 }
-
 .table-heading,
 .employee-data {
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   padding: 20px;
 }
 .table-heading {
-  background-color: aqua;
+  border-top: none;
+  background-color: var(--primary-color);
+  color: white;
 }
 .employee-heading {
   display: flex;
@@ -104,9 +119,14 @@
   gap: 10px;
 }
 .skill-card {
-  background-color: blue;
+  background-color: var(--primary-color);
   padding: 10px;
   border-radius: 10px;
+}
+.skill{
+  text-decoration: none;
+  cursor: default;
+  color: white;
 }
 .actions-list .material-symbols-outlined {
   color: #000;

@@ -1,6 +1,8 @@
 :root {
-  --primary-color: #709d61;
-  --text-color: gray;
+  --primary-color: #7E3AF2;
+  --text-color: rgba(36,38,45);
+  --secondary-color : rgba(112,114,117);
+  --background-color: #F9FAFB;
 }
 
 * {
@@ -20,7 +22,7 @@
 .body {
   margin: 0 auto;
   padding: 0;
-  background-color: #f7f6f4;
+  background-color: var(--background-color);
   font-family: "Manrope";
 }
 
@@ -48,6 +50,9 @@
   gap: 20px;
   border-radius: 10px;
   cursor: pointer;
+  text-decoration: none;
+}
+.logo-wrap{
   text-decoration: none;
 }
 .material-symbols-outlined {
