@@ -79,6 +79,7 @@
 }
 
 .employee-table{
+  display: none;
   border: 1px solid black;
 }
 .employee-table,.table-row {
@@ -107,6 +108,11 @@ tr{
 }
 .employee-data {
   background-color: white;
+}
+.sort-icon{
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  cursor: pointer;
 }
 
 .skill-list {
@@ -138,9 +144,6 @@ tr{
   margin: auto;
   display: none;
   animation: spin 1s infinite linear;
-}
-.display {
-  display: block;
 }
 @keyframes spin {
   from {
