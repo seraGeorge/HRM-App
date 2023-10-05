@@ -2,21 +2,21 @@ import { tableBody } from "./elements.js";
 import { titleCase } from "./helperFunctions.js";
 
 export const setTableData = (data) => {
-        const employees = data.employees;
+    const employees = data.employees;
 
-        for (let i = 0; i < employees.length; i++) {
-            let employee = employees[i];
-            let empName = titleCase(employee.first_name, employee.last_name);
+    employees.forEach((employee) => {
+        let empName = titleCase(employee.first_name, employee.last_name);
 
-            let skillSet = employee.skills;
-            let skills = ""
-            for (let j = 0; j < skillSet.length; j++) {
-                let skill = skillSet[j]
-                skills += `<span class="skill-card"><a href="#" class="skill"> ${skill.name} </a></span>`
-            }
+        let skillSet = employee.skills;
+        let skills = ""
+        for (let j = 0; j < skillSet.length; j++) {
+            let skill = skillSet[j]
+            skills += `<span class="skill-card"><a href="#" class="skill"> ${skill.name} </a></span>`
+        }
 
-            const tableRow = document.createElement('tr');
-            tableRow.innerHTML = `
+        const tableRow = document.createElement('tr');
+
+        tableRow.innerHTML = `
             <td class="employee-data">${employee.id}</td>
             <td class="employee-data">${empName}</td>
             <td class="employee-data">${employee.designation}</td>
@@ -29,9 +29,9 @@ export const setTableData = (data) => {
             </span> <span class="material-symbols-outlined delete">
             delete
             </span> </div></td> `;
-            tableRow.classList = "table-row";
-            tableRow.querySelector('.delete')
-            tableBody.appendChild(tableRow);
-        }
+        tableRow.classList = "table-row";
+        tableRow.querySelector('.delete')
+        tableBody.appendChild(tableRow);
 
+    })
 }

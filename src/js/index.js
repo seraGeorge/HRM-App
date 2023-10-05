@@ -6,11 +6,17 @@ import { setTableData } from "./setTable.js";
 
 //Loader before the table Data
 displayLoading();
+
+let dataVal;
+
 const result = readUserData(`/`);
 result.then(data => {
+    //Hiding loader
     hideLoading()
     setTableData(data)
-})
+    //Copy of the data from firebase
+    dataVal = data;
+    sortIcon.forEach((item, index) => item.addEventListener("click", (event) => { buttonClickHandler(event, dataVal, index) }))
+}).catch((error) => console.error(error))
 
 
-sortIcon.forEach((item) => item.addEventListener("click", buttonClickHandler))
