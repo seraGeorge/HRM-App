@@ -1,4 +1,4 @@
-import { loader, tableData, year } from "./elements.js";
+import { loader, sortIcon, tableData, year } from "./elements.js";
 import { getYear } from "./helperFunctions.js";
 
 year.innerHTML = getYear()
@@ -13,3 +13,15 @@ export const hideLoading = () => {
 
 }
 
+
+export const makeSortIconVisible = (index) => {
+    sortIcon.forEach((item, id) => {
+        if (id != index) {
+            sortIcon[id].style.visibility = "hidden"
+        }
+        else {
+            sortIcon[index].style.visibility = "visible"
+        }
+    })
+
+}

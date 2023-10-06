@@ -106,6 +106,13 @@ tr{
   align-items: center;
   gap: 10px;
 }
+.table-heading .button{
+    padding: 10px;
+}
+.table-title{
+    cursor: pointer;
+    color: white;
+}
 .employee-data {
   background-color: white;
 }

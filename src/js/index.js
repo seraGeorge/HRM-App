@@ -1,8 +1,9 @@
 import { sortBtnList, sortIcon } from "./elements.js";
 import { readUserData } from "./firebase.js";
 import { displayLoading, hideLoading } from "./handlers.js";
+import { sortCriteria } from "./helperFunctions.js";
 import { setTableData } from "./setTable.js";
-import { buttonClickHandler } from "./sortFn.js";
+import { sortBtnHandler } from "./sortFn.js";
 
 
 //Loader before the table Data
@@ -18,7 +19,10 @@ result.then(data => {
     setTableData(data.employees)
     //Copy of the data from firebase
     dataVal = data;
-    sortBtnList.forEach((sortBtn, index) => sortBtn.addEventListener("click", (event) => { buttonClickHandler(event, dataVal.employees, index) }))
 }).catch((error) => console.error(error))
 
+sortBtnList.forEach((sortBtn, index) =>
+    sortBtn.addEventListener("click", (event) => {
+    sortBtnHandler(event, dataVal.employees, index, sortCriteria(index))
+}))
 

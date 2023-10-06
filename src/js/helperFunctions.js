@@ -21,4 +21,16 @@ export const getYear = () => {
     return now.getFullYear().toString()
 }
 
+export const sortCriteria = (index) => {
+    return ["id", "emp_name", "designation", "department"][index]
+}
 
+export const sortFn = (x, y, flag) => {
+    if (x > y) {
+        return flag;
+    }
+    if (y > x) {
+        return (-1 * flag);
+    }
+    return 0;
+}
