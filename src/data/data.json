@@ -2,8 +2,7 @@
     "employees": [
         {
             "id":"EMP001",
-            "first_name": "John",
-            "last_name": "Doe",
+            "emp_name": "John Doe",
             "email": "john.doe@example.com",
             "phone": "8451234567",
             "address": "123 Main Street, Anytown, CA, 12345, USA",
@@ -30,8 +29,7 @@
         },
         {
             "id":"EMP002",
-            "first_name": "Jane",
-            "last_name": "Smith",
+            "emp_name": "Jane Smith",
             "email": "jane.smith@example.com",
             "phone": "845987-6543",
             "address": "456 Elm Street, Another Town, NY, 54321, USA",

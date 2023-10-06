@@ -1,11 +1,9 @@
 import { tableBody } from "./elements.js";
 import { titleCase } from "./helperFunctions.js";
 
-export const setTableData = (data) => {
-    const employees = data.employees;
-
+export const setTableData = (employees) => {
+    tableBody.innerHTML = "";
     employees.forEach((employee) => {
-        let empName = titleCase(employee.first_name, employee.last_name);
 
         let skillSet = employee.skills;
         let skills = ""
@@ -18,7 +16,7 @@ export const setTableData = (data) => {
 
         tableRow.innerHTML = `
             <td class="employee-data">${employee.id}</td>
-            <td class="employee-data">${empName}</td>
+            <td class="employee-data">${employee.emp_name}</td>
             <td class="employee-data">${employee.designation}</td>
             <td class="employee-data">${employee.department}</td>
             <td class="employee-data"><div class="skill-list"> ${skills} </div></td>
@@ -30,7 +28,7 @@ export const setTableData = (data) => {
             delete
             </span> </div></td> `;
         tableRow.classList = "table-row";
-        tableRow.querySelector('.delete')
+        // tableRow.querySelector('.delete')
         tableBody.appendChild(tableRow);
 
     })

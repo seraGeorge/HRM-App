@@ -1,7 +1,8 @@
-import { sortIcon } from "./elements.js";
+import { sortBtnList, sortIcon } from "./elements.js";
 import { readUserData } from "./firebase.js";
-import { buttonClickHandler, displayLoading, hideLoading } from "./handlers.js";
+import { displayLoading, hideLoading } from "./handlers.js";
 import { setTableData } from "./setTable.js";
+import { buttonClickHandler } from "./sortFn.js";
 
 
 //Loader before the table Data
@@ -13,10 +14,11 @@ const result = readUserData(`/`);
 result.then(data => {
     //Hiding loader
     hideLoading()
-    setTableData(data)
+    sortIcon[0].style.visibility = "visible"
+    setTableData(data.employees)
     //Copy of the data from firebase
     dataVal = data;
-    sortIcon.forEach((item, index) => item.addEventListener("click", (event) => { buttonClickHandler(event, dataVal, index) }))
+    sortBtnList.forEach((sortBtn, index) => sortBtn.addEventListener("click", (event) => { buttonClickHandler(event, dataVal.employees, index) }))
 }).catch((error) => console.error(error))
 
 
