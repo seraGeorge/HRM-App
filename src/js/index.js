@@ -15,6 +15,7 @@ const result = readUserData(`/`);
 result.then(data => {
     //Hiding loader
     hideLoading()
+    sortIcon[0].classList.remove("rotate")
     sortIcon[0].style.visibility = "visible"
     setTableData(data.employees)
     //Copy of the data from firebase
