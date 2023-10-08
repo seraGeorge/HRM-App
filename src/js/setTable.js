@@ -1,5 +1,4 @@
 import { tableBody } from "./elements.js";
-import { titleCase } from "./helperFunctions.js";
 
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";

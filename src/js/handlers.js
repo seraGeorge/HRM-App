@@ -25,3 +25,10 @@ export const makeSortIconVisible = (index) => {
     })
 
 }
+
+export const toggleBtn = (button, dropdown) => {
+    button.addEventListener("click", () => {
+        dropdown.classList.toggle("display")
+    })
+
+}

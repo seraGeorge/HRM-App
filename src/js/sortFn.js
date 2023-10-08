@@ -3,7 +3,7 @@ import { makeSortIconVisible } from "./handlers.js";
 import { sortFn } from "./helperFunctions.js";
 import { setTableData } from "./setTable.js";
 
-export function sortBtnHandler(event, employees, index, currentSortCriteria) {
+export function sortBtnHandler( employees, index, currentSortCriteria) {
     makeSortIconVisible(index);
     let flag = 1;
     employees.sort((a, b) => {

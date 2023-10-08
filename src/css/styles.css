@@ -1,6 +1,7 @@
-.header{
+.header {
   z-index: 10;
-  box-shadow:0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 .header-content {
   margin: 0 auto;
@@ -20,15 +21,9 @@
 
 .heading-section {
   padding: 20px 24px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
-.heading1 {
-  margin: 0;
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1.5;
-  color: var(--text-color);
-}
+
 .heading-section .common-button-container {
   background-color: var(--secondary-color);
   font-size: 18px;
@@ -77,17 +72,91 @@
 .filters .common-button-container {
   background-color: black;
 }
+.filters {
+  position: relative;
+}
+.filter-dropdown {
+  z-index: 1;
+  background-color: beige;
+  position: absolute;
+  top: 50px;
+  border-radius: 10px;
+  min-width: 520px;
+  display: none;
+}
+.dropdown-row {
+  border-bottom: 1px solid black;
+  margin-bottom: 15px;
+  padding: 10px 10px;
+}
+.head-row {
+  padding: 15px;
+}
+.filter-heading-row {
+  align-items: stretch;
+  /* padding: 0 10px 10px 10px; */
+}
+.filter-title {
+  flex: 1;
+}
+.reset-btn {
+  font-weight: 700;
+  flex: 0;
+  margin-left: auto;
+  color: #000 !important;
+}
+.dropdown-list {
+  background-color: #9c41f2;
+  border-radius: 10px;
+  padding: 10px;
+}
+.selected-list {
+  flex: 1;
+}
+.dropdown-icon {
+  flex: 0;
+}
+.options-list {
+  z-index: 2;
+  background-color: rgb(245, 220, 241);
+  position: absolute;
+  border-radius: 10px;
+  width: 100%;
+  display: none;
+}
+.list-item {
+  padding: 10px;
+}
+.list-item:hover {
+  background-color: var(--primary-color);
+}
+.filter-chip {
+  gap: 5px;
+  padding: 5px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+}
+.cancel-btn {
+  color: black !important;
+}
+.selected-list {
+  gap: 10px;
+  justify-content: flex-start !important;
+}
 
-.employee-table{
+.employee-table {
   display: none;
   border: 1px solid black;
+  margin-bottom: 80px;
 }
-.employee-table,.table-row {
+.employee-table,
+.table-row {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
 }
-tr{
+tr {
   border-bottom: 1px solid black;
 }
 .table-heading,
@@ -106,17 +175,17 @@ tr{
   align-items: center;
   gap: 10px;
 }
-.table-heading .button{
-    padding: 10px;
+.table-heading .button {
+  padding: 10px;
 }
-.table-title{
-    cursor: pointer;
-    color: white;
+.table-title {
+  cursor: pointer;
+  color: white;
 }
 .employee-data {
   background-color: white;
 }
-.sort-icon{
+.sort-icon {
   transition: 300ms;
   cursor: pointer;
   visibility: hidden;
@@ -132,7 +201,7 @@ tr{
   padding: 10px;
   border-radius: 10px;
 }
-.skill{
+.skill {
   text-decoration: none;
   cursor: default;
   color: white;
@@ -161,8 +230,11 @@ tr{
   }
 }
 
-.footer{
+.footer {
   margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 .copyright-section {
   border-top: 1px solid var(--text-color);
