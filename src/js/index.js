@@ -1,7 +1,7 @@
 import { state } from "./context.js";
 import { applyAllBtn, departmentDropDownBtn, departmentOptionsList, departmentSelectedList, designationDropDownBtn, designationOptionsList, designationResetBtn, designationSelectedList, filterBtn, mainFilterDropDown, resetAllBtn, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, skillsSelectedList, sortBtnList, sortIcon, tableData } from "./elements.js";
 import { readUserData } from "./firebase.js";
-import { displayLoading, filterData, getTableData, hideLoading, toggleBtn } from "./handlers.js";
+import { displayLoading, filterData, getFilterChips, getTableData, hideLoading, toggleBtn } from "./handlers.js";
 import { sortCriteria } from "./helperFunctions.js";
 import { resetFilter, setDropDown, setDropDownData } from "./setDropDownData.js";
 import { setTableData } from "./setTable.js";
@@ -41,29 +41,13 @@ result.then(data => {
 
         applyAllBtn.addEventListener("click", () => {
             mainFilterDropDown.classList.remove("display");
-            const designationFilterChips = document.querySelectorAll(".designation-filter ");
-            const departmentFilterChips = document.querySelectorAll(".department-filter ");
-            const skillsFilterChips = document.querySelectorAll(".skills-filter ");
-
-            const designationFilters = [];
-            const departmentFilters = [];
-            const skillsFilters = [];
-
-            designationFilterChips.forEach((filterChip) => {
-                const filterChipValue = filterChip.querySelector(".heading3");
-                designationFilters.push(filterChipValue.innerHTML);
-            });
-            departmentFilterChips.forEach((filterChip) => {
-                const filterChipValue = filterChip.querySelector(".heading3");
-                departmentFilters.push(filterChipValue.innerHTML);
-            });
-            skillsFilterChips.forEach((filterChip) => {
-                const filterChipValue = filterChip.querySelector(".heading3");
-                skillsFilters.push(filterChipValue.innerHTML);
-            });
-            state.designationFilters = designationFilters;
-            state.departmentFilters = departmentFilters;
-            state.skillsFilters = skillsFilters;
+            const designationFilters = getFilterChips(".designation-filter ");
+            const departmentFilters = getFilterChips(".department-filter ");
+            const skillsFilters = getFilterChips(".skills-filter ");
+        
+            state.filter.designationFilters = designationFilters;
+            state.filter.departmentFilters = departmentFilters;
+            state.filter.skillsFilters = skillsFilters;
             setTableData(employeeList);
         });
 

@@ -32,6 +32,16 @@ export const toggleBtn = (button, dropdown) => {
     })
 
 }
+export const getFilterChips = (selector) => {
+    const filterChips = document.querySelectorAll(selector);
+    const filterValues = [];
+    filterChips.forEach((filterChip) => {
+        const filterChipValue = filterChip.querySelector(".heading3");
+        filterValues.push(filterChipValue.innerHTML);
+    });
+    return filterValues;
+}
+
 
 export const filterData = (result, designationFilters, departmentFilters, skillsFilters) => {
     let tableData;

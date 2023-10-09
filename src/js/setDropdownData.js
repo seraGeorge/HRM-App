@@ -34,9 +34,9 @@ export const setDropDownData = (data) => {
         if (mainFilterDropDown.classList.contains("display")) {
             mainFilterDropDown.classList.remove("display")
         }
-        state.designationFilters = [];
-        state.departmentFilters = [];
-        state.skillsFilters = [];
+        state.filter.designationFilters = [];
+        state.filter.departmentFilters = [];
+        state.filter.skillsFilters = [];
 
         setTableData(data.employees)
     })

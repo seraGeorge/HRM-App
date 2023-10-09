@@ -6,7 +6,7 @@ import { sortBtnHandler } from "./sortFn.js";
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";
     let sortedEmployees = sortBtnHandler(employees, state.sort)
-    let filteredEmployees = filterData(sortedEmployees,state.designationFilters,state.departmentFilters,state.skillsFilters)
+    let filteredEmployees = filterData(sortedEmployees,state.filter.designationFilters,state.filter.departmentFilters,state.filter.skillsFilters)
     let searchedEmployees = getTableData( filteredEmployees,state.search.property,state.search.searchTerm)
     searchedEmployees.forEach((employee) => {
 
