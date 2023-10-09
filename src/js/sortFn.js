@@ -2,23 +2,20 @@ import { sortIcon } from "./elements.js";
 import { makeSortIconVisible } from "./handlers.js";
 import { sortFn } from "./helperFunctions.js";
 import { setTableData } from "./setTable.js";
-
-export function sortBtnHandler( employees, index, currentSortCriteria) {
+export function sortBtnHandler(employees, index, currentSortCriteria) {
     makeSortIconVisible(index);
-    let flag = 1;
+
+    sortIcon[index].classList.toggle('rotate');
+    let flag = sortIcon[index].classList.contains("rotate") ? -1 : +1;
+
+    console.log(employees)
     employees.sort((a, b) => {
+
         let x = a[currentSortCriteria].toLowerCase();
         let y = b[currentSortCriteria].toLowerCase();
-        if (sortIcon[index].classList.contains("rotate")) {
-            sortIcon[index].classList.remove('rotate');
+        return sortFn(x, y, flag)
 
-            return sortFn(x, y, flag)
-        }
-        else {
-            sortIcon[index].classList.add('rotate');
-            flag = -1;
-            return sortFn(x, y, flag)
-        }
     })
-    setTableData(employees)
+
+    return employees;
 }

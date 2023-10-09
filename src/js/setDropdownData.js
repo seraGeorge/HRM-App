@@ -1,7 +1,8 @@
 import { departmentDropDownBtn, departmentOptionsList, departmentResetBtn, departmentSelectedList, designationDropDownBtn, designationOptionsList, designationResetBtn, designationSelectedList, filterBtn, mainFilterDropDown, resetAllBtn, skillsDropDownBtn, skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
+import { applyFilter } from "./handlers.js";
+import { setTableData } from "./setTable.js";
 
 export const setDropDownData = (data) => {
-    console.log(data)
 
     const departmentsDataList = data.departments;
     const designationsDataList = data.designations;
@@ -29,23 +30,20 @@ export const setDropDownData = (data) => {
         resetFilter(departmentSelectedList, departmentOptionsList);
         setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department");
         resetFilter(skillsSelectedList, skillsOptionsList);
-        setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skill");
-        
+        setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills");
+        if (mainFilterDropDown.classList.contains("display")) {
+            mainFilterDropDown.classList.remove("display")
+        }
+        setTableData(data.employees)
     })
     document.addEventListener("click", (event) => {
         event.stopPropagation()
         if (!(filterBtn === event.target) && !(mainFilterDropDown.contains(event.target))) {
             if (mainFilterDropDown.classList.contains("display")) {
                 mainFilterDropDown.classList.remove("display")
-                console.log("hi")
-                resetFilter(designationSelectedList, designationOptionsList);
-                setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation");
-                resetFilter(departmentSelectedList, departmentOptionsList);
-                setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department");
-                resetFilter(skillsSelectedList, skillsOptionsList);
-                setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skill");
             }
-
+            let tableData = applyFilter(data.employees)
+            setTableData(tableData)
         }
 
         if (!designationOptionsList.contains(event.target) && !(designationDropDownBtn === event.target) && (mainFilterDropDown.contains(event.target))) {
@@ -71,9 +69,7 @@ export const setDropDownData = (data) => {
 
 }
 export const setDropDown = (dataList, optionsList, selectedlist, className) => {
-    console.log(dataList)
     optionsList.innerHTML = "";
-    console.log(dataList)
     dataList.forEach((item) => {
         const listItem = document.createElement("li");
         listItem.innerHTML = item;

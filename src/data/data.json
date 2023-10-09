@@ -49,6 +49,52 @@
             "designation": "Engineer",
             "department": "IT Support",
             "employment_mode": "Full-Time"
+        },
+        {
+            "id":"EMP003",
+            "emp_name": "Jane Smith",
+            "email": "jane.smith@example.com",
+            "phone": "845987-6543",
+            "address": "456 Elm Street, Another Town, NY, 54321, USA",
+            "skills": [
+                {
+                    "id": "SLS456",
+                    "name": "Sales"
+                },
+                {
+                    "id": "CSV123",
+                    "name": "Customer Service"
+                }
+            ],
+            "gender": "Female",
+            "date_of_birth": "25-08-1990",
+            "date_of_joining": "20-05-2019",
+            "designation": "Engineer",
+            "department": "IT Support",
+            "employment_mode": "Full-Time"
+        },
+        {
+            "id":"EMP004",
+            "emp_name": "Jane Smith",
+            "email": "jane.smith@example.com",
+            "phone": "845987-6543",
+            "address": "456 Elm Street, Another Town, NY, 54321, USA",
+            "skills": [
+                {
+                    "id": "SLS456",
+                    "name": "Sales"
+                },
+                {
+                    "id": "CSV123",
+                    "name": "Customer Service"
+                }
+            ],
+            "gender": "Female",
+            "date_of_birth": "25-08-1990",
+            "date_of_joining": "20-05-2019",
+            "designation": "Engineer",
+            "department": "IT Support",
+            "employment_mode": "Full-Time"
         }
     ],
     "skills": [
