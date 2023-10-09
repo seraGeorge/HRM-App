@@ -8,7 +8,6 @@ export function sortBtnHandler(employees, index, currentSortCriteria) {
     sortIcon[index].classList.toggle('rotate');
     let flag = sortIcon[index].classList.contains("rotate") ? -1 : +1;
 
-    console.log(employees)
     employees.sort((a, b) => {
 
         let x = a[currentSortCriteria].toLowerCase();

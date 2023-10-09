@@ -28,3 +28,8 @@ export const skillsResetBtn = document.getElementById("skill-reset-btn")
 export const resetAllBtn = document.getElementById("reset-all-btn");
 export const applyAllBtn = document.getElementById("apply-all-btn");
 
+export const searchDropDownBtn = document.getElementById("search-dropdown-btn")
+export const searchDropDown = document.getElementById("search-dropdown")
+export const searchDropDownBtnText = document.getElementById("search-dropdown-btn-text")
+export const searchFilterList = document.querySelectorAll(".search-filter")
+export const searchText = document.getElementById("search-text")

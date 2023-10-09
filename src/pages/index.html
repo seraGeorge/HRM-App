@@ -31,16 +31,47 @@
       </section>
       <div class="employee-listing-section">
         <div class="actions-section common-flex">
+          <div class="search-bar common-flex">
+            <div id="searchForm" class="search-form common-flex">
+                <span class="material-symbols-outlined" class="search-icon">
+                  search
+                </span>
+              <input type="text" class="search-text" id="search-text" placeholder="Search" />
+            </div>
+            <button class=" button common-button-container common-flex" id="search-dropdown-btn">
+              <p id="search-dropdown-btn-text"> 
+              </p> 
+                <span class="material-symbols-outlined"> expand_more </span>
+            </button>
+            <div class="search-dropdown" id="search-dropdown">
+              <div class="list-item">
+                <input type="radio" id="all" name="search-filter" class="search-filter" value="All" checked>
+                <label for="all">All</label><br>  
+              </div>
+              <div class="list-item">
+                <input type="radio" id="designation" name="search-filter" class="search-filter" value="Designation">
+                <label for="designation">Designation</label><br>  
+              </div>
+              <div class="list-item">
+                <input type="radio" id="department" name="search-filter" class="search-filter" value="Department">
+                <label for="department">Department</label><br>  
+              </div>
+              <div class="list-item">
+                <input type="radio" id="skill" name="search-filter" class="search-filter" value="Skill">
+                <label for="skill">Skills</label><br>  
+              </div>
+          </div>
+          </div>
           <div class="filters">
             <button class="button common-button-container common-flex filter-btn" id="filter-btn">
               <span class="material-symbols-outlined"> filter_list </span>
-               Filters
+              Filters
             </button>
             <div class="filter-dropdown" id="filter-dropdown">
               <h2 class="heading2 head-row dropdown-row">
                 Filter List
               </h2>
-              <div class="designation-row dropdown-row" >
+              <div class="designation-row dropdown-row">
                 <div class="filter-heading-row common-flex">
                   <h2 class="heading2 filter-title">Designation</h2>
                   <button class="button reset-btn" id="designation-reset-btn">Reset</button>
@@ -48,14 +79,15 @@
                 <div class="dropdown-list common-flex">
                   <div class="selected-list common-flex" id="designation-selected-list">
                   </div>
-                  <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="designation-dropdown-btn">
+                  <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
+                    id="designation-dropdown-btn">
                     expand_more
                   </button>
                 </div>
                 <ul class="ul-reset options-list" id="designation-options-list">
                 </ul>
-              </div>   
-              <div class="department-row dropdown-row" >
+              </div>
+              <div class="department-row dropdown-row">
                 <div class="filter-heading-row common-flex">
                   <h2 class="heading2 filter-title">Department</h2>
                   <button class="button reset-btn" id="department-reset-btn">Reset</button>
@@ -63,14 +95,15 @@
                 <div class="dropdown-list common-flex">
                   <div class="selected-list common-flex" id="department-selected-list">
                   </div>
-                  <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="department-dropdown-btn">
+                  <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
+                    id="department-dropdown-btn">
                     expand_more
                   </button>
                 </div>
                 <ul class="ul-reset options-list" id="department-options-list">
                 </ul>
-              </div>   
-              <div class="skill-row dropdown-row" >
+              </div>
+              <div class="skill-row dropdown-row">
                 <div class="filter-heading-row common-flex">
                   <h2 class="heading2 filter-title">Skills</h2>
                   <button class="button reset-btn" id="skill-reset-btn">Reset</button>
@@ -87,12 +120,12 @@
               </div>
               <div class="dropdown-row common-flex">
                 <button class="button common-button-container common-flex" id="reset-all-btn">
-                   Reset All
+                  Reset All
                 </button>
                 <button class="button common-button-container common-flex" id="apply-all-btn">
                   Apply All
                 </button>
-              </div>              
+              </div>
             </div>
           </div>
         </div>
@@ -162,7 +195,6 @@
     </div>
 
   </footer>
-  <script type="module" src="../js/writeData.js"></script>
   <script type="module" src="../js/index.js"></script>
 </body>
 
