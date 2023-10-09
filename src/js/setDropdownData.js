@@ -1,5 +1,5 @@
+import { state } from "./context.js";
 import { departmentDropDownBtn, departmentOptionsList, departmentResetBtn, departmentSelectedList, designationDropDownBtn, designationOptionsList, designationResetBtn, designationSelectedList, filterBtn, mainFilterDropDown, resetAllBtn, skillsDropDownBtn, skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
-import { applyFilter } from "./handlers.js";
 import { setTableData } from "./setTable.js";
 
 export const setDropDownData = (data) => {
@@ -34,6 +34,10 @@ export const setDropDownData = (data) => {
         if (mainFilterDropDown.classList.contains("display")) {
             mainFilterDropDown.classList.remove("display")
         }
+        state.designationFilters = [];
+        state.departmentFilters = [];
+        state.skillsFilters = [];
+
         setTableData(data.employees)
     })
     document.addEventListener("click", (event) => {
@@ -42,8 +46,6 @@ export const setDropDownData = (data) => {
             if (mainFilterDropDown.classList.contains("display")) {
                 mainFilterDropDown.classList.remove("display")
             }
-            let tableData = applyFilter(data.employees)
-            setTableData(tableData)
         }
 
         if (!designationOptionsList.contains(event.target) && !(designationDropDownBtn === event.target) && (mainFilterDropDown.contains(event.target))) {

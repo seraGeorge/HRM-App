@@ -49,28 +49,58 @@ export const filterData = (result, designationFilters, departmentFilters, skills
     return tableData
 }
 
-export const applyFilter = (result) => {
-    const designationFilterChips = document.querySelectorAll(".designation-filter ");
-    const departmentFilterChips = document.querySelectorAll(".department-filter ");
-    const skillsFilterChips = document.querySelectorAll(".skills-filter ");
+export function filterEmployeesByProperty(employees, searchText, selectedProperty) {
+    const filteredVal = [];
 
-    const designationFilters = [];
-    const departmentFilters = [];
-    const skillsFilters = [];
+    for (const employee of employees) {
+        let propertyValue;
 
-    designationFilterChips.forEach((filterChip) => {
-        const filterChipValue = filterChip.querySelector(".heading3");
-        designationFilters.push(filterChipValue.innerHTML);
-    });
-    departmentFilterChips.forEach((filterChip) => {
-        const filterChipValue = filterChip.querySelector(".heading3");
-        departmentFilters.push(filterChipValue.innerHTML);
-    });
-    skillsFilterChips.forEach((filterChip) => {
-        const filterChipValue = filterChip.querySelector(".heading3");
-        skillsFilters.push(filterChipValue.innerHTML);
-    });
+        if (selectedProperty === "skills") {
+            propertyValue = employee[selectedProperty].map((skill) => skill.name.toLowerCase());
+        } else {
+            propertyValue = employee[selectedProperty].toLowerCase();
+        }
 
-    let tableData = filterData(result, designationFilters, departmentFilters, skillsFilters);
-    return tableData;
+        if (propertyValue.includes(searchText.toLowerCase())) {
+            filteredVal.push(employee);
+        }
+    }
+
+    return filteredVal;
+}
+
+export function getTableData(employeeList,selectedProperty,searchText) {
+    let tableData = [];
+    if (searchText !== "") {
+        if (selectedProperty === "all") {
+            const searchValueList = document.querySelectorAll(".search-filter-label");
+            const filteredSearchValueList = Array.from(searchValueList).filter(
+                (searchValue) => searchValue.innerHTML.toLowerCase() !== "all"
+            );
+            console.log(filteredSearchValueList)
+            for (const filterSearchValue of filteredSearchValueList) {
+                console.log(filterSearchValue.innerHTML.toLowerCase())
+                const searchValResult = filterEmployeesByProperty(
+                    employeeList,
+                    searchText,
+                    filterSearchValue.innerHTML.toLowerCase()
+                );
+
+                tableData.push(...searchValResult);
+            }
+        } else {
+            console.log("hi")
+
+            const searchValResult = filterEmployeesByProperty(
+                employeeList,
+                searchText,
+                selectedProperty
+            );
+
+            tableData = [...searchValResult];
+        }
+    } else {
+        tableData = employeeList;
+    }
+    return tableData
 }

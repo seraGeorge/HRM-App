@@ -3,7 +3,6 @@ import { readUserData } from "./firebase.js";
 export const getDataFromJson = (url) => fetch(url)
     .then(response => {
         if (response.ok) {
-            console.log(response)
             return response.json()
         }
         throw new Error('Something went wrong');

@@ -1,8 +1,14 @@
+import { state } from "./context.js";
 import { tableBody } from "./elements.js";
+import {  filterData, getTableData } from "./handlers.js";
+import { sortBtnHandler } from "./sortFn.js";
 
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";
-    employees.forEach((employee) => {
+    let sortedEmployees = sortBtnHandler(employees, state.sort)
+    let filteredEmployees = filterData(sortedEmployees,state.designationFilters,state.departmentFilters,state.skillsFilters)
+    let searchedEmployees = getTableData( filteredEmployees,state.search.property,state.search.searchTerm)
+    searchedEmployees.forEach((employee) => {
 
         let skillSet = employee.skills;
         let skills = ""
