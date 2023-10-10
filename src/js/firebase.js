@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getDatabase, get, child, ref, set } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+import { getDatabase, get, child, ref, set, onValue, push, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+import { displayLoading, hideLoading } from "./handlers.js";
 
 // Web app's Firebase configuration
 const firebaseConfig = {
@@ -22,17 +23,33 @@ export const database = getDatabase(app);
 
 //Writing data into your Realtime Database
 export function writeUserData(path, data) {
-    set(ref(database, path), data);
+    return new Promise((resolve, reject) => {
+        set(ref(database, path), data).then(() => {
+            resolve();
+        }).catch((error) => {
+            console.error(error);
+            reject(error);
+        })
+
+    })
 }
 
 //Reading data into your Realtime Database
-export const readUserData = (url) => get(child(ref(database), url))
-    .then((snapshot) => {
-        if (snapshot.exists()) {
-            const data = snapshot.val();
-            return data;
-        }
-        throw new Error('No data available');
-    }).catch((error) => {
-        console.error(error);
+export const readUserData = (url) => {
+    const userRef = ref(database, url);
+
+    return new Promise((resolve, reject) => {
+        onValue(userRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                resolve(data);
+            } else {
+                reject(new Error('No data available'));
+            }
+        }, (error) => {
+            console.error(error);
+            reject(error);
+        });
     });
+};
+

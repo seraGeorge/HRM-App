@@ -26,9 +26,9 @@ export const makeSortIconVisible = (index) => {
 
 }
 
-export const toggleBtn = (button, dropdown) => {
+export const toggleBtn = (button, popUp) => {
     button.addEventListener("click", () => {
-        dropdown.classList.toggle("display")
+        popUp.classList.toggle("no-display")
     })
 
 }
@@ -123,8 +123,8 @@ export function getSearchedData(employeeList, selectedProperty, searchText) {
 
 export const hideDropdownIfNotTarget = (dropdown, button, event) => {
     if (!(button.contains(event.target)) && !(dropdown.contains(event.target))) {
-        if (dropdown.classList.contains("display")) {
-            dropdown.classList.remove("display");
+        if (!dropdown.classList.contains("no-display")) {
+            dropdown.classList.add("no-display");
         }
     }
 }

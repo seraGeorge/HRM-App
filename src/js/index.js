@@ -11,6 +11,7 @@ displayLoading();
 
 let dataCopy;
 const result = readUserData(`/`);
+
 result.then(data => {
     hideLoading()
     dataCopy = data;

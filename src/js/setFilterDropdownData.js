@@ -68,13 +68,13 @@ const addSelection = (listItem, selectedlist, optionsList, className) => {
         listItemChip.classList.add(listItemClass)
         listItemChip.innerHTML =
             `<h3 class="heading3">${listItem.innerHTML}</h3>
-            <button class="button material-symbols-outlined cancel-btn" id="cancel-btn">cancel</button>`
+            <button class="button material-symbols-outlined filter-chip-cancel-btn" id="filter-chip-cancel-btn">cancel</button>`
         selectedlist.appendChild(listItemChip)
         optionsList.removeChild(listItem)
 
         //Cancel Button interaction
-        const cancelBtn = listItemChip.querySelector("#cancel-btn")
-        cancelBtn.addEventListener("click", (event) => {
+        const filterChipCancelBtn = listItemChip.querySelector("#filter-chip-cancel-btn")
+        filterChipCancelBtn.addEventListener("click", (event) => {
             event.stopPropagation();
             selectedlist.removeChild(listItemChip)
             optionsList.appendChild(listItem)

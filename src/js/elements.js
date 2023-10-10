@@ -33,3 +33,8 @@ export const searchDropDown = document.getElementById("search-dropdown")
 export const searchDropDownBtnText = document.getElementById("search-dropdown-btn-text")
 export const searchFilterList = document.querySelectorAll(".search-filter")
 export const searchText = document.getElementById("search-text")
+
+export const deleteModal = document.getElementById("employee-delete-modal")
+export const deleteModalCloseBtn = document.getElementById("delete-modal-close");
+export const deleteModalCancelBtn = document.getElementById("delete-modal-cancel-btn");
+export const deleteModalConfirmBtn = document.getElementById("delete-modal-confirm-btn")

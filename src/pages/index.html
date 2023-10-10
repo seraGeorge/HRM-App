@@ -33,45 +33,45 @@
         <div class="actions-section common-flex">
           <div class="search-bar common-flex">
             <div id="searchForm" class="search-form common-flex">
-                <span class="material-symbols-outlined" class="search-icon">
-                  search
-                </span>
+              <span class="material-symbols-outlined" class="search-icon">
+                search
+              </span>
               <input type="text" class="search-text" id="search-text" placeholder="Search" />
             </div>
             <button class=" button common-button-container common-flex" id="search-dropdown-btn">
-              <p id="search-dropdown-btn-text" class="search-dropdown-btn-text"> 
-              </p> 
-                <span class="material-symbols-outlined"> expand_more </span>
+              <p id="search-dropdown-btn-text" class="search-dropdown-btn-text">
+              </p>
+              <span class="material-symbols-outlined"> expand_more </span>
             </button>
-            <div class="search-dropdown" id="search-dropdown">
+            <div class="search-dropdown no-display" id="search-dropdown">
               <div class="list-item">
                 <input type="radio" id="all" name="search-filter" class="search-filter" value="All" checked>
-                <label for="all" class="search-filter-label">All</label><br>  
+                <label for="all" class="search-filter-label">All</label><br>
               </div>
               <div class="list-item">
                 <input type="radio" id="designation" name="search-filter" class="search-filter" value="Designation">
-                <label for="designation" class="search-filter-label">Designation</label><br>  
+                <label for="designation" class="search-filter-label">Designation</label><br>
               </div>
               <div class="list-item">
                 <input type="radio" id="department" name="search-filter" class="search-filter" value="Department">
-                <label for="department" class="search-filter-label">Department</label><br>  
+                <label for="department" class="search-filter-label">Department</label><br>
               </div>
               <div class="list-item">
                 <input type="radio" id="skill" name="search-filter" class="search-filter" value="Skill">
-                <label for="skill" class="search-filter-label">Skills</label><br>  
+                <label for="skill" class="search-filter-label">Skills</label><br>
               </div>
               <div class="list-item">
                 <input type="radio" id="name" name="search-filter" class="search-filter" value="Name">
-                <label for="name" class="search-filter-label">Name</label><br>  
+                <label for="name" class="search-filter-label">Name</label><br>
               </div>
-          </div>
+            </div>
           </div>
           <div class="filters">
             <button class="button common-button-container common-flex filter-btn" id="filter-btn">
               <span class="material-symbols-outlined"> filter_list </span>
               Filters
             </button>
-            <section class="filter-dropdown" id="filter-dropdown">
+            <section class="filter-dropdown no-display" id="filter-dropdown">
               <h2 class="heading2 head-row dropdown-row">
                 Filter List
               </h2>
@@ -88,7 +88,7 @@
                     expand_more
                   </button>
                 </div>
-                <ul class="ul-reset options-list" id="designation-options-list">
+                <ul class="ul-reset no-display options-list" id="designation-options-list">
                 </ul>
               </div>
               <div class="department-row dropdown-row">
@@ -96,7 +96,7 @@
                   <h2 class="heading2 filter-title">Department</h2>
                   <button class="button reset-btn" id="department-reset-btn">Reset</button>
                 </div>
-                <div class="dropdown-list common-flex">
+                <div class="dropdown-list  common-flex">
                   <div class="selected-list common-flex" id="department-selected-list">
                   </div>
                   <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
@@ -104,7 +104,7 @@
                     expand_more
                   </button>
                 </div>
-                <ul class="ul-reset options-list" id="department-options-list">
+                <ul class="ul-reset no-display options-list" id="department-options-list">
                 </ul>
               </div>
               <div class="skill-row dropdown-row">
@@ -119,10 +119,10 @@
                     expand_more
                   </button>
                 </div>
-                <ul class="ul-reset options-list" id="skill-options-list">
+                <ul class="ul-reset no-display options-list" id="skill-options-list">
                 </ul>
               </div>
-              <div class="dropdown-row common-flex">
+              <div class="button-row dropdown-row common-flex">
                 <button class="button common-button-container common-flex" id="reset-all-btn">
                   Reset All
                 </button>
@@ -186,6 +186,25 @@
             <tbody id="table-body">
             </tbody>
           </table>
+        </div>
+      </div>
+      <div class="employee-delete-modal no-display" id="employee-delete-modal">
+        <button class="button close-button material-symbols-outlined" id="delete-modal-close">
+          close
+        </button>
+        <h2 class="heading2 delete-modal-title" id="delete-modal-title">
+          Are you sure you want to delete the employee ?
+        </h2>
+        <p class="text">
+          The data selected will be permanently removed. It would remove all the details related to the employee. Are you sure you want to continue?
+        </p>
+        <div class="button-row dropdown-row common-flex">
+          <button class="button common-button-container common-flex" id="delete-modal-cancel-btn">
+            Cancel
+          </button>
+          <button class="button common-button-container common-flex" id="delete-modal-confirm-btn">
+            Confirm
+          </button>
         </div>
       </div>
     </div>

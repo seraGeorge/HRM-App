@@ -1,7 +1,7 @@
 :root {
   --primary-color: #7e3af2;
-  --text-color: rgba(36, 38, 45);
-  --secondary-color: rgba(112, 114, 117);
+  --secondary-color: rgba(36, 38, 45);
+  --placeholder-color: rgba(112, 114, 117);
   --background-color: #f9fafb;
 }
 
@@ -45,7 +45,7 @@ html {
   font-size: 40px;
   font-weight: 700;
   line-height: 1.5;
-  color: var(--text-color);
+  color: var(--secondary-color);
 }
 .heading2 {
   margin: 0;
@@ -59,7 +59,7 @@ html {
   font-size: 14px;
   font-weight: 700;
   line-height: 1.5;
-  color: var(--text-color);
+  color: var(--secondary-color);
 }
 
 
