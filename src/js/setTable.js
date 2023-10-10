@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { noTableData, tableBody } from "./elements.js";
+import { tableBody } from "./elements.js";
 import { filterData, getSearchedData } from "./handlers.js";
 import { sortBtnHandler } from "./sortFn.js";
 
