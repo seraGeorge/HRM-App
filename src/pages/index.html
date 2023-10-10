@@ -60,6 +60,10 @@
                 <input type="radio" id="skill" name="search-filter" class="search-filter" value="Skill">
                 <label for="skill" class="search-filter-label">Skills</label><br>  
               </div>
+              <div class="list-item">
+                <input type="radio" id="name" name="search-filter" class="search-filter" value="Name">
+                <label for="name" class="search-filter-label">Name</label><br>  
+              </div>
           </div>
           </div>
           <div class="filters">
@@ -67,7 +71,7 @@
               <span class="material-symbols-outlined"> filter_list </span>
               Filters
             </button>
-            <div class="filter-dropdown" id="filter-dropdown">
+            <section class="filter-dropdown" id="filter-dropdown">
               <h2 class="heading2 head-row dropdown-row">
                 Filter List
               </h2>
@@ -126,10 +130,10 @@
                   Apply All
                 </button>
               </div>
-            </div>
+            </section>
           </div>
         </div>
-        <div class="employee-list">
+        <div class="employee-list" id="employee-list">
           <div id="loader" class="loader"></div>
           <table class="employee-table" id="table">
             <thead>
@@ -137,7 +141,7 @@
                 <th class="table-heading">
                   <button class=" button employee-heading sort-btn">
                     <span class="table-title"> Employee Id </span>
-                    <span class="sort-icon material-symbols-outlined rotate">
+                    <span class="sort-icon material-symbols-outlined">
                       expand_more
                     </span>
                   </button>
@@ -180,7 +184,6 @@
               </tr>
             </thead>
             <tbody id="table-body">
-
             </tbody>
           </table>
         </div>

@@ -67,19 +67,29 @@ export function filterEmployeesByProperty(employees, searchText, selectedPropert
 
         if (selectedProperty === "skills") {
             propertyValue = employee[selectedProperty].map((skill) => skill.name.toLowerCase());
-        } else {
-            propertyValue = employee[selectedProperty].toLowerCase();
+            if (propertyValue.filter((skill) => skill.includes(searchText.toLowerCase())).length > 0) {
+                filteredVal.push(employee);
+            }
         }
-
-        if (propertyValue.includes(searchText.toLowerCase())) {
-            filteredVal.push(employee);
+        else if (selectedProperty === "name") {
+            selectedProperty = "emp_name"
+            propertyValue = employee[selectedProperty].toLowerCase();
+            if (propertyValue.includes(searchText.toLowerCase())) {
+                filteredVal.push(employee);
+            }
+        }
+        else {
+            propertyValue = employee[selectedProperty].toLowerCase();
+            if (propertyValue.includes(searchText.toLowerCase())) {
+                filteredVal.push(employee);
+            }
         }
     }
 
     return filteredVal;
 }
 
-export function getTableData(employeeList,selectedProperty,searchText) {
+export function getSearchedData(employeeList, selectedProperty, searchText) {
     let tableData = [];
     if (searchText !== "") {
         if (selectedProperty === "all") {
@@ -87,9 +97,7 @@ export function getTableData(employeeList,selectedProperty,searchText) {
             const filteredSearchValueList = Array.from(searchValueList).filter(
                 (searchValue) => searchValue.innerHTML.toLowerCase() !== "all"
             );
-            console.log(filteredSearchValueList)
             for (const filterSearchValue of filteredSearchValueList) {
-                console.log(filterSearchValue.innerHTML.toLowerCase())
                 const searchValResult = filterEmployeesByProperty(
                     employeeList,
                     searchText,
@@ -99,8 +107,6 @@ export function getTableData(employeeList,selectedProperty,searchText) {
                 tableData.push(...searchValResult);
             }
         } else {
-            console.log("hi")
-
             const searchValResult = filterEmployeesByProperty(
                 employeeList,
                 searchText,
@@ -113,4 +119,12 @@ export function getTableData(employeeList,selectedProperty,searchText) {
         tableData = employeeList;
     }
     return tableData
+}
+
+export const hideDropdownIfNotTarget = (dropdown, button, event) => {
+    if (!(button.contains(event.target)) && !(dropdown.contains(event.target))) {
+        if (dropdown.classList.contains("display")) {
+            dropdown.classList.remove("display");
+        }
+    }
 }

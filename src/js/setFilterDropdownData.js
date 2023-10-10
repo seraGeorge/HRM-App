@@ -2,7 +2,7 @@ import { state } from "./context.js";
 import { departmentDropDownBtn, departmentOptionsList, departmentResetBtn, departmentSelectedList, designationDropDownBtn, designationOptionsList, designationResetBtn, designationSelectedList, filterBtn, mainFilterDropDown, resetAllBtn, skillsDropDownBtn, skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
 import { setTableData } from "./setTable.js";
 
-export const setDropDownData = (data) => {
+export const setFilterDropdownData = (data) => {
 
     const departmentsDataList = data.departments;
     const designationsDataList = data.designations;
@@ -40,60 +40,39 @@ export const setDropDownData = (data) => {
 
         setTableData(data.employees)
     })
-    document.addEventListener("click", (event) => {
-        event.stopPropagation()
-        if (!(filterBtn === event.target) && !(mainFilterDropDown.contains(event.target))) {
-            if (mainFilterDropDown.classList.contains("display")) {
-                mainFilterDropDown.classList.remove("display")
-            }
-        }
-
-        if (!designationOptionsList.contains(event.target) && !(designationDropDownBtn === event.target) && (mainFilterDropDown.contains(event.target))) {
-            if (designationOptionsList.classList.contains("display")) {
-                designationOptionsList.classList.remove("display")
-            }
-
-        }
-        if (!departmentOptionsList.contains(event.target) && !(departmentDropDownBtn === event.target) && (mainFilterDropDown.contains(event.target))) {
-            if (departmentOptionsList.classList.contains("display")) {
-                departmentOptionsList.classList.remove("display")
-            }
-
-        }
-        if (!skillsOptionsList.contains(event.target) && !(skillsDropDownBtn === event.target) && (mainFilterDropDown.contains(event.target))) {
-            if (skillsOptionsList.classList.contains("display")) {
-                skillsOptionsList.classList.remove("display")
-            }
-
-        }
-
-    })
-
 }
 export const setDropDown = (dataList, optionsList, selectedlist, className) => {
     optionsList.innerHTML = "";
     dataList.forEach((item) => {
+
+        //List Item in the dropdown
         const listItem = document.createElement("li");
         listItem.innerHTML = item;
         listItem.classList.add('list-item')
         optionsList.appendChild(listItem)
+
         addSelection(listItem, selectedlist, optionsList, className)
     })
 }
 const addSelection = (listItem, selectedlist, optionsList, className) => {
     listItem.addEventListener("click", (event) => {
+
         optionsList.classList.remove("display")
         event.stopPropagation();
         const listItemClass = className + "-filter";
 
+        //List Item Chip in the selectedList
         const listItemChip = document.createElement("div");
         listItemChip.classList.add("common-flex")
         listItemChip.classList.add("filter-chip")
         listItemChip.classList.add(listItemClass)
         listItemChip.innerHTML =
-            `<h3 class="heading3">${listItem.innerHTML}</h3><button class="button material-symbols-outlined cancel-btn" id="cancel-btn">cancel</button>`
+            `<h3 class="heading3">${listItem.innerHTML}</h3>
+            <button class="button material-symbols-outlined cancel-btn" id="cancel-btn">cancel</button>`
         selectedlist.appendChild(listItemChip)
         optionsList.removeChild(listItem)
+
+        //Cancel Button interaction
         const cancelBtn = listItemChip.querySelector("#cancel-btn")
         cancelBtn.addEventListener("click", (event) => {
             event.stopPropagation();
