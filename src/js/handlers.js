@@ -49,7 +49,7 @@ export const filterData = (result, designationFilters, departmentFilters, skills
         tableData = result.filter((e) => {
             const designationMatch = designationFilters.length != 0 ? designationFilters.includes(e.designation) : true;
             const departmentMatch = departmentFilters.length != 0 ? departmentFilters.includes(e.department) : true;
-            const skillMatch = skillsFilters.length != 0 ? e.skills.some((f) => skillsFilters.includes(f.name)) : true;
+            const skillMatch = skillsFilters.length != 0 ? skillsFilters.every(filter => e.skills.some(skill => skill.name === filter)) : true;
             // Include the employee in the filtered array if any of the conditions are true
             return designationMatch && departmentMatch && skillMatch;
         });

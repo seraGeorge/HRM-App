@@ -54,7 +54,7 @@ result.then(data => {
 
         //filtering based on 3 filters
         applyAllBtn.addEventListener("click", () => {
-            mainFilterDropDown.classList.remove("display");
+            mainFilterDropDown.classList.add("no-display");
             const designationFilters = getFilterChips(".designation-filter ");
             const departmentFilters = getFilterChips(".department-filter ");
             const skillsFilters = getFilterChips(".skills-filter ");
@@ -62,6 +62,7 @@ result.then(data => {
             state.filter.designationFilters = designationFilters;
             state.filter.departmentFilters = departmentFilters;
             state.filter.skillsFilters = skillsFilters;
+
             setTableData(employeeList);
         });
 
@@ -74,7 +75,7 @@ result.then(data => {
                 searchDropDownBtnText.innerHTML = labelElement.textContent
             }
             searchFilter.addEventListener("click", () => {
-                searchDropDown.classList.remove("display")
+                searchDropDown.classList.add("no-display")
                 searchDropDownBtnText.innerHTML = labelElement.textContent
             })
         })

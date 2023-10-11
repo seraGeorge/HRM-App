@@ -31,8 +31,8 @@ export const setFilterDropdownData = (data) => {
         setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department");
         resetFilter(skillsSelectedList, skillsOptionsList);
         setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills");
-        if (mainFilterDropDown.classList.contains("display")) {
-            mainFilterDropDown.classList.remove("display")
+        if (!mainFilterDropDown.classList.contains("no-display")) {
+            mainFilterDropDown.classList.add("no-display")
         }
         state.filter.designationFilters = [];
         state.filter.departmentFilters = [];
@@ -57,7 +57,7 @@ export const setDropDown = (dataList, optionsList, selectedlist, className) => {
 const addSelection = (listItem, selectedlist, optionsList, className) => {
     listItem.addEventListener("click", (event) => {
 
-        optionsList.classList.remove("display")
+        optionsList.classList.add("no-display")
         event.stopPropagation();
         const listItemClass = className + "-filter";
 
@@ -71,7 +71,9 @@ const addSelection = (listItem, selectedlist, optionsList, className) => {
             <button class="button material-symbols-outlined filter-chip-cancel-btn" id="filter-chip-cancel-btn">cancel</button>`
         selectedlist.appendChild(listItemChip)
         optionsList.removeChild(listItem)
-
+        if (!optionsList.classList.contains("no-display")) {
+            optionsList.classList.add("no-display");
+        }
         //Cancel Button interaction
         const filterChipCancelBtn = listItemChip.querySelector("#filter-chip-cancel-btn")
         filterChipCancelBtn.addEventListener("click", (event) => {
