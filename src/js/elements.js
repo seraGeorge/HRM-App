@@ -38,3 +38,33 @@ export const deleteModal = document.getElementById("employee-delete-modal")
 export const deleteModalCloseBtn = document.getElementById("delete-modal-close");
 export const deleteModalCancelBtn = document.getElementById("delete-modal-cancel-btn");
 export const deleteModalConfirmBtn = document.getElementById("delete-modal-confirm-btn")
+
+export const viewModal = document.getElementById("view-modal")
+export const viewModalCloseBtn = document.getElementById("view-modal-close");
+
+
+export const empDesignationVal = document.getElementById("designation-val");
+export const empDepartmentVal = document.getElementById("department-val");
+export const empModeVal = document.getElementById("emp-mod-val");
+export const empWorkExpVal = document.getElementById("work-exp-val");
+export const empDOBVal = document.getElementById("date-of-birth");
+export const empDOJVal = document.getElementById("date-of-joining");
+export const empGenderVal = document.getElementById("gender-val");
+export const empEmailVal = document.getElementById("email-val");
+export const empPhoneNoVal = document.getElementById("phone-val");
+export const empSkillsList = document.getElementById("skill-list")
+export const empSkillsVal = document.querySelectorAll(".skill-card");
+export const empAddressVal = document.getElementById("address-val");
+
+
+
+
+
+
+
+
+
+
+
+
+

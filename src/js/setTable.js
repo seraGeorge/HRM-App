@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, tableBody } from "./elements.js";
+import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empModeVal, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
 import { displayLoading, filterData, getSearchedData, hideLoading, toggleBtn } from "./handlers.js";
 import { sortBtnHandler } from "./sortFn.js";
@@ -37,28 +37,64 @@ export const setTableData = (employees) => {
             tableRow.classList = "table-row";
             tableBody.appendChild(tableRow);
             const deleteSelector = tableRow.querySelector(".employee-delete");
-            const employeeIdTag = tableRow.querySelector(".employee-id")
-            employeeDeleteBtnAction(employees, deleteSelector, employeeIdTag)
+            const viewSelector = tableRow.querySelector(".employee-view");
+            const employeeIdTag = tableRow.querySelector(".employee-id");
+            const employeeIdVal = employeeIdTag.dataset.id;
+            employeeDeleteBtnAction(employees, deleteSelector, employeeIdVal);
+            employeeViewAction(employees, viewSelector, employeeIdVal);
         })
     }
-}
-const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdTag) => {
-    toggleBtn(deleteSelector, deleteModal);
     toggleBtn(deleteModalCloseBtn, deleteModal);
     toggleBtn(deleteModalCancelBtn, deleteModal);
     toggleBtn(deleteModalConfirmBtn, deleteModal)
+    toggleBtn(viewModalCloseBtn, viewModal);
+
+}
+const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) => {
+    toggleBtn(deleteSelector, deleteModal);
 
 
     deleteSelector.addEventListener("click", () => {
-        employeeDeleteConfirmAction(employeeIdTag, employeeList)
+        employeeDeleteConfirmAction(employeeIdVal, employeeList)
     })
 
 }
-const employeeDeleteConfirmAction = (employeeIdTag, employeeList) => {
+const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
 
     deleteModalConfirmBtn.addEventListener("click", () => {
-        const newEmployeeList = employeeList.filter((employee) => employee.id != employeeIdTag.dataset.id);
+        const newEmployeeList = employeeList.filter((employee) => employee.id != employeeIdVal);
         writeUserData('/employees', newEmployeeList);
         location.reload(true)
     })
 };
+const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
+    toggleBtn(viewSelector, viewModal);
+
+
+    viewSelector.addEventListener("click", () => {
+        const indexToView = employeeList.findIndex((employee) => employee.id === employeeIdVal)
+        const currentEmployee = employeeList[indexToView];
+        empDesignationVal.innerHTML = currentEmployee.designation ?? "-";
+        empDepartmentVal.innerHTML = currentEmployee.department ?? '-';
+        empModeVal.innerHTML = currentEmployee.employment_mode ?? '-';
+        empWorkExpVal.innerHTML = null ?? '-';
+        empDOBVal.innerHTML = currentEmployee.date_of_birth ?? '-';
+        empDOJVal.innerHTML = currentEmployee.date_of_joining ?? '-';
+        empGenderVal.innerHTML = currentEmployee.gender ?? '-';
+        empEmailVal.innerHTML = currentEmployee.email ?? '-';
+        empPhoneNoVal.innerHTML = currentEmployee.phone ?? '-';
+        empAddressVal.innerHTML = currentEmployee.address ?? '-';
+        
+        
+        let temp = ""
+        if (currentEmployee.skills.length > 0) {
+            currentEmployee.skills.forEach((skill) => {
+                temp += `<span class="skill-card"> ${skill.name} </span>`
+            })
+        }
+        else {
+            temp = '-'
+        }
+        empSkillsList.innerHTML = temp
+    })
+}

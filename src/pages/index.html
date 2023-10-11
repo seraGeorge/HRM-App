@@ -208,7 +208,7 @@
             </button>
           </div>
         </div>
-        <div class="modal view-modal">
+        <div class="modal view-modal no-display" id="view-modal">
           <button class="button close-button material-symbols-outlined" id="view-modal-close">
             close
           </button>
@@ -221,15 +221,7 @@
                 Designation
               </h3>
               <p class="heading3 designation-val" id="designation-val">
-                Designation
-              </p>
-            </span>
-            <span class="category department-detail">
-              <h3 class="heading3 detail-title department-title">
-                Department
-              </h3>
-              <p class="heading3 department-val" id="department-val">
-                Department
+                
               </p>
             </span>
             <span class="category emp-mode-detail">
@@ -237,17 +229,24 @@
                 Employment Mode
               </h3>
               <p class="heading3 emp-mod-val" id="emp-mod-val">
-                Full time
               </p>
             </span>
+            <span class="category department-detail">
+              <h3 class="heading3 detail-title department-title">
+                Department
+              </h3>
+              <p class="heading3 department-val" id="department-val">
+                
+              </p>
+            </span>
+            
           </span>
           <span class="detail-row common-flex">
             <span class="category date-of-joining">
               <h3 class="heading3 detail-title date-of-joining-title">
                 Date of Joining
               </h3>
-              <p class="heading3 date-of-joining-val" id="date-of-joining-title">
-                11/12/2023
+              <p class="heading3 date-of-joining-val" id="date-of-joining">
               </p>
             </span>
             <span class="category work-exp">
@@ -255,7 +254,6 @@
                 Total Work Experience
               </h3>
               <p class="heading3 work-exp-val" id="work-exp-val">
-                2 months
               </p>
             </span>
           </span>
@@ -264,8 +262,7 @@
               <h3 class="heading3 detail-title date-of-birth-title">
                 Date of Birth
               </h3>
-              <p class="heading3 date-of-birth-val" id="date-of-birth-title">
-                11/12/2023
+              <p class="heading3 date-of-birth-val" id="date-of-birth">
               </p>
             </span>
             <span class="category work-exp">
@@ -273,7 +270,6 @@
                 Gender
               </h3>
               <p class="heading3 gender-val" id="gender-val">
-                Female
               </p>
             </span>
           </span>
@@ -287,16 +283,14 @@
                   <span class="material-symbols-outlined contact-detail-icon">
                     mail
                   </span>
-                  <p class="heading3 detail-title email-val">
-                    xxx@gmail.com
+                  <p class="heading3 detail-title email-val" id="email-val">
                   </p>
                 </span>
                 <span class="category contact-detail-val ">
                   <span class="material-symbols-outlined contact-detail-icon">
                     phone
                   </span>
-                  <p class="heading3 detail-title email-val">
-                    xxxx-xxx-xxx
+                  <p class="heading3 detail-title phone-val" id="phone-val">
                   </p>
                 </span>
               </span>
@@ -306,10 +300,7 @@
             <h3 class="heading3 detail-title skill-title">
               Skills
             </h3>
-            <span class="skill-list">
-              <span class="skill-card"> javascript </span>
-              <span class="skill-card"> javascript </span>
-              <span class="skill-card"> javascript </span>
+            <span class="skill-list" id="skill-list">
             </span>
           </span>
           <span class="detail-row">
@@ -317,7 +308,6 @@
               Address
             </h3>
             <p class="heading3 address-val" id="address-val">
-              XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             </p>
           </span>
         </div>
