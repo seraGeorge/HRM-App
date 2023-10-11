@@ -24,7 +24,7 @@ export const setTableData = (employees) => {
             const tableRow = document.createElement('tr');
 
             tableRow.innerHTML = `
-            <td class="employee-data employee-id">${employee.id}</td>
+            <td class="employee-data employee-id" data-id="${employee.id}">${employee.id}</td>
             <td class="employee-data">${employee.emp_name}</td>
             <td class="employee-data">${employee.designation}</td>
             <td class="employee-data">${employee.department}</td>
@@ -36,30 +36,29 @@ export const setTableData = (employees) => {
             </div></td> `;
             tableRow.classList = "table-row";
             tableBody.appendChild(tableRow);
+            const deleteSelector = tableRow.querySelector(".employee-delete");
+            const employeeIdTag = tableRow.querySelector(".employee-id")
+            employeeDeleteBtnAction(employees, deleteSelector, employeeIdTag)
         })
-        employeeDeleteBtnAction(employees);
     }
 }
-const employeeDeleteBtnAction = (employeeList) => {
+const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdTag) => {
+    toggleBtn(deleteSelector, deleteModal);
     toggleBtn(deleteModalCloseBtn, deleteModal);
     toggleBtn(deleteModalCancelBtn, deleteModal);
     toggleBtn(deleteModalConfirmBtn, deleteModal)
 
-    const employeeDltBtnList = document.querySelectorAll(".employee-delete");
-    employeeDltBtnList.forEach((employeeDltBtn, index) => {
-        toggleBtn(employeeDltBtn, deleteModal);
-        employeeDltBtn.addEventListener("click", () => {
-            employeeDeleteConfirmAction(employeeList, index)
-        })
+
+    deleteSelector.addEventListener("click", () => {
+        employeeDeleteConfirmAction(employeeIdTag, employeeList)
     })
 
 }
-const employeeDeleteConfirmAction = (employeeList, index) => {
-    const employeeIdNodeList = document.querySelectorAll(".employee-id")
-    const employeeIdList = Array.from(employeeIdNodeList).map((e) => e.innerHTML)
+const employeeDeleteConfirmAction = (employeeIdTag, employeeList) => {
 
     deleteModalConfirmBtn.addEventListener("click", () => {
-        const newEmployeeList = employeeList.filter((employee) => employee.id != employeeIdList[index]);
+        const newEmployeeList = employeeList.filter((employee) => employee.id != employeeIdTag.dataset.id);
         writeUserData('/employees', newEmployeeList);
+        location.reload(true)
     })
 };
