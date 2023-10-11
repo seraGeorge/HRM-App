@@ -18,7 +18,7 @@ export const setTableData = (employees) => {
             let skills = ""
             for (let j = 0; j < skillSet.length; j++) {
                 let skill = skillSet[j]
-                skills += `<span class="skill-card"><a href="#" class="skill"> ${skill.name} </a></span>`
+                skills += `<span class="skill-card"> ${skill.name} </span>`
             }
 
             const tableRow = document.createElement('tr');

@@ -1,224 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Human Resources Management App</title>
-  <link rel="icon" type="image/x-icon" href="../assets/logo.png">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="stylesheet" href="../css/normalize.css" />
-  <link rel="stylesheet" href="../css/styles.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Human Resources Management App</title>
+    <link rel="icon" type="image/x-icon" href="../assets/logo.png">
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
 
-  <link rel="stylesheet" href="../css/commonClasses.css" />
+    <link rel="stylesheet" href="../css/commonClasses.css" />
 
-</head>
+  </head>
 
-<body class="body">
-  <header class="header">
-    <div class="header-content global-width">
-      <a href="javascript:void(0)" class="logo-wrap">
-        <h1 class="heading1">HRM</h1>
-      </a>
-    </div>
-  </header>
-  <main class="main-section">
-    <div class="global-width main-content">
-      <section class="heading-section common-section">
-        <h1 class="heading1">Dashboard</h1>
-        <!-- TODO: Add new Employee -->
-      </section>
-      <div class="employee-listing-section">
-        <div class="actions-section common-flex">
-          <div class="search-bar common-flex">
-            <div id="searchForm" class="search-form common-flex">
-              <span class="material-symbols-outlined" class="search-icon">
-                search
-              </span>
-              <input type="text" class="search-text" id="search-text" placeholder="Search" />
+  <body class="body">
+    <header class="header">
+      <div class="header-content global-width">
+        <a href="javascript:void(0)" class="logo-wrap">
+          <h1 class="heading1">HRM</h1>
+        </a>
+      </div>
+    </header>
+    <main class="main-section">
+      <div class="global-width main-content">
+        <section class="heading-section common-section">
+          <h1 class="heading1">Dashboard</h1>
+          <!-- TODO: Add new Employee -->
+        </section>
+        <div class="employee-listing-section">
+          <div class="actions-section common-flex">
+            <div class="search-bar common-flex">
+              <div id="searchForm" class="search-form common-flex">
+                <span class="material-symbols-outlined" class="search-icon">
+                  search
+                </span>
+                <input type="text" class="search-text" id="search-text" placeholder="Search" />
+              </div>
+              <button class=" button common-button-container common-flex" id="search-dropdown-btn">
+                <p id="search-dropdown-btn-text" class="search-dropdown-btn-text">
+                </p>
+                <span class="material-symbols-outlined"> expand_more </span>
+              </button>
+              <div class="search-dropdown no-display" id="search-dropdown">
+                <div class="list-item">
+                  <input type="radio" id="all" name="search-filter" class="search-filter" value="All" checked>
+                  <label for="all" class="search-filter-label">All</label><br>
+                </div>
+                <div class="list-item">
+                  <input type="radio" id="designation" name="search-filter" class="search-filter" value="Designation">
+                  <label for="designation" class="search-filter-label">Designation</label><br>
+                </div>
+                <div class="list-item">
+                  <input type="radio" id="department" name="search-filter" class="search-filter" value="Department">
+                  <label for="department" class="search-filter-label">Department</label><br>
+                </div>
+                <div class="list-item">
+                  <input type="radio" id="skill" name="search-filter" class="search-filter" value="Skill">
+                  <label for="skill" class="search-filter-label">Skills</label><br>
+                </div>
+                <div class="list-item">
+                  <input type="radio" id="name" name="search-filter" class="search-filter" value="Name">
+                  <label for="name" class="search-filter-label">Name</label><br>
+                </div>
+              </div>
             </div>
-            <button class=" button common-button-container common-flex" id="search-dropdown-btn">
-              <p id="search-dropdown-btn-text" class="search-dropdown-btn-text">
+            <div class="filters">
+              <button class="button common-button-container common-flex filter-btn" id="filter-btn">
+                <span class="material-symbols-outlined"> filter_list </span>
+                Filters
+              </button>
+              <section class="filter-dropdown no-display" id="filter-dropdown">
+                <h2 class="heading2 head-row dropdown-row">
+                  Filter List
+                </h2>
+                <div class="designation-row dropdown-row">
+                  <div class="filter-heading-row common-flex">
+                    <h2 class="heading2 filter-title">Designation</h2>
+                    <button class="button reset-btn" id="designation-reset-btn">Reset</button>
+                  </div>
+                  <div class="dropdown-list common-flex">
+                    <div class="selected-list common-flex" id="designation-selected-list">
+                    </div>
+                    <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
+                      id="designation-dropdown-btn">
+                      expand_more
+                    </button>
+                  </div>
+                  <ul class="ul-reset no-display options-list" id="designation-options-list">
+                  </ul>
+                </div>
+                <div class="department-row dropdown-row">
+                  <div class="filter-heading-row common-flex">
+                    <h2 class="heading2 filter-title">Department</h2>
+                    <button class="button reset-btn" id="department-reset-btn">Reset</button>
+                  </div>
+                  <div class="dropdown-list  common-flex">
+                    <div class="selected-list common-flex" id="department-selected-list">
+                    </div>
+                    <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
+                      id="department-dropdown-btn">
+                      expand_more
+                    </button>
+                  </div>
+                  <ul class="ul-reset no-display options-list" id="department-options-list">
+                  </ul>
+                </div>
+                <div class="skill-row dropdown-row">
+                  <div class="filter-heading-row common-flex">
+                    <h2 class="heading2 filter-title">Skills</h2>
+                    <button class="button reset-btn" id="skill-reset-btn">Reset</button>
+                  </div>
+                  <div class="dropdown-list common-flex">
+                    <div class="selected-list common-flex" id="skill-selected-list">
+                    </div>
+                    <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="skill-dropdown-btn">
+                      expand_more
+                    </button>
+                  </div>
+                  <ul class="ul-reset no-display options-list" id="skill-options-list">
+                  </ul>
+                </div>
+                <div class="button-row dropdown-row common-flex">
+                  <button class="button common-button-container common-flex" id="reset-all-btn">
+                    Reset All
+                  </button>
+                  <button class="button common-button-container common-flex" id="apply-all-btn">
+                    Apply All
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="employee-list" id="employee-list">
+            <div id="loader" class="loader"></div>
+            <table class="employee-table" id="table">
+              <thead>
+                <tr class="table-row" id="head-row">
+                  <th class="table-heading">
+                    <button class=" button employee-heading sort-btn">
+                      <span class="table-title"> Employee Id </span>
+                      <span class="sort-icon material-symbols-outlined">
+                        expand_more
+                      </span>
+                    </button>
+                  </th>
+                  <th class="table-heading">
+                    <button class=" button employee-heading sort-btn">
+                      <span class="table-title"> Name </span>
+                      <span class="sort-icon material-symbols-outlined rotate">
+                        expand_more
+                      </span>
+                    </button>
+                  </th>
+                  <th class="table-heading">
+                    <button class=" button employee-heading sort-btn">
+                      <span class="table-title"> Designation </span>
+
+                      <span class="sort-icon material-symbols-outlined rotate">
+                        expand_more
+                    </button>
+                    </span>
+                  </th>
+                  <th class="table-heading">
+                    <button class=" button employee-heading sort-btn">
+                      <span class="table-title"> Department </span>
+                      <span class="sort-icon material-symbols-outlined rotate">
+                        expand_more
+                      </span>
+                    </button>
+                  </th>
+                  <th class="table-heading">
+                    <button class=" button employee-heading sort-btn">
+                      <span class="table-title"> Skills </span>
+                      </span>
+                  </th>
+                  <th class="table-heading">
+                    <button class=" button employee-heading sort-btn">
+                      <span class="table-title"> Actions </span>
+                      </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal employee-delete-modal no-display" id="employee-delete-modal">
+          <button class="button close-button material-symbols-outlined" id="delete-modal-close">
+            close
+          </button>
+          <h2 class="heading2 delete-modal-title" id="delete-modal-title">
+            Are you sure you want to delete the employee ?
+          </h2>
+          <p class="text">
+            The data selected will be permanently removed. It would remove all the details related to the employee. Are
+            you sure you want to continue?
+          </p>
+          <div class="button-row dropdown-row common-flex">
+            <button class="button common-button-container common-flex" id="delete-modal-cancel-btn">
+              Cancel
+            </button>
+            <button class="button common-button-container common-flex" id="delete-modal-confirm-btn">
+              Confirm
+            </button>
+          </div>
+        </div>
+        <div class="modal view-modal">
+          <button class="button close-button material-symbols-outlined" id="view-modal-close">
+            close
+          </button>
+          <h2 class="heading2 view-modal-title" id="delete-modal-title">
+            Employee Name
+          </h2>
+          <span class="detail-row common-flex">
+            <span class="category designation-detail">
+              <h3 class="heading3 detail-title designation-title">
+                Designation
+              </h3>
+              <p class="heading3 designation-val" id="designation-val">
+                Designation
               </p>
-              <span class="material-symbols-outlined"> expand_more </span>
-            </button>
-            <div class="search-dropdown no-display" id="search-dropdown">
-              <div class="list-item">
-                <input type="radio" id="all" name="search-filter" class="search-filter" value="All" checked>
-                <label for="all" class="search-filter-label">All</label><br>
-              </div>
-              <div class="list-item">
-                <input type="radio" id="designation" name="search-filter" class="search-filter" value="Designation">
-                <label for="designation" class="search-filter-label">Designation</label><br>
-              </div>
-              <div class="list-item">
-                <input type="radio" id="department" name="search-filter" class="search-filter" value="Department">
-                <label for="department" class="search-filter-label">Department</label><br>
-              </div>
-              <div class="list-item">
-                <input type="radio" id="skill" name="search-filter" class="search-filter" value="Skill">
-                <label for="skill" class="search-filter-label">Skills</label><br>
-              </div>
-              <div class="list-item">
-                <input type="radio" id="name" name="search-filter" class="search-filter" value="Name">
-                <label for="name" class="search-filter-label">Name</label><br>
-              </div>
-            </div>
-          </div>
-          <div class="filters">
-            <button class="button common-button-container common-flex filter-btn" id="filter-btn">
-              <span class="material-symbols-outlined"> filter_list </span>
-              Filters
-            </button>
-            <section class="filter-dropdown no-display" id="filter-dropdown">
-              <h2 class="heading2 head-row dropdown-row">
-                Filter List
-              </h2>
-              <div class="designation-row dropdown-row">
-                <div class="filter-heading-row common-flex">
-                  <h2 class="heading2 filter-title">Designation</h2>
-                  <button class="button reset-btn" id="designation-reset-btn">Reset</button>
-                </div>
-                <div class="dropdown-list common-flex">
-                  <div class="selected-list common-flex" id="designation-selected-list">
-                  </div>
-                  <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
-                    id="designation-dropdown-btn">
-                    expand_more
-                  </button>
-                </div>
-                <ul class="ul-reset no-display options-list" id="designation-options-list">
-                </ul>
-              </div>
-              <div class="department-row dropdown-row">
-                <div class="filter-heading-row common-flex">
-                  <h2 class="heading2 filter-title">Department</h2>
-                  <button class="button reset-btn" id="department-reset-btn">Reset</button>
-                </div>
-                <div class="dropdown-list  common-flex">
-                  <div class="selected-list common-flex" id="department-selected-list">
-                  </div>
-                  <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
-                    id="department-dropdown-btn">
-                    expand_more
-                  </button>
-                </div>
-                <ul class="ul-reset no-display options-list" id="department-options-list">
-                </ul>
-              </div>
-              <div class="skill-row dropdown-row">
-                <div class="filter-heading-row common-flex">
-                  <h2 class="heading2 filter-title">Skills</h2>
-                  <button class="button reset-btn" id="skill-reset-btn">Reset</button>
-                </div>
-                <div class="dropdown-list common-flex">
-                  <div class="selected-list common-flex" id="skill-selected-list">
-                  </div>
-                  <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="skill-dropdown-btn">
-                    expand_more
-                  </button>
-                </div>
-                <ul class="ul-reset no-display options-list" id="skill-options-list">
-                </ul>
-              </div>
-              <div class="button-row dropdown-row common-flex">
-                <button class="button common-button-container common-flex" id="reset-all-btn">
-                  Reset All
-                </button>
-                <button class="button common-button-container common-flex" id="apply-all-btn">
-                  Apply All
-                </button>
-              </div>
-            </section>
-          </div>
-        </div>
-        <div class="employee-list" id="employee-list">
-          <div id="loader" class="loader"></div>
-          <table class="employee-table" id="table">
-            <thead>
-              <tr class="table-row" id="head-row">
-                <th class="table-heading">
-                  <button class=" button employee-heading sort-btn">
-                    <span class="table-title"> Employee Id </span>
-                    <span class="sort-icon material-symbols-outlined">
-                      expand_more
-                    </span>
-                  </button>
-                </th>
-                <th class="table-heading">
-                  <button class=" button employee-heading sort-btn">
-                    <span class="table-title"> Name </span>
-                    <span class="sort-icon material-symbols-outlined rotate">
-                      expand_more
-                    </span>
-                  </button>
-                </th>
-                <th class="table-heading">
-                  <button class=" button employee-heading sort-btn">
-                    <span class="table-title"> Designation </span>
-
-                    <span class="sort-icon material-symbols-outlined rotate">
-                      expand_more
-                  </button>
+            </span>
+            <span class="category department-detail">
+              <h3 class="heading3 detail-title department-title">
+                Department
+              </h3>
+              <p class="heading3 department-val" id="department-val">
+                Department
+              </p>
+            </span>
+            <span class="category emp-mode-detail">
+              <h3 class="heading3 detail-title emp-mode-title">
+                Employment Mode
+              </h3>
+              <p class="heading3 emp-mod-val" id="emp-mod-val">
+                Full time
+              </p>
+            </span>
+          </span>
+          <span class="detail-row common-flex">
+            <span class="category date-of-joining">
+              <h3 class="heading3 detail-title date-of-joining-title">
+                Date of Joining
+              </h3>
+              <p class="heading3 date-of-joining-val" id="date-of-joining-title">
+                11/12/2023
+              </p>
+            </span>
+            <span class="category work-exp">
+              <h3 class="heading3 detail-title work-exp-title">
+                Total Work Experience
+              </h3>
+              <p class="heading3 work-exp-val" id="work-exp-val">
+                2 months
+              </p>
+            </span>
+          </span>
+          <span class="detail-row common-flex">
+            <span class="category date-of-birth">
+              <h3 class="heading3 detail-title date-of-birth-title">
+                Date of Birth
+              </h3>
+              <p class="heading3 date-of-birth-val" id="date-of-birth-title">
+                11/12/2023
+              </p>
+            </span>
+            <span class="category work-exp">
+              <h3 class="heading3 detail-title gender-title">
+                Gender
+              </h3>
+              <p class="heading3 gender-val" id="gender-val">
+                Female
+              </p>
+            </span>
+          </span>
+          <span class="detail-row">
+            <span class="contact-details">
+              <h3 class="heading3 detail-title contact-details-title">
+                Contact Details
+              </h3>
+              <span class="contact-details-val-row common-flex">
+                <span class="category contact-detail-val ">
+                  <span class="material-symbols-outlined contact-detail-icon">
+                    mail
                   </span>
-                </th>
-                <th class="table-heading">
-                  <button class=" button employee-heading sort-btn">
-                    <span class="table-title"> Department </span>
-                    <span class="sort-icon material-symbols-outlined rotate">
-                      expand_more
-                    </span>
-                  </button>
-                </th>
-                <th class="table-heading">
-                  <button class=" button employee-heading sort-btn">
-                    <span class="table-title"> Skills </span>
-                    </span>
-                </th>
-                <th class="table-heading">
-                  <button class=" button employee-heading sort-btn">
-                    <span class="table-title"> Actions </span>
-                    </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody id="table-body">
-            </tbody>
-          </table>
+                  <p class="heading3 detail-title email-val">
+                    xxx@gmail.com
+                  </p>
+                </span>
+                <span class="category contact-detail-val ">
+                  <span class="material-symbols-outlined contact-detail-icon">
+                    phone
+                  </span>
+                  <p class="heading3 detail-title email-val">
+                    xxxx-xxx-xxx
+                  </p>
+                </span>
+              </span>
+            </span>
+          </span>
+          <span class="detail-row">
+            <h3 class="heading3 detail-title skill-title">
+              Skills
+            </h3>
+            <span class="skill-list">
+              <span class="skill-card"> javascript </span>
+              <span class="skill-card"> javascript </span>
+              <span class="skill-card"> javascript </span>
+            </span>
+          </span>
+          <span class="detail-row">
+            <h3 class="heading3 detail-title address-title">
+              Address
+            </h3>
+            <p class="heading3 address-val" id="address-val">
+              XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            </p>
+          </span>
         </div>
       </div>
-      <div class="delete-modal employee-delete-modal no-display" id="employee-delete-modal">
-        <button class="button close-button material-symbols-outlined" id="delete-modal-close">
-          close
-        </button>
-        <h2 class="heading2 delete-modal-title" id="delete-modal-title">
-          Are you sure you want to delete the employee ?
-        </h2>
-        <p class="text">
-          The data selected will be permanently removed. It would remove all the details related to the employee. Are you sure you want to continue?
-        </p>
-        <div class="button-row dropdown-row common-flex">
-          <button class="button common-button-container common-flex" id="delete-modal-cancel-btn">
-            Cancel
-          </button>
-          <button class="button common-button-container common-flex" id="delete-modal-confirm-btn">
-            Confirm
-          </button>
-        </div>
+    </main>
+    <footer class="footer">
+      <div class="copyright-section global-padding">
+        <span class="copyright-content">
+          Copyright @<span id="year"></span> HRM, All Rights Reserved
+        </span>
       </div>
-    </div>
-  </main>
-  <footer class="footer">
-    <div class="copyright-section global-padding">
-      <span class="copyright-content">
-        Copyright @<span id="year"></span> HRM, All Rights Reserved
-      </span>
-    </div>
 
-  </footer>
-  <script type="module" src="../js/index.js"></script>
+    </footer>
+    <script type="module" src="../js/index.js"></script>
     <!-- <script type="module" src="../js/writeData.js"></script> -->
-</body>
+  </body>
 
 </html>

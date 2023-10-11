@@ -230,10 +230,6 @@ tr {
   background-color: var(--primary-color);
   padding: 10px;
   border-radius: 10px;
-}
-.skill {
-  text-decoration: none;
-  cursor: default;
   color: white;
 }
 .actions-list .material-symbols-outlined {
@@ -259,12 +255,11 @@ tr {
     transform: rotate(360deg);
   }
 }
-.delete-modal{
+.modal{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   position:fixed;
-  width: 400px;
   background-color: white;
   border-radius: 10px;
   border: 2px solid var(--secondary-color);
@@ -272,13 +267,13 @@ tr {
   flex-direction: column;
   padding: 10px;
 }
-.delete-modal .close-button{
+.modal .close-button{
   color: var(--secondary-color);
   align-self: flex-end;
 }
-.delete-modal .heading2{
-  font-weight: 700;
-  font-size: 20px;
+
+.employee-delete-modal{
+    width: 400px;
 }
 .employee-delete-modal .button-row{
   align-self: flex-end;
@@ -287,6 +282,30 @@ tr {
 .employee-delete-modal .common-button-container {
   background-color: black;
 }
+.view-modal{
+  width: 600px;
+  gap: 20px;
+}
+.detail-title{
+  font-size: 18px !important;
+  font-weight: 900 !important;
+}
+.category{
+  flex: 1;
+}
+.contact-detail-icon{
+  color: var(--secondary-color) !important;
+}
+.contact-details-val-row{
+  gap: 10px;
+}
+.contact-detail-val{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+
 
 .footer {
   margin-top: auto;
