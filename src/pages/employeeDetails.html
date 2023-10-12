@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Employee Details</title>
+    <link rel="icon" type="image/x-icon" href="../assets/logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <link rel="stylesheet" href="../css/commonClasses.css" />
+  </head>
+
+  <body class="body">
+    <header class="header">
+      <div class="header-content global-width">
+        <a href="javascript:void(0)" class="logo-wrap">
+          <h1 class="heading1">HRM</h1>
+        </a>
+      </div>
+    </header>
+    <main class="main-section">
+      <section class="global-width main-content">
+        <h1 class="heading1">Add new Employee</h1>
+        <section class="personal-information">
+          <h2 class="heading2 m-10">Personal Information</h2>
+          <fieldset class="personal-details">
+            <span class="entry-details-row common-flex">
+              <span class="category first-name-detail detail">
+                <label for="fname" class="label-heading m-10">First Name</label>
+                <input
+                  type="text"
+                  id="fname"
+                  class="first-name input"
+                  name="fname"
+                  required
+                />
+              </span>
+              <span class="category last-name-detail detail">
+                <label for="lname" class="label-heading m-10">Last Name</label>
+                <input
+                  type="text"
+                  id="lname"
+                  class="last-name input"
+                  name="lname"
+                  required
+                />
+              </span>
+            </span>
+            <span class="entry-details-row common-flex">
+              <span class="category email-detail detail">
+                <label for="email-entry" class="label-heading m-10"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email-entry"
+                  class="email-entry input"
+                  name="email-entry"
+                  required
+                />
+              </span>
+              <span class="category last-name-detail detail">
+                <label for="phone-entry" class="label-heading m-10"
+                  >Phone No:</label
+                >
+                <input
+                  type="text"
+                  id="phone-entry"
+                  class="phone-entry input"
+                  name="phone-entry"
+                  required
+                />
+              </span>
+            </span>
+            <span class="entry-details-row common-flex">
+              <span class="category address-detail detail">
+                <label for="address-entry" class="label-heading m-10"
+                  >Address</label
+                >
+                <input
+                  type="text"
+                  id="address-entry"
+                  class="address-entry input"
+                  name="address-entry"
+                  required
+                />
+              </span>
+            </span>
+          </fieldset>
+        </section>
+        <section class="other-information">
+          <h2 class="heading2">Other Information</h2>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="copyright-section global-padding">
+        <span class="copyright-content">
+          Copyright @<span id="year"></span> HRM, All Rights Reserved
+        </span>
+      </div>
+    </footer>
+    <script type="module" src="../js/index.js"></script>
+  </body>
+</html>

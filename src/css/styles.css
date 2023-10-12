@@ -26,7 +26,7 @@
 }
 
 .heading-section .common-button-container {
-  background-color: var(--placeholder-color);
+  background-color: var(--secondary-color);
   font-size: 18px;
 }
 
@@ -66,7 +66,7 @@
   gap: 5px;
   border-radius: 0;
   background: none;
-  border-left: 2px solid black;
+  border-left: 2px solid var(--secondary-color);
 }
 .search-bar .material-symbols-outlined,
 .search-bar .search-dropdown-btn-text {
@@ -79,7 +79,7 @@
   gap: 10px;
 }
 .filters .common-button-container {
-  background-color: black;
+  background-color: var(--secondary-color);
 }
 .search-bar {
   position: relative;
@@ -108,7 +108,7 @@
   cursor: pointer;
 }
 .dropdown-row {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--secondary-color);
   padding: 10px 10px;
 }
 .dropdown-row:last-child {
@@ -163,12 +163,12 @@
   gap: 5px;
   padding: 5px;
   background-color: white;
-  color: black;
+  color: var(--secondary-color);
   border-radius: 10px;
   border: 1px solid var(--secondary-color);
 }
 .filter-chip-cancel-btn {
-  color: black !important;
+  color: var(--secondary-color) !important;
 }
 .selected-list {
   gap: 10px;
@@ -177,7 +177,7 @@
 
 .employee-table {
   display: none;
-  border: 1px solid black;
+  border: 1px solid var(--secondary-color);
   margin-bottom: 80px;
 }
 .employee-table,
@@ -187,7 +187,7 @@
   width: 100%;
 }
 tr {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--secondary-color);
 }
 .table-heading,
 .employee-data {
@@ -255,11 +255,11 @@ tr {
     transform: rotate(360deg);
   }
 }
-.modal{
+.modal {
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  position:fixed;
+  transform: translate(-50%, -50%);
+  position: fixed;
   background-color: white;
   border-radius: 10px;
   border: 2px solid var(--secondary-color);
@@ -267,45 +267,43 @@ tr {
   flex-direction: column;
   padding: 10px;
 }
-.modal .close-button{
+.modal .close-button {
   color: var(--secondary-color);
   align-self: flex-end;
 }
 
-.employee-delete-modal{
-    width: 400px;
+.employee-delete-modal {
+  width: 400px;
 }
-.employee-delete-modal .button-row{
+.employee-delete-modal .button-row {
   align-self: flex-end;
   gap: 10px;
 }
 .employee-delete-modal .common-button-container {
-  background-color: black;
+  background-color: var(--secondary-color);
 }
-.view-modal{
+.view-modal {
   width: 600px;
   gap: 20px;
 }
-.detail-title{
+.detail-title {
   font-size: 18px !important;
   font-weight: 900 !important;
 }
-.category{
+.category {
   flex: 1;
 }
-.contact-detail-icon{
+.contact-detail-icon {
   color: var(--secondary-color) !important;
 }
-.contact-details-val-row{
+.contact-details-val-row {
   gap: 10px;
 }
-.contact-detail-val{
+.contact-detail-val {
   display: flex;
   gap: 10px;
   align-items: center;
 }
-
-
 
 .footer {
   margin-top: auto;
@@ -318,4 +316,30 @@ tr {
   border-top: 1px solid var(--secondary-color);
   padding: 30px 0 30px 0;
   text-align: center;
+}
+
+.m-10{
+  margin-bottom: 10px !important;
+}
+.personal-information,
+.other-information {
+  margin: 30px 0;
+}
+
+.entry-details-row{
+  gap: 30px;
+  margin-bottom: 30px;
+}
+.detail{
+  display: flex;
+  flex-direction: column;
+}
+.input{
+  border: 1px solid var(--secondary-color);
+  padding: 10px;
+  color: var(--secondary-color);
+}
+input:focus {
+  outline: none;
+  border: 3px solid var(--secondary-color);
 }
