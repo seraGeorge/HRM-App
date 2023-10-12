@@ -320,11 +320,12 @@ th,td {
   text-align: center;
 }
 
+
 .m-10{
   margin-bottom: 10px !important;
 }
-.personal-information,
-.other-information {
+.personal-details,
+.other-details {
   margin: 30px 0;
 }
 
@@ -341,7 +342,36 @@ th,td {
   padding: 10px;
   color: var(--secondary-color);
 }
-input:focus {
+.input:focus {
   outline: none;
-  border: 3px solid var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+}
+.gender-label-heading{
+  margin: 0 0 10px 0;
+}
+.gender-detail{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gender-other-val{
+  border: none;
+  border-bottom: 1px solid var(--secondary-color);
+  background-color: transparent;
+  padding: 5px;
+  outline: none;
+}
+.skills-list{
+  width: 200px;
+}
+.form-buttons{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.form-buttons .common-button-container {
+  background-color: var(--secondary-color);
+}
+select{
+  padding: 10px;
 }

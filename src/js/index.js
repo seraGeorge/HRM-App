@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { applyAllBtn, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon } from "./elements.js";
+import { applyAllBtn, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon, viewModal } from "./elements.js";
 import { readUserData } from "./firebase.js";
 import { displayLoading, getFilterChips, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
 import { setFilterDropdownData } from "./setFilterDropdownData.js";
@@ -15,10 +15,12 @@ const result = readUserData(`/`);
 result.then(data => {
     hideLoading()
     dataCopy = data;
+    console.log(dataCopy)
+    localStorage.setItem('dataToPass', JSON.stringify(dataCopy));
     let employeeList = dataCopy.employees;
 
 
-    if (employeeList !== null) {
+    if( (employeeList !== null)||(employeeList!==undefined) ){
 
 
         state.sort = 0

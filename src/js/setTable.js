@@ -1,7 +1,7 @@
 import { state } from "./context.js";
 import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empModeVal, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
-import { displayLoading, filterData, getSearchedData, hideLoading, toggleBtn } from "./handlers.js";
+import { displayLoading, filterData, getSearchedData, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
 import { sortBtnHandler } from "./sortFn.js";
 
 export const setTableData = (employees) => {
@@ -9,7 +9,6 @@ export const setTableData = (employees) => {
     let sortedEmployees = sortBtnHandler(employees, state.sort)
     let filteredEmployees = filterData(sortedEmployees, state.filter.designationFilters, state.filter.departmentFilters, state.filter.skillsFilters)
     let searchedEmployees = getSearchedData(filteredEmployees, state.search.property, state.search.searchTerm)
-    console.log(searchedEmployees)
 
     if (searchedEmployees === undefined) {
         const tableRow = document.createElement('tr');
@@ -54,7 +53,7 @@ export const setTableData = (employees) => {
         toggleBtn(deleteModalCloseBtn, deleteModal);
         toggleBtn(deleteModalCancelBtn, deleteModal);
         toggleBtn(deleteModalConfirmBtn, deleteModal)
-        toggleBtn(viewModalCloseBtn, viewModal);    
+        toggleBtn(viewModalCloseBtn, viewModal);
     }
 
 }
@@ -77,7 +76,6 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
 };
 const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
     toggleBtn(viewSelector, viewModal);
-
 
     viewSelector.addEventListener("click", () => {
         const indexToView = employeeList.findIndex((employee) => employee.id === employeeIdVal)
