@@ -58,7 +58,9 @@ export const empAddressVal = document.getElementById("address-val");
 
 
 
-
+export const skillsFormEntryBtn = document.getElementById("skill-entry-btn")
+export const skillsFormEntryList = document.getElementById("skill-entry-list")
+export const skillsFormEntrySelectedList = document.getElementById("skills-entry-selected-list")
 
 
 

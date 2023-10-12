@@ -1,9 +1,13 @@
+import { skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList } from "./elements.js";
+import { toggleBtn } from "./handlers.js";
+import { setDropDown } from "./setFilterDropdownData.js";
+
 export const form = document.querySelector("#form")
 export const genderOtherVal = document.querySelector("#gender-other-entry");
 export const otherEntryField = document.querySelector("#gender-other-val");
 export const submitBtn = document.querySelector("#submit-btn")
 export const genderSelectedValue = document.querySelector('input[name="gender"]:checked');
-
+// export const skills = document.querySelectorAll("")
 
 
 
@@ -16,6 +20,10 @@ if (dataStr !== undefined) {
     dataObj = JSON.parse(dataStr)
     console.log(dataObj)
     // localStorage.removeItem('dataToPass'); // Clear the localStorage
+    toggleBtn(skillsFormEntryBtn, skillsFormEntryList)
+    const skillsDataList = dataObj.skills.map((e) => e.name)
+
+    setDropDown(skillsDataList, skillsFormEntryList, skillsFormEntrySelectedList, "skills")
 
     //Other Entry
     genderOtherVal.addEventListener("click", () => {
