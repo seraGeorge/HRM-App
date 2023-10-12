@@ -9,9 +9,17 @@ export const setTableData = (employees) => {
     let sortedEmployees = sortBtnHandler(employees, state.sort)
     let filteredEmployees = filterData(sortedEmployees, state.filter.designationFilters, state.filter.departmentFilters, state.filter.skillsFilters)
     let searchedEmployees = getSearchedData(filteredEmployees, state.search.property, state.search.searchTerm)
+    console.log(searchedEmployees)
 
+    if (searchedEmployees === undefined) {
+        const tableRow = document.createElement('tr');
 
-    if (searchedEmployees.length > 0) {
+        tableRow.innerHTML = `<td class="no-data" colspan="6">No data Available</td>`;
+        tableRow.classList = "table-row";
+        tableBody.appendChild(tableRow);
+
+    }
+    else {
         searchedEmployees.forEach((employee) => {
 
             let skillSet = employee.skills;
@@ -43,11 +51,11 @@ export const setTableData = (employees) => {
             employeeDeleteBtnAction(employees, deleteSelector, employeeIdVal);
             employeeViewAction(employees, viewSelector, employeeIdVal);
         })
+        toggleBtn(deleteModalCloseBtn, deleteModal);
+        toggleBtn(deleteModalCancelBtn, deleteModal);
+        toggleBtn(deleteModalConfirmBtn, deleteModal)
+        toggleBtn(viewModalCloseBtn, viewModal);    
     }
-    toggleBtn(deleteModalCloseBtn, deleteModal);
-    toggleBtn(deleteModalCancelBtn, deleteModal);
-    toggleBtn(deleteModalConfirmBtn, deleteModal)
-    toggleBtn(viewModalCloseBtn, viewModal);
 
 }
 const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) => {
@@ -84,8 +92,8 @@ const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
         empEmailVal.innerHTML = currentEmployee.email ?? '-';
         empPhoneNoVal.innerHTML = currentEmployee.phone ?? '-';
         empAddressVal.innerHTML = currentEmployee.address ?? '-';
-        
-        
+
+
         let temp = ""
         if (currentEmployee.skills.length > 0) {
             currentEmployee.skills.forEach((skill) => {

@@ -189,8 +189,7 @@
 tr {
   border-bottom: 1px solid var(--secondary-color);
 }
-.table-heading,
-.employee-data {
+th,td {
   padding: 20px;
   border-spacing: 0;
 }
@@ -214,6 +213,9 @@ tr {
 }
 .employee-data {
   background-color: white;
+}
+.no-data{
+  text-align: center;
 }
 .sort-icon {
   transition: 300ms;
