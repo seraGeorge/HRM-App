@@ -18,17 +18,17 @@
     <header class="header">
       <div class="header-content global-width">
         <a href="javascript:void(0)" class="logo-wrap">
-          <h1 class="heading1">HRM</h1>
+          <h1 class="page-title">HRM</h1>
         </a>
       </div>
     </header>
     <main class="main-section">
       <section class="global-width main-content">
-        <h1 class="heading1">Add new Employee</h1>
+        <h1 class="page-title">Add new Employee</h1>
         <section class="information">
-          <form action="" id="form" class="form">
+          <form action="" id="form" class="form" novalidate>
             <fieldset class="personal-details">
-              <legend class="heading2">Personal Information</legend>
+              <legend class="subheading">Personal Information</legend>
               <span class="entry-details-row common-flex">
                 <span class="category first-name-detail detail">
                   <label for="fname" class="label-heading m-10">First Name</label>
@@ -41,23 +41,23 @@
               </span>
               <span class="entry-details-row common-flex">
                 <span class="category email-detail detail">
-                  <label for="email-entry" class="label-heading m-10">Email</label>
-                  <input type="email" id="email-entry" class="email-entry input" name="email" required />
+                  <label for="email" class="label-heading m-10">Email</label>
+                  <input type="email" id="email" class="email-entry input" name="email" required />
                 </span>
                 <span class="category last-name-detail detail">
-                  <label for="phone-entry" class="label-heading m-10">Phone No:</label>
+                  <label for="phone" class="label-heading m-10">Phone No:</label>
                   <input type="text" id="phone" class="phone-entry input" name="phone" required />
                 </span>
               </span>
               <span class="entry-details-row common-flex">
                 <span class="category address-detail detail">
-                  <label for="address-entry" class="label-heading m-10">Address</label>
+                  <label for="address" class="label-heading m-10">Address</label>
                   <input type="text" id="address" class="address-entry input" name="address" required />
                 </span>
               </span>
               <span class="entry-details-row common-flex">
                 <span class="category date-of-birth-detail detail">
-                  <label for="date-of-birth-entry" class="label-heading m-10">Date Of Birth</label>
+                  <label for="date-of-birth" class="label-heading m-10">Date Of Birth</label>
                   <input type="date" id="date_of_birth" class="date-of-birth-entry input"
                     name="date_of_birth" required />
                 </span>
@@ -65,60 +65,45 @@
                   <p class="gender-label-heading">Gender</p>
                   <span class="gender-options common-flex">
                     <span class="category gender-detail">
-                      <input type="radio" id="gender-male-entry" class="gender-male-entry input" name="gender" value="Male"/>
-                      <label for="gender">Male</label>
+                      <input type="radio" id="gender-male-entry" class="gender-male-entry gender input" name="gender" value="Male"/>
+                      <label for="gender-male-entry">Male</label>
                     </span>
                     <span class="category gender-detail">
-                      <input type="radio" id="gender-female-entry" class="gender-female-entry input" name="gender" value="Female"/>
-                      <label for="gender">Female</label>
+                      <input type="radio" id="gender-female-entry" class="gender-female-entry gender input" name="gender" value="Female"/>
+                      <label for="gender-female-entry">Female</label>
                     </span>
                     <span class="category gender-detail">
-                      <input type="radio" id="gender-other-entry" class="gender-other-entry input" name="gender" value="Other"/>
-                      <label for="gender">Other</label>
+                      <input type="radio" id="gender-other-entry" class="gender-other-entry gender input" name="gender" value="Other"/>
+                      <label for="gender-other-entry">Other</label>
                     </span>
-                    <input type="text" id="gender-other-val" class="gender-other-val no-display" name="gender-other-val"
+                    <input type="text" id="gender-other-val" class="gender-other-val no-display" name="gender-other-val"/>
                   </span>
                 </span>
               </span>
             </fieldset>
             <fieldset class="other-details">
-              <legend class="heading2">Other Information</legend>
+              <legend class="subheading">Other Information</legend>
               <span class="entry-details-row common-flex">
                 <span class="category designation-detail detail">
-                  <label for="designation" class="label-heading m-10">Designation</label>
-                  <select name="designation" id="designation">
+                  <label for="designation-entry" class="label-heading m-10">Designation</label>
+                  <select name="designation-entry" id="designation-entry">
                     <option disabled selected value> -- select an option -- </option>
-
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
                   </select>
                 </span>
                 <span class="category department-detail detail">
-                  <label for="department" class="label-heading m-10">Department</label>
-                  <select name="department" id="department">
+                  <label for="department-entry" class="label-heading m-10">Department</label>
+                  <select name="department-entry" id="department-entry">
                     <option disabled selected value> -- select an option -- </option>
-
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
                   </select>
                 </span>
                 <span class="category department-detail detail">
-                  <label for="emp_mode" class="label-heading m-10">Employment Mode</label>
-                  <select name="emp_mode" id="emp_mode">
+                  <label for="empmode-entry" class="label-heading m-10">Employment Mode</label>
+                  <select name="empmode-entry" id="empmode-entry">
                     <option disabled selected value> -- select an option -- </option>
-
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
                   </select>
                 </span>
                 <span class="category date-of-joining-detail detail">
-                  <label for="date-of-joining-entry" class="label-heading m-10">Date Of Joining</label>
+                  <label for="date-of-joining" class="label-heading m-10">Date Of Joining</label>
                   <input type="date" id="date_of_joining" class="date-of-joining-entry input"
                     name="date_of_joining" required />
                 </span>
@@ -126,11 +111,11 @@
               <span class="entry-details-row common-flex">
                 <span class="skills-detail detail">
                   <label for="skills" class="label-heading m-10">Skills</label>
-                  <div class="dropdown-list skills-list common-flex">
+                  <div class="skills-list common-flex">
                     <div class="selected-list common-flex" id="skills-entry-selected-list">
                     </div>
                     <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="skill-entry-btn">
-                      expand_more
+                      add_circle
                     </button>
                   </div>
                   <ul class="ul-reset no-display options-list" id="skill-entry-list">

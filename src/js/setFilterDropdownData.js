@@ -26,11 +26,11 @@ export const setFilterDropdownData = (data) => {
     resetAllBtn.addEventListener("click", (event) => {
         event.stopPropagation()
         resetFilter(designationSelectedList, designationOptionsList);
-        setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation");
+        setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter");
         resetFilter(departmentSelectedList, departmentOptionsList);
-        setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department");
+        setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter");
         resetFilter(skillsSelectedList, skillsOptionsList);
-        setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills");
+        setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter");
         if (!mainFilterDropDown.classList.contains("no-display")) {
             mainFilterDropDown.classList.add("no-display")
         }
@@ -59,24 +59,24 @@ const addSelection = (listItem, selectedlist, optionsList, className) => {
 
         optionsList.classList.add("no-display")
         event.stopPropagation();
-        const listItemClass = className + "-filter";
+        const listItemClass = className ;
 
         //List Item Chip in the selectedList
         const listItemChip = document.createElement("div");
         listItemChip.classList.add("common-flex")
-        listItemChip.classList.add("filter-chip")
+        listItemChip.classList.add("chip")
         listItemChip.classList.add(listItemClass)
         listItemChip.innerHTML =
-            `<h3 class="heading3">${listItem.innerHTML}</h3>
-            <button class="button material-symbols-outlined filter-chip-cancel-btn" id="filter-chip-cancel-btn">cancel</button>`
+            `<h3 class="chip-heading">${listItem.innerHTML}</h3>
+            <button class="button material-symbols-outlined chip-cancel-btn" id="chip-cancel-btn">cancel</button>`
         selectedlist.appendChild(listItemChip)
         optionsList.removeChild(listItem)
         if (!optionsList.classList.contains("no-display")) {
             optionsList.classList.add("no-display");
         }
         //Cancel Button interaction
-        const filterChipCancelBtn = listItemChip.querySelector("#filter-chip-cancel-btn")
-        filterChipCancelBtn.addEventListener("click", (event) => {
+        const chipCancelBtn = listItemChip.querySelector("#chip-cancel-btn")
+        chipCancelBtn.addEventListener("click", (event) => {
             event.stopPropagation();
             selectedlist.removeChild(listItemChip)
             optionsList.appendChild(listItem)

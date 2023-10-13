@@ -36,7 +36,7 @@ export const getFilterChips = (selector) => {
     const filterChips = document.querySelectorAll(selector);
     const filterValues = [];
     filterChips.forEach((filterChip) => {
-        const filterChipValue = filterChip.querySelector(".heading3");
+        const filterChipValue = filterChip.querySelector(".chip-heading");
         filterValues.push(filterChipValue.innerHTML);
     });
     return filterValues;
@@ -127,4 +127,12 @@ export const hideDropdownIfNotTarget = (dropdown, button, event) => {
             dropdown.classList.add("no-display");
         }
     }
+}
+export const setOptionsList=(data,selectEntry)=>{
+    data.forEach((value)=>{
+        const optionVal = document.createElement("option");
+        optionVal.value=value;
+        optionVal.innerHTML=value;
+        selectEntry.appendChild(optionVal);
+    })
 }

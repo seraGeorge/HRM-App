@@ -40,28 +40,28 @@ html {
   max-width: 1440px;
   margin: 0 auto;
 }
-.heading1 {
+.page-title {
   margin: 0;
   font-size: 40px;
   font-weight: 700;
   line-height: 1.5;
   color: var(--secondary-color);
 }
-.heading2 {
+.subheading {
   margin: 0;
   font-weight: 700;
   font-size: 20px;
   line-height: 1.5;
   color: var(--secondary-color);
 }
-.heading3 {
+.modalheading,
+.chip-heading {
   margin: 0;
   font-size: 16px;
   font-weight: 700;
   line-height: 1.5;
   color: var(--secondary-color);
 }
-
 
 .common-section {
   display: flex;

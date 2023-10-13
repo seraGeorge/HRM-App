@@ -9,30 +9,30 @@ export const optionsList = document.querySelectorAll(".options-list")
 export const filterBtn = document.getElementById("filter-btn")
 export const mainFilterDropDown = document.getElementById("filter-dropdown")
 
-export const designationOptionsList = document.getElementById("designation-options-list")
-export const departmentOptionsList = document.getElementById("department-options-list")
-export const skillsOptionsList = document.getElementById("skill-options-list")
+export const designationOptionsList = document.getElementById("filter-designation-options-list")
+export const departmentOptionsList = document.getElementById("filter-department-options-list")
+export const skillsOptionsList = document.getElementById("filter-skill-options-list")
 
-export const designationDropDownBtn = document.getElementById("designation-dropdown-btn")
-export const departmentDropDownBtn = document.getElementById("department-dropdown-btn")
-export const skillsDropDownBtn = document.getElementById("skill-dropdown-btn")
+export const designationDropDownBtn = document.getElementById("filter-designation-dropdown-btn")
+export const departmentDropDownBtn = document.getElementById("filter-department-dropdown-btn")
+export const skillsDropDownBtn = document.getElementById("filter-skill-dropdown-btn")
 
-export const designationSelectedList = document.getElementById("designation-selected-list")
-export const departmentSelectedList = document.getElementById("department-selected-list")
-export const skillsSelectedList = document.getElementById("skill-selected-list")
+export const designationSelectedList = document.getElementById("filter-designation-selected-list")
+export const departmentSelectedList = document.getElementById("filter-department-selected-list")
+export const skillsSelectedList = document.getElementById("filter-skill-selected-list")
 
-export const designationResetBtn = document.getElementById("designation-reset-btn")
-export const departmentResetBtn = document.getElementById("department-reset-btn")
-export const skillsResetBtn = document.getElementById("skill-reset-btn")
+export const designationResetBtn = document.getElementById("filter-designation-reset-btn")
+export const departmentResetBtn = document.getElementById("filter-department-reset-btn")
+export const skillsResetBtn = document.getElementById("filter-skill-reset-btn")
 
-export const resetAllBtn = document.getElementById("reset-all-btn");
-export const applyAllBtn = document.getElementById("apply-all-btn");
+export const resetAllBtn = document.getElementById("filter-reset-all-btn");
+export const applyAllBtn = document.getElementById("filter-apply-all-btn");
 
 export const searchDropDownBtn = document.getElementById("search-dropdown-btn")
 export const searchDropDown = document.getElementById("search-dropdown")
 export const searchDropDownBtnText = document.getElementById("search-dropdown-btn-text")
 export const searchFilterList = document.querySelectorAll(".search-filter")
-export const searchText = document.getElementById("search-text")
+export const searchText = document.getElementById("search-input")
 
 export const deleteModal = document.getElementById("employee-delete-modal")
 export const deleteModalCloseBtn = document.getElementById("delete-modal-close");
@@ -55,6 +55,7 @@ export const empPhoneNoVal = document.getElementById("phone-val");
 export const empSkillsList = document.getElementById("skill-list")
 export const empSkillsVal = document.querySelectorAll(".skill-card");
 export const empAddressVal = document.getElementById("address-val");
+
 
 
 

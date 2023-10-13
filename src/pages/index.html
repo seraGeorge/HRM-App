@@ -19,14 +19,14 @@
     <header class="header">
       <div class="header-content global-width">
         <a href="javascript:void(0)" class="logo-wrap">
-          <h1 class="heading1">HRM</h1>
+          <h1 class="page-title">HRM</h1>
         </a>
       </div>
     </header>
     <main class="main-section">
       <div class="global-width main-content">
         <section class="heading-section common-section">
-          <h1 class="heading1">Dashboard</h1>
+          <h1 class="page-title">Employees</h1>
           <button class="button common-button-container common-flex add-btn" id="add-btn" onclick="location.href='./employeeDetails.html'">
             <span class="material-symbols-outlined add_btn_icon"> add_circle </span>
             Add New Employee
@@ -39,7 +39,7 @@
                 <span class="material-symbols-outlined" class="search-icon">
                   search
                 </span>
-                <input type="text" class="search-text" id="search-text" placeholder="Search" />
+                <input type="text" class="search-input" id="search-input" placeholder="Search" />
               </div>
               <button class=" button common-button-container common-flex" id="search-dropdown-btn">
                 <p id="search-dropdown-btn-text" class="search-dropdown-btn-text">
@@ -48,24 +48,24 @@
               </button>
               <div class="search-dropdown no-display" id="search-dropdown">
                 <div class="list-item">
-                  <input type="radio" id="all" name="search-filter" class="search-filter" value="All" checked>
-                  <label for="all" class="search-filter-label">All</label><br>
+                  <input type="radio" id="search-all" name="search-filter" class="search-filter" value="All" checked>
+                  <label for="search-all" class="search-filter-label">All</label><br>
                 </div>
                 <div class="list-item">
-                  <input type="radio" id="designation" name="search-filter" class="search-filter" value="Designation">
-                  <label for="designation" class="search-filter-label">Designation</label><br>
+                  <input type="radio" id="search-designation" name="search-filter" class="search-filter" value="Designation">
+                  <label for="search-designation" class="search-filter-label">Designation</label><br>
                 </div>
                 <div class="list-item">
-                  <input type="radio" id="department" name="search-filter" class="search-filter" value="Department">
-                  <label for="department" class="search-filter-label">Department</label><br>
+                  <input type="radio" id="search-department" name="search-filter" class="search-filter" value="Department">
+                  <label for="search-department" class="search-filter-label">Department</label><br>
                 </div>
                 <div class="list-item">
-                  <input type="radio" id="skill" name="search-filter" class="search-filter" value="Skill">
-                  <label for="skill" class="search-filter-label">Skills</label><br>
+                  <input type="radio" id="search-skill" name="search-filter" class="search-filter" value="Skill">
+                  <label for="search-skill" class="search-filter-label">Skills</label><br>
                 </div>
                 <div class="list-item">
-                  <input type="radio" id="name" name="search-filter" class="search-filter" value="Name">
-                  <label for="name" class="search-filter-label">Name</label><br>
+                  <input type="radio" id="search-name" name="search-filter" class="search-filter" value="Name">
+                  <label for="search-name" class="search-filter-label">Name</label><br>
                 </div>
               </div>
             </div>
@@ -75,61 +75,61 @@
                 Filters
               </button>
               <section class="filter-dropdown no-display" id="filter-dropdown">
-                <h2 class="heading2 head-row dropdown-row">
+                <h2 class="subheading head-row dropdown-row">
                   Filter List
                 </h2>
                 <div class="designation-row dropdown-row">
                   <div class="filter-heading-row common-flex">
-                    <h2 class="heading2 filter-title">Designation</h2>
-                    <button class="button reset-btn" id="designation-reset-btn">Reset</button>
+                    <h2 class="subheading filter-title">Designation</h2>
+                    <button class="button reset-btn" id="filter-designation-reset-btn">Reset</button>
                   </div>
                   <div class="dropdown-list common-flex">
-                    <div class="selected-list common-flex" id="designation-selected-list">
+                    <div class="selected-list common-flex" id="filter-designation-selected-list">
                     </div>
                     <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
-                      id="designation-dropdown-btn">
+                      id="filter-designation-dropdown-btn">
                       expand_more
                     </button>
                   </div>
-                  <ul class="ul-reset no-display options-list" id="designation-options-list">
+                  <ul class="ul-reset no-display options-list" id="filter-designation-options-list">
                   </ul>
                 </div>
                 <div class="department-row dropdown-row">
                   <div class="filter-heading-row common-flex">
-                    <h2 class="heading2 filter-title">Department</h2>
-                    <button class="button reset-btn" id="department-reset-btn">Reset</button>
+                    <h2 class="subheading filter-title">Department</h2>
+                    <button class="button reset-btn" id="filter-department-reset-btn">Reset</button>
                   </div>
                   <div class="dropdown-list  common-flex">
-                    <div class="selected-list common-flex" id="department-selected-list">
+                    <div class="selected-list common-flex" id="filter-department-selected-list">
                     </div>
                     <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
-                      id="department-dropdown-btn">
+                      id="filter-department-dropdown-btn">
                       expand_more
                     </button>
                   </div>
-                  <ul class="ul-reset no-display options-list" id="department-options-list">
+                  <ul class="ul-reset no-display options-list" id="filter-department-options-list">
                   </ul>
                 </div>
                 <div class="skill-row dropdown-row">
                   <div class="filter-heading-row common-flex">
-                    <h2 class="heading2 filter-title">Skills</h2>
-                    <button class="button reset-btn" id="skill-reset-btn">Reset</button>
+                    <h2 class="subheading filter-title">Skills</h2>
+                    <button class="button reset-btn" id="filter-skill-reset-btn">Reset</button>
                   </div>
                   <div class="dropdown-list common-flex">
-                    <div class="selected-list common-flex" id="skill-selected-list">
+                    <div class="selected-list common-flex" id="filter-skill-selected-list">
                     </div>
-                    <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="skill-dropdown-btn">
+                    <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="filter-skill-dropdown-btn">
                       expand_more
                     </button>
                   </div>
-                  <ul class="ul-reset no-display options-list" id="skill-options-list">
+                  <ul class="ul-reset no-display options-list" id="filter-skill-options-list">
                   </ul>
                 </div>
                 <div class="button-row dropdown-row common-flex">
-                  <button class="button common-button-container common-flex" id="reset-all-btn">
+                  <button class="button common-button-container common-flex" id="filter-reset-all-btn">
                     Reset All
                   </button>
-                  <button class="button common-button-container common-flex" id="apply-all-btn">
+                  <button class="button common-button-container common-flex" id="filter-apply-all-btn">
                     Apply All
                   </button>
                 </div>
@@ -195,7 +195,7 @@
           <button class="button close-button material-symbols-outlined" id="delete-modal-close">
             close
           </button>
-          <h2 class="heading2 delete-modal-title" id="delete-modal-title">
+          <h2 class="subheading delete-modal-title" id="delete-modal-title">
             Are you sure you want to delete the employee ?
           </h2>
           <p class="text">
@@ -215,68 +215,68 @@
           <button class="button close-button material-symbols-outlined" id="view-modal-close">
             close
           </button>
-          <h2 class="heading2 view-modal-title" id="delete-modal-title">
+          <h2 class="subheading view-modal-title" id="delete-modal-title">
             Employee Name
           </h2>
           <span class="detail-row common-flex">
             <span class="category designation-detail">
-              <h3 class="heading3 detail-title designation-title">
+              <h3 class="modal-heading detail-title designation-title">
                 Designation
               </h3>
-              <p class="heading3 designation-val" id="designation-val">
+              <p class="modal-heading designation-val" id="designation-val">
                 
               </p>
             </span>
             <span class="category emp-mode-detail">
-              <h3 class="heading3 detail-title emp-mode-title">
+              <h3 class="modal-heading detail-title emp-mode-title">
                 Employment Mode
               </h3>
-              <p class="heading3 emp-mod-val" id="emp-mod-val">
+              <p class="modal-heading emp-mod-val" id="emp-mod-val">
               </p>
             </span>
             <span class="category department-detail">
-              <h3 class="heading3 detail-title department-title">
+              <h3 class="modal-heading detail-title department-title">
                 Department
               </h3>
-              <p class="heading3 department-val" id="department-val">
+              <p class="modal-heading department-val" id="department-val">
               </p>
             </span>
           </span>
           <span class="detail-row common-flex">
             <span class="category date-of-joining">
-              <h3 class="heading3 detail-title date-of-joining-title">
+              <h3 class="modal-heading detail-title date-of-joining-title">
                 Date of Joining
               </h3>
-              <p class="heading3 date-of-joining-val" id="date-of-joining">
+              <p class="modal-heading date-of-joining-val" id="date-of-joining">
               </p>
             </span>
             <span class="category work-exp">
-              <h3 class="heading3 detail-title work-exp-title">
+              <h3 class="modal-heading detail-title work-exp-title">
                 Total Work Experience
               </h3>
-              <p class="heading3 work-exp-val" id="work-exp-val">
+              <p class="modal-heading work-exp-val" id="work-exp-val">
               </p>
             </span>
           </span>
           <span class="detail-row common-flex">
             <span class="category date-of-birth">
-              <h3 class="heading3 detail-title date-of-birth-title">
+              <h3 class="modal-heading detail-title date-of-birth-title">
                 Date of Birth
               </h3>
-              <p class="heading3 date-of-birth-val" id="date-of-birth">
+              <p class="modal-heading date-of-birth-val" id="date-of-birth">
               </p>
             </span>
             <span class="category work-exp">
-              <h3 class="heading3 detail-title gender-title">
+              <h3 class="modal-heading detail-title gender-title">
                 Gender
               </h3>
-              <p class="heading3 gender-val" id="gender-val">
+              <p class="modal-heading gender-val" id="gender-val">
               </p>
             </span>
           </span>
           <span class="detail-row">
             <span class="contact-details">
-              <h3 class="heading3 detail-title contact-details-title">
+              <h3 class="modal-heading detail-title contact-details-title">
                 Contact Details
               </h3>
               <span class="contact-details-val-row common-flex">
@@ -284,31 +284,31 @@
                   <span class="material-symbols-outlined contact-detail-icon">
                     mail
                   </span>
-                  <p class="heading3 detail-title email-val" id="email-val">
+                  <p class="modal-heading detail-title email-val" id="email-val">
                   </p>
                 </span>
                 <span class="category contact-detail-val ">
                   <span class="material-symbols-outlined contact-detail-icon">
                     phone
                   </span>
-                  <p class="heading3 detail-title phone-val" id="phone-val">
+                  <p class="modal-heading detail-title phone-val" id="phone-val">
                   </p>
                 </span>
               </span>
             </span>
           </span>
           <span class="detail-row">
-            <h3 class="heading3 detail-title skill-title">
+            <h3 class="modal-heading detail-title skill-title">
               Skills
             </h3>
             <span class="skill-list" id="skill-list">
             </span>
           </span>
           <span class="detail-row">
-            <h3 class="heading3 detail-title address-title">
+            <h3 class="modal-heading detail-title address-title">
               Address
             </h3>
-            <p class="heading3 address-val" id="address-val">
+            <p class="modal-heading address-val" id="address-val">
             </p>
           </span>
         </div>
@@ -323,7 +323,7 @@
 
     </footer>
     <script type="module" src="../js/index.js"></script>
-    <!-- <script type="module" src="../js/writeData.js"></script> -->
+    <script type="module" src="../js/writeData.js"></script>
   </body>
 
 </html>
