@@ -89,9 +89,9 @@ if (dataStr !== undefined) {
 
         writeUserData('/employees', dataObj.employees);
 
-        // history.back();
-        // localStorage.removeItem('dataToPass'); // Clear the localStorage
-        // return false;      
+        history.back();
+        localStorage.removeItem('dataToPass'); // Clear the localStorage
+        return false;      
     })
 
 }
