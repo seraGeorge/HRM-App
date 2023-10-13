@@ -373,3 +373,6 @@ th,td {
 select{
   padding: 10px;
 }
+.skills-detail .options-list {
+  width: fit-content;
+}

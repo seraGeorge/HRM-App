@@ -7,21 +7,21 @@ export const setFilterDropdownData = (data) => {
     const departmentsDataList = data.departments;
     const designationsDataList = data.designations;
     const skillsDataList = data.skills.map((e) => e.name)
-    setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation")
-    setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department")
-    setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills")
+    setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
+    setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
+    setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
 
     designationResetBtn.addEventListener("click", () => {
         resetFilter(designationSelectedList, designationOptionsList)
-        setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation")
+        setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
     })
     departmentResetBtn.addEventListener("click", () => {
         resetFilter(departmentSelectedList, departmentOptionsList)
-        setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department")
+        setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
     })
     skillsResetBtn.addEventListener("click", () => {
         resetFilter(skillsSelectedList, skillsOptionsList)
-        setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills")
+        setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
     })
     resetAllBtn.addEventListener("click", (event) => {
         event.stopPropagation()

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getDatabase, get, child, ref, set, onValue, push, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+import { getDatabase, get, child, ref, set, onValue, push, update,remove} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 import { displayLoading, hideLoading } from "./handlers.js";
 
 // Web app's Firebase configuration
@@ -23,15 +23,7 @@ export const database = getDatabase(app);
 
 //Writing data into your Realtime Database
 export function writeUserData(path, data) {
-    return new Promise((resolve, reject) => {
-        set(ref(database, path), data).then(() => {
-            resolve();
-        }).catch((error) => {
-            console.error(error);
-            reject(error);
-        })
-
-    })
+    return set(ref(database, path), data)
 }
 
 //Reading data into your Realtime Database
@@ -53,3 +45,11 @@ export const readUserData = (url) => {
     });
 };
 
+export const updateUserData = (url, data, index) => {
+    const userRef = ref(database, url + "/" + index);
+    return update(userRef, data)
+}
+export const deleteUserData = (url, index) => {
+    const userRef = ref(database, url + "/" + index);
+    return remove(userRef)
+}

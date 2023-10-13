@@ -1,6 +1,6 @@
 import { state } from "./context.js";
 import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empModeVal, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
-import { writeUserData } from "./firebase.js";
+import { deleteUserData, updateUserData, writeUserData } from "./firebase.js";
 import { displayLoading, filterData, getSearchedData, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
 import { sortBtnHandler } from "./sortFn.js";
 
@@ -45,10 +45,12 @@ export const setTableData = (employees) => {
             tableBody.appendChild(tableRow);
             const deleteSelector = tableRow.querySelector(".employee-delete");
             const viewSelector = tableRow.querySelector(".employee-view");
+            const editSelector = tableRow.querySelector(".employee-edit");
             const employeeIdTag = tableRow.querySelector(".employee-id");
             const employeeIdVal = employeeIdTag.dataset.id;
             employeeDeleteBtnAction(employees, deleteSelector, employeeIdVal);
             employeeViewAction(employees, viewSelector, employeeIdVal);
+            employeeEditAction(editSelector,employeeIdVal)
         })
         toggleBtn(deleteModalCloseBtn, deleteModal);
         toggleBtn(deleteModalCancelBtn, deleteModal);
@@ -69,9 +71,17 @@ const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) =>
 const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
 
     deleteModalConfirmBtn.addEventListener("click", () => {
-        const newEmployeeList = employeeList.filter((employee) => employee.id != employeeIdVal);
-        writeUserData('/employees', newEmployeeList);
-        location.reload(true)
+        const indexToDlt = employeeList.findIndex((employee) => employee.id === employeeIdVal);
+        console.log(indexToDlt)
+        if (indexToDlt !== -1) {
+            deleteUserData('/employees', indexToDlt) // Passing null to delete the data at the specified index.
+                .then(() => {
+                    location.reload(true);
+                })
+                .catch((error) => {
+                    console.error("Error updating user data:", error);
+                });
+        }
     })
 };
 const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
@@ -102,5 +112,12 @@ const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
             temp = '-'
         }
         empSkillsList.innerHTML = temp
+    })
+}
+const employeeEditAction =(editSelector,employeeIdVal)=>{
+    editSelector.addEventListener("click",()=>{
+        window.location.href='./employeeDetails.html';
+        localStorage.setItem('source', "edit");   
+        localStorage.setItem('empId', employeeIdVal);        
     })
 }

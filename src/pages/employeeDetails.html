@@ -24,9 +24,9 @@
     </header>
     <main class="main-section">
       <section class="global-width main-content">
-        <h1 class="page-title">Add new Employee</h1>
+        <h1 class="page-title" id="page_title"></h1>
         <section class="information">
-          <form action="" id="form" class="form" novalidate>
+          <form action="" id="form" class="form" >
             <fieldset class="personal-details">
               <legend class="subheading">Personal Information</legend>
               <span class="entry-details-row common-flex">
@@ -76,7 +76,7 @@
                       <input type="radio" id="gender-other-entry" class="gender-other-entry gender input" name="gender" value="Other"/>
                       <label for="gender-other-entry">Other</label>
                     </span>
-                    <input type="text" id="gender-other-val" class="gender-other-val no-display" name="gender-other-val"/>
+                    <input type="text" id="gender_other_val" class="gender-other-val no-display" name="gender_other_val"/>
                   </span>
                 </span>
               </span>
@@ -85,20 +85,20 @@
               <legend class="subheading">Other Information</legend>
               <span class="entry-details-row common-flex">
                 <span class="category designation-detail detail">
-                  <label for="designation-entry" class="label-heading m-10">Designation</label>
-                  <select name="designation-entry" id="designation-entry">
+                  <label for="designation" class="label-heading m-10">Designation</label>
+                  <select name="designation" id="designation">
                     <option disabled selected value> -- select an option -- </option>
                   </select>
                 </span>
                 <span class="category department-detail detail">
-                  <label for="department-entry" class="label-heading m-10">Department</label>
-                  <select name="department-entry" id="department-entry">
+                  <label for="department" class="label-heading m-10">Department</label>
+                  <select name="department" id="department">
                     <option disabled selected value> -- select an option -- </option>
                   </select>
                 </span>
                 <span class="category department-detail detail">
-                  <label for="empmode-entry" class="label-heading m-10">Employment Mode</label>
-                  <select name="empmode-entry" id="empmode-entry">
+                  <label for="employment_mode" class="label-heading m-10">Employment Mode</label>
+                  <select name="employment_mode" id="employment_mode">
                     <option disabled selected value> -- select an option -- </option>
                   </select>
                 </span>
@@ -114,7 +114,7 @@
                   <div class="skills-list common-flex">
                     <div class="selected-list common-flex" id="skills-entry-selected-list">
                     </div>
-                    <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="skill-entry-btn">
+                    <button type="button" class="button dropdown-icon material-symbols-outlined dropdown-btn" id="skill-entry-btn">
                       add_circle
                     </button>
                   </div>
@@ -124,8 +124,8 @@
               </span>
             </fieldset>
             <div class="button-row dropdown-row form-buttons">
-              <input type="reset" class="button common-button-container common-flex" id="reset-btn" value="Clear" />
-              <button type="submit" class="button common-button-container common-flex" id="submit-btn">Submit</button></>
+              <button type="reset" class="button common-button-container common-flex" id="reset-btn">Clear</button>
+              <button type="submit" class="button common-button-container common-flex" id="submit-btn">Submit</button>
             </div>
           </form>
         </section>

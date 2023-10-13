@@ -57,8 +57,9 @@ export const empSkillsVal = document.querySelectorAll(".skill-card");
 export const empAddressVal = document.getElementById("address-val");
 
 
+export const addEmployeeBtn = document.getElementById("add-employee-btn");
 
-
+export const pageTitle = document.getElementById("page_title");
 export const skillsFormEntryBtn = document.getElementById("skill-entry-btn")
 export const skillsFormEntryList = document.getElementById("skill-entry-list")
 export const skillsFormEntrySelectedList = document.getElementById("skills-entry-selected-list")

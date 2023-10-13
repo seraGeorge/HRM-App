@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { applyAllBtn, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon, viewModal } from "./elements.js";
+import { addEmployeeBtn, applyAllBtn, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon, viewModal } from "./elements.js";
 import { readUserData } from "./firebase.js";
 import { displayLoading, getFilterChips, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
 import { setFilterDropdownData } from "./setFilterDropdownData.js";
@@ -16,7 +16,6 @@ result.then(data => {
     hideLoading()
     dataCopy = data;
     console.log(dataCopy)
-    localStorage.setItem('dataToPass', JSON.stringify(dataCopy));
     let employeeList = dataCopy.employees;
 
 
@@ -87,6 +86,12 @@ result.then(data => {
             state.search.searchTerm = searchText.value.toLowerCase();
             state.search.property = searchDropDownBtnText.innerHTML.toLowerCase();
             setTableData(employeeList);
+        })
+
+        addEmployeeBtn.addEventListener("click", () => {
+            window.location.href='./employeeDetails.html';
+            localStorage.setItem('source', "add");   
+            localStorage.setItem('data', JSON.stringify(dataCopy));         
         })
 
         document.addEventListener("click", (event) => {
