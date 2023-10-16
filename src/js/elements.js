@@ -42,7 +42,7 @@ export const deleteModalConfirmBtn = document.getElementById("delete-modal-confi
 export const viewModal = document.getElementById("view-modal")
 export const viewModalCloseBtn = document.getElementById("view-modal-close");
 
-
+export const empName = document.getElementById("view-modal-title");
 export const empDesignationVal = document.getElementById("designation-val");
 export const empDepartmentVal = document.getElementById("department-val");
 export const empModeVal = document.getElementById("emp-mod-val");

@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empModeVal, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
+import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { deleteUserData, updateUserData, writeUserData } from "./firebase.js";
 import { displayLoading, filterData, getSearchedData, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
 import { sortBtnHandler } from "./sortFn.js";
@@ -50,7 +50,7 @@ export const setTableData = (employees) => {
             const employeeIdVal = employeeIdTag.dataset.id;
             employeeDeleteBtnAction(employees, deleteSelector, employeeIdVal);
             employeeViewAction(employees, viewSelector, employeeIdVal);
-            employeeEditAction(editSelector,employeeIdVal)
+            employeeEditAction(editSelector, employeeIdVal)
         })
         toggleBtn(deleteModalCloseBtn, deleteModal);
         toggleBtn(deleteModalCancelBtn, deleteModal);
@@ -90,6 +90,7 @@ const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
     viewSelector.addEventListener("click", () => {
         const indexToView = employeeList.findIndex((employee) => employee.id === employeeIdVal)
         const currentEmployee = employeeList[indexToView];
+        empName.innerHTML = currentEmployee.emp_name ?? "-";
         empDesignationVal.innerHTML = currentEmployee.designation ?? "-";
         empDepartmentVal.innerHTML = currentEmployee.department ?? '-';
         empModeVal.innerHTML = currentEmployee.employment_mode ?? '-';
@@ -114,10 +115,10 @@ const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
         empSkillsList.innerHTML = temp
     })
 }
-const employeeEditAction =(editSelector,employeeIdVal)=>{
-    editSelector.addEventListener("click",()=>{
-        window.location.href='./employeeDetails.html';
-        localStorage.setItem('source', "edit");   
-        localStorage.setItem('empId', employeeIdVal);        
+const employeeEditAction = (editSelector, employeeIdVal) => {
+    editSelector.addEventListener("click", () => {
+        window.location.href = './employeeDetails.html';
+        localStorage.setItem('source', "edit");
+        localStorage.setItem('empId', employeeIdVal);
     })
 }
