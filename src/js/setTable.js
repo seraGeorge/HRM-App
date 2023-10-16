@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
+import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { deleteUserData, updateUserData, writeUserData } from "./firebase.js";
 import { displayLoading, filterData, getSearchedData, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
 import { sortBtnHandler } from "./sortFn.js";
@@ -51,6 +51,16 @@ export const setTableData = (employees) => {
             employeeDeleteBtnAction(employees, deleteSelector, employeeIdVal);
             employeeViewAction(employees, viewSelector, employeeIdVal);
             employeeEditAction(editSelector, employeeIdVal)
+            deleteSelector.onblur = () => {
+                if (!deleteModal.classList.contains("no-display")) {
+                    deleteModal.classList.add("no-display");
+                }
+            }
+            viewSelector.onblur = () => {
+                if (!viewModal.classList.contains("no-display")) {
+                    viewModal.classList.add("no-display")
+                }
+            }
         })
         toggleBtn(deleteModalCloseBtn, deleteModal);
         toggleBtn(deleteModalCancelBtn, deleteModal);
@@ -60,13 +70,11 @@ export const setTableData = (employees) => {
 
 }
 const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) => {
-    toggleBtn(deleteSelector, deleteModal);
-
-
+    toggleBtn(deleteSelector, deleteModal)
     deleteSelector.addEventListener("click", () => {
+        empIdToDlt.innerHTML = employeeIdVal;
         employeeDeleteConfirmAction(employeeIdVal, employeeList)
     })
-
 }
 const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
 
@@ -85,8 +93,7 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
     })
 };
 const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
-    toggleBtn(viewSelector, viewModal);
-
+    toggleBtn(viewSelector, viewModal)
     viewSelector.addEventListener("click", () => {
         const indexToView = employeeList.findIndex((employee) => employee.id === employeeIdVal)
         const currentEmployee = employeeList[indexToView];

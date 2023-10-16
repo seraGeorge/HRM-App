@@ -34,13 +34,16 @@ export const searchDropDownBtnText = document.getElementById("search-dropdown-bt
 export const searchFilterList = document.querySelectorAll(".search-filter")
 export const searchText = document.getElementById("search-input")
 
-export const deleteModal = document.getElementById("employee-delete-modal")
+export const deleteModal = document.querySelector("#employee-delete-modal")
 export const deleteModalCloseBtn = document.getElementById("delete-modal-close");
 export const deleteModalCancelBtn = document.getElementById("delete-modal-cancel-btn");
 export const deleteModalConfirmBtn = document.getElementById("delete-modal-confirm-btn")
+export const empIdToDlt = document.getElementById("emp-id-to-dlt");
 
-export const viewModal = document.getElementById("view-modal")
+
+export const viewModal = document.querySelector("#view-modal")
 export const viewModalCloseBtn = document.getElementById("view-modal-close");
+
 
 export const empName = document.getElementById("view-modal-title");
 export const empDesignationVal = document.getElementById("designation-val");
