@@ -59,32 +59,32 @@ export const filterData = (result, designationFilters, departmentFilters, skills
     return tableData
 }
 
+function filterBySkills(employee, searchText) {
+    const skillNames = employee.skills.map((skill) => skill.name.toLowerCase());
+    return skillNames.some((skill) => skill.includes(searchText.toLowerCase()));
+}
+
+function filterByName(employee, searchText) {
+    const empName = employee.emp_name.toLowerCase();
+    return empName.includes(searchText.toLowerCase());
+}
+
+function filterByProperty(employee, selectedProperty, searchText) {
+    const propertyValue = employee[selectedProperty].toLowerCase();
+    return propertyValue.includes(searchText.toLowerCase());
+}
+
 export function filterEmployeesByProperty(employees, searchText, selectedProperty) {
-    const filteredVal = [];
 
-    for (const employee of employees) {
-        let propertyValue;
-
+    const filteredVal = employees.filter((employee) => {
         if (selectedProperty === "skills") {
-            propertyValue = employee[selectedProperty].map((skill) => skill.name.toLowerCase());
-            if (propertyValue.filter((skill) => skill.includes(searchText.toLowerCase())).length > 0) {
-                filteredVal.push(employee);
-            }
+            return filterBySkills(employee, searchText);
+        } else if (selectedProperty === "name") {
+            return filterByName(employee, searchText);
+        } else {
+            return filterByProperty(employee, selectedProperty, searchText);
         }
-        else if (selectedProperty === "name") {
-            selectedProperty = "emp_name"
-            propertyValue = employee[selectedProperty].toLowerCase();
-            if (propertyValue.includes(searchText.toLowerCase())) {
-                filteredVal.push(employee);
-            }
-        }
-        else {
-            propertyValue = employee[selectedProperty].toLowerCase();
-            if (propertyValue.includes(searchText.toLowerCase())) {
-                filteredVal.push(employee);
-            }
-        }
-    }
+    });
 
     return filteredVal;
 }
