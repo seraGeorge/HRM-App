@@ -146,6 +146,13 @@ export const setFormValue = (inputId, value) => {
 
 // Function to check if any form field has changed
 export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
+    let genderFlag = true
+    if (["Male", "Female"].includes(empToEdit.gender)) {
+        genderFlag = formDataObj.gender !== empToEdit.gender;
+    }
+    else {
+        genderFlag = (formDataObj.gender_other_val !== empToEdit.gender);
+    }
     return (
         formDataObj.name !== empToEdit.emp_name ||
         formDataObj.email !== empToEdit.email ||
@@ -156,9 +163,7 @@ export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
         formDataObj.designation !== empToEdit.designation ||
         formDataObj.department !== empToEdit.department ||
         formDataObj.employment_mode !== empToEdit.employment_mode ||
-        (formDataObj.gender !== empToEdit.gender) ||
-        ((formDataObj.gender_other_val !== "") && (formDataObj.gender_other_val === empToEdit.gender)) ||
-        !arraysEqual(getSelectedSkills(dataObj), empToEdit.skills)
+        genderFlag || !arraysEqual(getSelectedSkills(dataObj), empToEdit.skills)
     );
 }
 

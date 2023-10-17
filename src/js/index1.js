@@ -125,6 +125,7 @@ if (dataStr !== undefined) {
         const formData = new FormData(form);
         formData.forEach((value, key) => (formDataObj[key] = value));
         hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj)
+        console.log(hasChanged)
         updateButtonStyle(submitBtn, hasChanged);
     });
 
