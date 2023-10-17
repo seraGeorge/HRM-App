@@ -21,7 +21,7 @@
 }
 
 .heading-section {
-  padding: 20px 24px;
+  padding: 20px 0;
   margin-bottom: 40px;
 }
 
@@ -32,7 +32,6 @@
 
 .actions-section {
   gap: 30px;
-  padding: 15px;
   margin-bottom: 30px;
   border-radius: 10px;
 }
@@ -194,11 +193,14 @@
 tr {
   border-bottom: 1px solid black;
 }
-.table-heading,
-.employee-data {
+th,td {
   padding: 20px;
   border-spacing: 0;
 }
+.no-data{
+  text-align: center;
+}
+
 
 .table-heading {
   border-top: none;

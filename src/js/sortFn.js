@@ -8,6 +8,7 @@ export function sortBtnHandler(employees, index) {
     let currentSortCriteria = sortCriteria(index)
 
     let flag = sortIcon[index].classList.contains("rotate") ? -1 : +1;
+    if (employees === undefined) return employees
 
     employees.sort((a, b) => {
 
