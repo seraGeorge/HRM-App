@@ -50,14 +50,14 @@ html {
 .subheading {
   margin: 0;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.5;
   color: var(--secondary-color);
 }
 .modal-heading,
 .chip-heading {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.5;
   color: var(--secondary-color);

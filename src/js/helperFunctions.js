@@ -40,5 +40,6 @@ export const isValidDateFormat = (dateString) => {
 export const getDate = (dateVal) => {
     const dateParts = dateVal.split("-");
     const date = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+    date.setDate(date.getDate() + 1); // Adding one day to correct the date
     return date.toISOString().slice(0, 10);
 }

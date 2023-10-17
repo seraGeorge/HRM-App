@@ -1,7 +1,7 @@
 import { state } from "./context.js";
 import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
-import {  filterData, getSearchedData,sortBtnHandler, toggleBtn } from "./handlers.js";
+import { filterData, formatDate, getSearchedData, sortBtnHandler, toggleBtn } from "./handlers.js";
 
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";
@@ -86,14 +86,20 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
 };
 const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
     toggleBtn(viewSelector, viewModal)
+
     viewSelector.addEventListener("click", () => {
         const indexToView = employeeList.findIndex((employee) => employee.id === employeeIdVal)
         const currentEmployee = employeeList[indexToView];
+
+        const DOJ = new Date(currentEmployee.date_of_joining);
+        const now = new Date();
+        const workExp = Math.floor((now - DOJ) / (1000 * 60 * 60 * 24 * 30));
+        //TODO:Work Experience
         empName.innerHTML = currentEmployee.emp_name ?? "-";
         empDesignationVal.innerHTML = currentEmployee.designation ?? "-";
         empDepartmentVal.innerHTML = currentEmployee.department ?? '-';
         empModeVal.innerHTML = currentEmployee.employment_mode ?? '-';
-        empWorkExpVal.innerHTML = null ?? '-';
+        empWorkExpVal.innerHTML = workExp.toString() + " months" ?? '-';
         empDOBVal.innerHTML = currentEmployee.date_of_birth ?? '-';
         empDOJVal.innerHTML = currentEmployee.date_of_joining ?? '-';
         empGenderVal.innerHTML = currentEmployee.gender ?? '-';
