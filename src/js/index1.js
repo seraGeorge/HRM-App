@@ -138,86 +138,82 @@ if (dataStr !== undefined) {
         let hasChanged = false;
         newDataObj.emp_name = formDataObj.name;
         if (formDataObj.name !== empToEdit.emp_name) {
-            console.log("hi")
             hasChanged = true;
         }
         newDataObj.email = formDataObj.email;
         if (formDataObj.email !== empToEdit.email) {
-            console.log("hi")
             hasChanged = true;
         }
         newDataObj.phone = formDataObj.phone;
         if (formDataObj.phone !== empToEdit.phone) {
-            console.log("hi")
             hasChanged = true;
         }
         newDataObj.address = formDataObj.address;
         if (formDataObj.address !== empToEdit.address) {
-            console.log("hi")
             hasChanged = true;
         }
         newDataObj.date_of_birth = formDataObj.date_of_birth;
-        if (formDataObj.date_of_birth !== empToEdit.date_of_birth) {
-            console.log("hi")
+        const dobValue = isValidDateFormat(empToEdit.date_of_birth) ? getDate(empToEdit.date_of_birth) : empToEdit.date_of_birth;
+
+        if (formDataObj.date_of_birth !== dobValue) {
             hasChanged = true;
         }
+
         newDataObj.date_of_joining = formDataObj.date_of_joining;
-        if (formDataObj.date_of_joining !== empToEdit.date_of_joining) {
-            console.log("hi")
+        const dojValue = isValidDateFormat(empToEdit.date_of_joining) ? getDate(empToEdit.date_of_joining) : empToEdit.date_of_joining;
+        if (formDataObj.date_of_joining !== dojValue) {
             hasChanged = true;
         }
         newDataObj.designation = formDataObj.designation;
         if (formDataObj.designation !== empToEdit.designation) {
-            console.log("hi")
             hasChanged = true;
         }
         newDataObj.department = formDataObj.department;
         if (formDataObj.department !== empToEdit.department) {
-            console.log("hi")
             hasChanged = true;
         }
         newDataObj.employment_mode = formDataObj.employment_mode;
         if (formDataObj.employment_mode !== empToEdit.employment_mode) {
-            console.log("hi")
             hasChanged = true;
         }
 
         newDataObj.gender = formDataObj.gender === "Other" ? formDataObj.gender_other_val : formDataObj.gender;
-        if ((formDataObj.gender !== empToEdit.gender) || (formDataObj.gender_other_val !== empToEdit.gender)) {
-            console.log("hi")
+        if ((formDataObj.gender !== empToEdit.gender) || ((formDataObj.gender_other_val !== "") && (formDataObj.gender_other_val === empToEdit.gender))) {
             hasChanged = true;
         }
         const skillsTagList = document.querySelectorAll(".chip");
         const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);
         const skillArrayObj = dataObj.skills.filter(skill => skillValues.includes(skill.name))
         newDataObj.skills = skillArrayObj
-        // if (formDataObj.skills.length === empToEdit.length) { 
-        //     if(formDataObj.every((value, index) => value === empToEdit[index])){
-        //         hasChanged = true;
-        //     }
-        // }
+        if (skillArrayObj.length === empToEdit.length) {
+            if (formDataObj.every((value, index) => value === empToEdit[index])) {
+                hasChanged = true;
+            }
+        }
         console.log(hasChanged)
-        // if (hasChanged) {
-        //     let largestId = null;
-        //     for (const employee of dataObj.employees) {
-        //         const idNumber = parseInt(employee.id.substring(3));
-        //         if (largestId === null || idNumber > parseInt(largestId.substring(3))) {
-        //             largestId = employee.id;
-        //         }
-        //     }
-        //     const newEmpId = parseInt(largestId.substring(3)) + 1;
-        //     const newEmpIdStr = (newEmpId).toString().length <= 2 ?
-        //         "0".concat((newEmpId).toString())
-        //         : (newEmpId).toString();
-        //     newDataObj.id = largestId.substring(0, 3).concat(newEmpIdStr)
-        //     //TODO: Add Logic for validity
-        //     //TODO: Custom Validation design elements
-        //     //TODO: Alert box for success
-        //     //TODO: Alert box for error
-        //     await updateUserData('/employees', newDataObj, dataObj.employees.length)
-        //     history.back();
-        //     return false;
-        // }
+        if (hasChanged) {
+            submitBtn.style.opacity = "1"
+            let largestId = null;
+            for (const employee of dataObj.employees) {
+                const idNumber = parseInt(employee.id.substring(3));
+                if (largestId === null || idNumber > parseInt(largestId.substring(3))) {
+                    largestId = employee.id;
+                }
+            }
+            const newEmpId = parseInt(largestId.substring(3)) + 1;
+            const newEmpIdStr = (newEmpId).toString().length <= 2 ?
+                "0".concat((newEmpId).toString())
+                : (newEmpId).toString();
+            newDataObj.id = largestId.substring(0, 3).concat(newEmpIdStr)
+            //TODO: Add Logic for validity
+            //TODO: Custom Validation design elements
+            //TODO: Alert box for success
+            //TODO: Alert box for error
+            await updateUserData('/employees', newDataObj, dataObj.employees.length)
+            history.back();
+            return false;
+        }
+
     })
 
     document.addEventListener("click", (event) => {

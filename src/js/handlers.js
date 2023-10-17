@@ -143,6 +143,8 @@ export const setFormValue = (inputId, value) => {
     }
 }
 
-export const checkIfPreset = (presetValues) => {
-    console.log(presetValues)
+export const checkIfPreset = (currentFormVal, presetVal) => {
+    if (formDataObj.name !== empToEdit.emp_name) {
+        hasChanged = true;
+    }
 }
