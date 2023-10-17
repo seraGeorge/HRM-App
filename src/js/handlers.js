@@ -128,11 +128,21 @@ export const hideDropdownIfNotTarget = (dropdown, button, event) => {
         }
     }
 }
-export const setOptionsList=(data,selectEntry)=>{
-    data.forEach((value)=>{
+export const setOptionsList = (data, selectEntry) => {
+    data.forEach((value) => {
         const optionVal = document.createElement("option");
-        optionVal.value=value;
-        optionVal.innerHTML=value;
+        optionVal.value = value;
+        optionVal.innerHTML = value;
         selectEntry.appendChild(optionVal);
     })
+}
+export const setFormValue = (inputId, value) => {
+    const element = document.getElementById(inputId);
+    if (element) {
+        element.value = value;
+    }
+}
+
+export const checkIfPreset = (presetValues) => {
+    console.log(presetValues)
 }

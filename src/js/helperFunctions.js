@@ -33,3 +33,13 @@ export const sortFn = (x, y, flag) => {
     }
     return 0;
 }
+export const isValidDateFormat = (dateString) => {
+    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
+
+    return dateRegex.test(dateString);
+}
+export const getDate = (dateVal) => {
+    const dateParts = dateVal.split("-");
+    const date = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+    return date.toISOString().slice(0, 10);
+}

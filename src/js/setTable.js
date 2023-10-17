@@ -51,11 +51,14 @@ export const setTableData = (employees) => {
             employeeDeleteBtnAction(employees, deleteSelector, employeeIdVal);
             employeeViewAction(employees, viewSelector, employeeIdVal);
             employeeEditAction(editSelector, employeeIdVal)
-            deleteSelector.onblur = () => {
-                if (!deleteModal.classList.contains("no-display")) {
-                    deleteModal.classList.add("no-display");
-                }
-            }
+            // deleteSelector.onblur = () => {
+            //     if (!deleteModal.classList.contains("no-display")) {
+            //         deleteModal.classList.add("no-display");
+            //     }
+            // }
+            // document.addEventListener("click",()=>{
+            //     hideDropdownIfNotTarget(deleteModal,deleteSelector,event)
+            // })
             viewSelector.onblur = () => {
                 if (!viewModal.classList.contains("no-display")) {
                     viewModal.classList.add("no-display")
@@ -77,12 +80,11 @@ const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) =>
     })
 }
 const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
-
+    console.log(employeeIdVal)
     deleteModalConfirmBtn.addEventListener("click", () => {
-        const indexToDlt = employeeList.findIndex((employee) => employee.id === employeeIdVal);
-        console.log(indexToDlt)
-        if (indexToDlt !== -1) {
-            deleteUserData('/employees', indexToDlt) // Passing null to delete the data at the specified index.
+        const newEmpList = employeeList.filter((employee) => employee.id !== employeeIdVal);
+        if (newEmpList.length > 0) {
+            writeUserData('/employees', newEmpList) // Passing null to delete the data at the specified index.
                 .then(() => {
                     location.reload(true);
                 })

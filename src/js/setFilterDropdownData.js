@@ -44,46 +44,56 @@ export const setFilterDropdownData = (data) => {
 export const setDropDown = (dataList, optionsList, selectedlist, className) => {
     optionsList.innerHTML = "";
     dataList.forEach((item) => {
-
         //List Item in the dropdown
-        const listItem = document.createElement("li");
-        listItem.innerHTML = item;
-        listItem.classList.add('list-item')
+        const listItem = createListItem(item);
         optionsList.appendChild(listItem)
 
-        addSelection(listItem, selectedlist, optionsList, className)
-    })
-}
-const addSelection = (listItem, selectedlist, optionsList, className) => {
-    listItem.addEventListener("click", (event) => {
-
-        optionsList.classList.add("no-display")
-        event.stopPropagation();
-        const listItemClass = className ;
-
-        //List Item Chip in the selectedList
-        const listItemChip = document.createElement("div");
-        listItemChip.classList.add("common-flex")
-        listItemChip.classList.add("chip")
-        listItemChip.classList.add(listItemClass)
-        listItemChip.innerHTML =
-            `<h3 class="chip-heading">${listItem.innerHTML}</h3>
-            <button class="button material-symbols-outlined chip-cancel-btn" id="chip-cancel-btn">cancel</button>`
-        selectedlist.appendChild(listItemChip)
-        optionsList.removeChild(listItem)
-        if (!optionsList.classList.contains("no-display")) {
-            optionsList.classList.add("no-display");
-        }
-        //Cancel Button interaction
-        const chipCancelBtn = listItemChip.querySelector("#chip-cancel-btn")
-        chipCancelBtn.addEventListener("click", (event) => {
+        listItem.addEventListener("click", (event) => {
             event.stopPropagation();
-            selectedlist.removeChild(listItemChip)
-            optionsList.appendChild(listItem)
-        })
+
+            addSelection(item, listItem, selectedlist, optionsList, className)
+        });
     })
 }
+export const addSelection = (item, listItem, selectedlist, optionsList, className) => {
+    optionsList.classList.add("no-display")
+    const listItemClass = className;
 
+    //List Item Chip in the selectedList
+    const listItemChip = createChip(item, listItemClass);
+
+    selectedlist.appendChild(listItemChip)
+    optionsList.removeChild(listItem)
+
+    if (!optionsList.classList.contains("no-display")) {
+        optionsList.classList.add("no-display");
+    }
+    //Cancel Button interaction
+    const chipCancelBtn = listItemChip.querySelector("#chip-cancel-btn")
+    chipCancelBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        selectedlist.removeChild(listItemChip)
+        optionsList.appendChild(listItem)
+    })
+
+}
+const createChip = (text, className) => {
+    const listItemChip = document.createElement("div");
+    listItemChip.classList.add("common-flex");
+    listItemChip.classList.add("chip");
+    listItemChip.classList.add(className);
+    listItemChip.innerHTML = `
+      <h3 class="chip-heading">${text}</h3>
+      <button class="button material-symbols-outlined chip-cancel-btn" id="chip-cancel-btn">cancel</button>
+    `;
+    return listItemChip;
+};
+export const createListItem = (text) => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = text;
+    listItem.classList.add('list-item');
+    return listItem;
+};
 export const resetFilter = (selectedlist, optionsList) => {
     selectedlist.innerHTML = "";
     optionsList.innerHTML = "";
