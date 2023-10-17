@@ -72,10 +72,6 @@ export const addSelection = (item, listItem, selectedlist, optionsList, classNam
 
     // Create a custom event for changes in selectedlist
     const selectionChangeEvent = new CustomEvent("selectionChange", {
-        detail: {
-            changeType: "add", // You can specify "add" or "remove" here
-            item: item,
-        },
     });
 
     // Dispatch the custom event
@@ -95,10 +91,6 @@ export const addSelection = (item, listItem, selectedlist, optionsList, classNam
 
         // Create a custom event for changes in selectedlist
         const removalEvent = new CustomEvent("selectionChange", {
-            detail: {
-                changeType: "remove",
-                item: item,
-            },
         });
 
         // Dispatch the custom event

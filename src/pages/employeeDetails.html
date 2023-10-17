@@ -8,7 +8,10 @@
     <link rel="icon" type="image/x-icon" href="../assets/logo.png" />
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="../css/normalize.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <link rel="stylesheet" href="../css/normalize.css" />
     <link rel="stylesheet" href="../css/styles.css" />
 
     <link rel="stylesheet" href="../css/commonClasses.css" />
@@ -26,7 +29,7 @@
       <section class="global-width main-content">
         <h1 class="page-title" id="page_title"></h1>
         <section class="information">
-          <form action="" id="form" class="form" >
+          <form action="" id="form" class="form" novalidate>
             <fieldset class="personal-details">
               <legend class="subheading">Personal Information</legend>
               <span class="entry-details-row common-flex">
@@ -36,30 +39,45 @@
                 </span> -->
                 <span class="category name-detail detail">
                   <label for="name" class="label-heading m-10">Name</label>
-                  <input type="text" id="name" class="name input" name="name" required />
+                  <div class="input-grp common-flex">
+                    <input type="text" id="name" class="name input" name="name"  required />
+                    <span class="input-icon"></span>
+                  </div>
                 </span>
               </span>
               <span class="entry-details-row common-flex">
                 <span class="category email-detail detail">
                   <label for="email" class="label-heading m-10">Email</label>
+                  <div class="input-grp common-flex">
                   <input type="email" id="email" class="email-entry input" name="email" required />
+                  <span class="input-icon"></span>
+                </div>
                 </span>
                 <span class="category phone-no-detail detail">
                   <label for="phone" class="label-heading m-10">Phone No:</label>
-                  <input type="text" id="phone" class="phone-entry input" name="phone" required />
+                  <div class="input-grp common-flex">
+                  <input type="tel" id="phone" class="phone-entry input" name="phone" maxlength="10" required />
+                  <span class="input-icon"></span>
+                </div>
                 </span>
               </span>
               <span class="entry-details-row common-flex">
                 <span class="category address-detail detail">
                   <label for="address" class="label-heading m-10">Address</label>
+                  <div class="input-grp common-flex">
                   <input type="text" id="address" class="address-entry input" name="address" required />
+                  <span class="input-icon"></span>
+                </div>
                 </span>
               </span>
               <span class="entry-details-row common-flex">
                 <span class="category date-of-birth-detail detail">
                   <label for="date-of-birth" class="label-heading m-10">Date Of Birth</label>
+                  <div class="input-grp common-flex">
                   <input type="date" id="date_of_birth" class="date-of-birth-entry input"
                     name="date_of_birth" required />
+                    <span class="input-icon"></span>
+                  </div>  
                 </span>
                 <span class="category gender-detail-row">
                   <p class="gender-label-heading">Gender</p>
@@ -76,7 +94,10 @@
                       <input type="radio" id="gender-other-entry" class="gender-other-entry gender input" name="gender" value="Other"/>
                       <label for="gender-other-entry">Other</label>
                     </span>
-                    <input type="text" id="gender_other_val" class="gender-other-val no-display" name="gender_other_val"/>
+                    <div class="input-grp no-display common-flex">
+                    <input type="text" id="gender_other_val" class="gender-other-val " name="gender_other_val"/>
+                    <span class="input-icon"></span>
+                  </div>  
                   </span>
                 </span>
               </span>
@@ -86,34 +107,37 @@
               <span class="entry-details-row common-flex">
                 <span class="category designation-detail detail">
                   <label for="designation" class="label-heading m-10">Designation</label>
-                  <select name="designation" id="designation">
+                  <select name="designation" id="designation" required>
                     <option disabled selected value> -- select an option -- </option>
                   </select>
                 </span>
                 <span class="category department-detail detail">
                   <label for="department" class="label-heading m-10">Department</label>
-                  <select name="department" id="department">
+                  <select name="department" id="department" required>
                     <option disabled selected value> -- select an option -- </option>
                   </select>
                 </span>
                 <span class="category department-detail detail">
                   <label for="employment_mode" class="label-heading m-10">Employment Mode</label>
-                  <select name="employment_mode" id="employment_mode">
+                  <select name="employment_mode" id="employment_mode" required>
                     <option disabled selected value> -- select an option -- </option>
                   </select>
                 </span>
                 <span class="category date-of-joining-detail detail">
                   <label for="date-of-joining" class="label-heading m-10">Date Of Joining</label>
+                  <div class="input-grp common-flex">
                   <input type="date" id="date_of_joining" class="date-of-joining-entry input"
                     name="date_of_joining" required />
+                    <span class="input-icon"></span>
+                  </div>  
+
                 </span>
               </span>
               <span class="entry-details-row common-flex">
                 <span class="skills-detail detail">
                   <label for="skills" class="label-heading m-10">Skills</label>
                   <div class="skills-list common-flex">
-                    <div class="selected-list common-flex" id="skills-entry-selected-list">
-                    </div>
+                    <div class="selected-list common-flex" id="skills-entry-selected-list"></div>
                     <button type="button" class="button dropdown-icon material-symbols-outlined dropdown-btn" id="skill-entry-btn">
                       add_circle
                     </button>

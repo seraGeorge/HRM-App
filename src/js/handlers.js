@@ -179,13 +179,121 @@ export const getSelectedSkills = (dataObj) => {
     return dataObj.skills.filter(skill => skillValues.includes(skill.name));
 }
 
-// Function to compare two arrays for equality
 export const arraysEqual = (arr1, arr2) => {
-    const flag = arr1.filter((value, index) => value === arr2[index]).length === 0
-    return arr1.length === arr2.length && flag;
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+    const idSet1 = new Set(arr1.map(obj => obj.id));
+    const idSet2 = new Set(arr2.map(obj => obj.id));
+
+    return [...idSet1].every(id => idSet2.has(id));
 }
 
 export const updateButtonStyle = (submitBtn, hasChanged) => {
     submitBtn.style.opacity = hasChanged ? "1" : "0.3";
     submitBtn.disabled = !hasChanged;
+}
+
+
+export const getNewEmployeeDetails = (formDataObj, dataObj) => {
+    let newDataObj = {}
+    newDataObj.emp_name = formDataObj.name;
+    newDataObj.email = formDataObj.email;
+    newDataObj.phone = formDataObj.phone;
+    newDataObj.address = formDataObj.address;
+    newDataObj.date_of_birth = formDataObj.date_of_birth;
+    newDataObj.date_of_joining = formDataObj.date_of_joining;
+    newDataObj.designation = formDataObj.designation;
+    newDataObj.department = formDataObj.department;
+    newDataObj.employment_mode = formDataObj.employment_mode;
+    newDataObj.gender = formDataObj.gender === "Other" ? formDataObj.gender_other_val : formDataObj.gender;
+    const skillsTagList = document.querySelectorAll(".chip");
+    const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);
+    const skillArrayObj = dataObj.skills.filter(skill => skillValues.includes(skill.name))
+    newDataObj.skills = skillArrayObj
+    return newDataObj;
+}
+export const getNewEmpId = (dataObj) => {
+    let largestId = null;
+    for (const employee of dataObj.employees) {
+        const idNumber = parseInt(employee.id.substring(3));
+        if (largestId === null || idNumber > parseInt(largestId.substring(3))) {
+            largestId = employee.id;
+        }
+    }
+    const newEmpId = parseInt(largestId.substring(3)) + 1;
+    const newEmpIdStr = (newEmpId).toString().length <= 2 ?
+        "0".concat((newEmpId).toString())
+        : (newEmpId).toString();
+    return largestId.substring(0, 3).concat(newEmpIdStr)
+
+}
+
+export const validationIcon = (inputElement, flag) => {
+    const validationIcon = inputElement.nextElementSibling;
+    if (flag) {
+        validationIcon.innerHTML = `<i class="fa fa-check input-icon-val" style="color:green"></i>`;
+    }
+    else {
+        validationIcon.innerHTML = `<i class="fa fa-warning input-icon-val" style="color:red"></i>`
+    }
+
+}
+export const formEntryInputValidate = (inputElement) => {
+    // console.log(inputElement)
+    const inputValue = inputElement.value;
+    let typeCheck = inputElement.checkValidity();
+    let flag = true;
+    let isPattern = true;
+
+
+    if (inputElement.type === "text") {
+        isPattern = /^[a-z A-Z]+$/.test(inputValue) && inputValue.length > 2;
+    }
+    else if (inputElement.type === "email") {
+    }
+    else if (inputElement.type === "tel") {
+        isPattern = /^[0-9]*$/.test(inputValue) && inputValue.length == 10;
+    }
+    else if (inputElement.type === "date") {
+        const enteredDate = new Date(inputValue);
+        const today = new Date();
+        isPattern = /^\d{4}-\d{2}-\d{2}$/.test(inputValue) && enteredDate <= today;
+    }
+
+    flag = isPattern && typeCheck;
+
+    return flag;
+}
+
+export const formEntryValid = (inputElements, selectElements) => {
+    const errorEntries = Array.from(inputElements).filter((inputElement) => {
+        const validationIcon = inputElement.nextElementSibling;
+        return ((validationIcon.innerHTML === `<i class="fa fa-warning input-icon-val" style="color:red"></i>`)
+        )
+    })
+
+    const isAnyRequired = Array.from(inputElements).filter((inputElement) => {
+        if ((inputElement.type === "radio")) {
+
+        }
+        else {
+            const flag = formEntryInputValidate(inputElement);
+            validationIcon(inputElement, flag)
+        }
+        return inputElement.hasAttribute("required") && inputElement.value === ""
+    })
+
+    const isSelectElementsChosen = Array.from(selectElements).filter((selectElement) => {
+        const index = selectElement.selectedIndex;
+        const selectedOption = selectElement.options[index];
+        return selectedOption.disabled
+    })
+
+
+    return errorEntries.length === 0 &&
+        isAnyRequired.length === 0 && isSelectElementsChosen.length === 0;
+
+
 }
