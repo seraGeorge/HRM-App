@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { addEmployeeBtn, applyAllBtn, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon, viewModal } from "./elements.js";
+import { addEmployeeBtn, applyAllBtn, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon } from "./elements.js";
 import { readUserData } from "./firebase.js";
 import { displayLoading, getFilterChips, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
 import { setFilterDropdownData } from "./setFilterDropdownData.js";
@@ -23,6 +23,7 @@ result.then(data => {
 
 
         state.sort = 0
+        localStorage.setItem('data', JSON.stringify(dataCopy));
         setTableData(employeeList)
         setFilterDropdownData(dataCopy)
 

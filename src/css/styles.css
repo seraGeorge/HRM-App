@@ -5,7 +5,7 @@
 }
 .header-content {
   margin: 0 auto;
-  padding: 29px 0px;
+  padding: 20px 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -32,7 +32,7 @@
 
 .actions-section {
   gap: 30px;
-  padding: 15px;
+  padding: 16px;
   margin-bottom: 30px;
   border-radius: 10px;
 }
@@ -55,25 +55,24 @@
   outline: 0;
   color: white;
   text-decoration: none;
-  font-size: 20px;
-  color: var(--secondary-color);
-}
-.search-input::placeholder {
+  font-size: 16px;
   color: var(--secondary-color);
 }
 .search-bar .common-button-container {
-  padding: 0 10px;
+  padding: 10px 10px;
   gap: 5px;
   border-radius: 0;
   background: none;
   border-left: 2px solid var(--secondary-color);
+  
 }
 .search-bar .material-symbols-outlined,
 .search-bar .search-dropdown-btn-text {
+  margin: 0;
   color: var(--secondary-color);
 }
 .actions-section .button-decoration {
-  font-size: 18px;
+  font-size: 16px;
 }
 .filters {
   gap: 10px;
@@ -115,14 +114,14 @@
   border-bottom: none;
 }
 .head-row {
-  padding: 15px;
+  padding: 16px;
 }
 .search-filter {
   accent-color: var(--secondary-color);
 }
 .filter-heading-row {
   align-items: stretch;
-  padding: 15px;
+  padding: 16px;
 }
 .filter-title {
   flex: 1;
@@ -188,10 +187,11 @@
 }
 tr {
   border-bottom: 1px solid var(--secondary-color);
+  font-size: 14px;
 }
 th,
 td {
-  padding: 20px;
+  padding: 10px;
   border-spacing: 0;
 }
 
@@ -236,7 +236,8 @@ td {
   color: white;
 }
 .actions-list .material-symbols-outlined {
-  color: #000;
+  font-size: 20px;
+  color: var(--secondary-color);
   gap: 10px;
 }
 
@@ -317,8 +318,9 @@ td {
 }
 .copyright-section {
   border-top: 1px solid var(--secondary-color);
-  padding: 30px 0 30px 0;
+  padding: 20px 0 20px 0;
   text-align: center;
+  font-size: 12px;
 }
 
 .m-10 {

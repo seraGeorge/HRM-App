@@ -1,8 +1,7 @@
 import { state } from "./context.js";
 import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
-import { deleteUserData, updateUserData, writeUserData } from "./firebase.js";
-import { displayLoading, filterData, getSearchedData, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
-import { sortBtnHandler } from "./sortFn.js";
+import { writeUserData } from "./firebase.js";
+import {  filterData, getSearchedData,sortBtnHandler, toggleBtn } from "./handlers.js";
 
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";
@@ -119,10 +118,6 @@ const employeeEditAction = (employees, editSelector, employeeIdVal) => {
     editSelector.addEventListener("click", () => {
         window.location.href = './employeeDetails.html';
         localStorage.setItem('source', "edit");
-        const data = localStorage.getItem('data');
-        const dataObj = JSON.parse(data);
-        dataObj.employees = employees
-        localStorage.setItem('data', JSON.stringify(dataObj));
         localStorage.setItem('empId', employeeIdVal);
     })
 }

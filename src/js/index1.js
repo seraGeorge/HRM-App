@@ -1,25 +1,13 @@
-import { empDOBVal, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList } from "./elements.js";
-import { updateUserData, writeUserData } from "./firebase.js";
+import { pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList } from "./elements.js";
+import { updateUserData } from "./firebase.js";
 import { formEntryInputValidate, formEntryValid, getNewEmpId, getNewEmployeeDetails, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle, validationIcon } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
-import { addSelection, createListItem, setDropDown } from "./setFilterDropdownData.js";
-import { setTableData } from "./setTable.js";
-
-export const form = document.querySelector("#form")
-export const genderOtherVal = document.querySelector("#gender-other-entry");
-export const otherEntryField = document.querySelector("#gender_other_val");
-export const submitBtn = document.querySelector("#submit-btn")
-export const genderSelectedValue = document.querySelector('input[name="gender"]:checked');
-export const skills = document.querySelectorAll("#skills-select .chip-heading")
-export const designationSelectEntry = document.querySelector("#designation")
-export const departmentSelectEntry = document.querySelector("#department")
-export const empModeSelectEntry = document.querySelector("#employment_mode")
-export const genderRadiobuttons = document.querySelectorAll(".gender");
+import { addSelection,  setDropDown } from "./setFilterDropdownData.js";
+import { form, genderOtherVal, otherEntryField, submitBtn,  designationSelectEntry, departmentSelectEntry, empModeSelectEntry, genderRadiobuttons } from "./elements.js"
 
 const source = localStorage["source"];
 const dataStr = localStorage['data'];
 const empIdToEdit = localStorage["empId"]
-
 
 if (dataStr !== undefined) {
 
@@ -55,6 +43,8 @@ if (dataStr !== undefined) {
         })
     })
 
+
+    // Form Input Interactions
     form.addEventListener("input", (event) => {
         const inputElement = event.target;
         if ((inputElement.type === "radio") || (inputElement.tagName === "SELECT")) {
@@ -69,24 +59,23 @@ if (dataStr !== undefined) {
 
 
     if (source == "add") {
+        //Adding new Employee
         pageTitle.innerHTML = "Add New employee"
         submitBtn.addEventListener("click", async (event) => {
             event.preventDefault();
 
-            let formDataObj = {};
-            const formData = new FormData(form);
-            formData.forEach((value, key) => (formDataObj[key] = value));
-
-            //Check if valid
+            //Check if valid to add employee
             const inputElements = form.querySelectorAll("input");
             const selectElements = form.querySelectorAll("select");
 
             const isSkillsEmpty = skillsFormEntrySelectedList.hasChildNodes()
             const isUpdate = formEntryValid(inputElements, selectElements) && isSkillsEmpty;
-            console.log(isUpdate)
 
             //Set new Data
             if (isUpdate) {
+                let formDataObj = {};
+                const formData = new FormData(form);
+                formData.forEach((value, key) => (formDataObj[key] = value));    
                 let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
                 newDataObj.id = getNewEmpId(dataObj)
                 await updateUserData('/employees', newDataObj, dataObj.employees.length)
@@ -99,8 +88,10 @@ if (dataStr !== undefined) {
 
     }
     else if (source == "edit") {
+        //Editing a Employee
         pageTitle.innerHTML = "Update Details of a employee"
         submitBtn.innerHTML = "Save"
+
         // Set employee details
         const empToEdit = dataObj.employees.find((employee) => employee.id === empIdToEdit);
         const empToEditArrayIndex = dataObj.employees.findIndex((employee) => employee.id === empIdToEdit);
@@ -122,18 +113,18 @@ if (dataStr !== undefined) {
 
 
         //Employee Gender value setting
-        const empGenderEntryList = document.getElementsByName("gender");
         let empGenderEntryToBeChecked;
         if (["Male", "Female"].includes(empToEdit.gender)) {
-            empGenderEntryToBeChecked = Array.from(empGenderEntryList).find((empGenderEntry) => {
+            empGenderEntryToBeChecked = Array.from(genderRadiobuttons).find((empGenderEntry) => {
                 return empGenderEntry.value === empToEdit.gender
             });
         }
         else {
             //handling other gender cases
             empGenderEntryToBeChecked = genderOtherVal;
-            otherEntryField.classList.remove("no-display");
-            otherEntryField.value = empToEdit.gender.toString();
+            otherEntryField.parentNode.classList.remove("no-display");
+            console.log(empToEdit.gender)
+            otherEntryField.value = empToEdit.gender;
         }
         empGenderEntryToBeChecked.checked = true;
 
@@ -144,8 +135,9 @@ if (dataStr !== undefined) {
                 return listItem.innerHTML.includes(skill.name);
             })
             addSelection(skill.name, listItem, skillsFormEntrySelectedList, skillsFormEntryList, "skills-select")
-
         })
+
+
         let hasChanged = false;
         let formDataObj = {};
 
@@ -165,7 +157,7 @@ if (dataStr !== undefined) {
             hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj)
             updateButtonStyle(submitBtn, hasChanged);
         });
-        
+
         submitBtn.addEventListener("click", async (event) => {
             event.preventDefault();
             //Check if valid
@@ -192,12 +184,7 @@ if (dataStr !== undefined) {
 
 
     }
-
-
-
-
-
-
+    
     document.addEventListener("click", (event) => {
         hideDropdownIfNotTarget(skillsFormEntryList, skillsFormEntryBtn, event);
     })

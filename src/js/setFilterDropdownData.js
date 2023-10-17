@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { departmentDropDownBtn, departmentOptionsList, departmentResetBtn, departmentSelectedList, designationDropDownBtn, designationOptionsList, designationResetBtn, designationSelectedList, filterBtn, mainFilterDropDown, resetAllBtn, skillsDropDownBtn, skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
+import {  departmentOptionsList, departmentResetBtn, departmentSelectedList, designationOptionsList, designationResetBtn, designationSelectedList,  mainFilterDropDown, resetAllBtn,  skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
 import { setTableData } from "./setTable.js";
 
 export const setFilterDropdownData = (data) => {

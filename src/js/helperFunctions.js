@@ -1,4 +1,3 @@
-import { readUserData } from "./firebase.js";
 
 export const getDataFromJson = (url) => fetch(url)
     .then(response => {
