@@ -1,5 +1,5 @@
 import { loader, sortIcon, tableData, year } from "./elements.js";
-import { getYear } from "./helperFunctions.js";
+import { getDate, getYear, isValidDateFormat } from "./helperFunctions.js";
 
 year.innerHTML = getYear()
 export const displayLoading = () => {
@@ -122,6 +122,7 @@ export function getSearchedData(employeeList, selectedProperty, searchText) {
 }
 
 export const hideDropdownIfNotTarget = (dropdown, button, event) => {
+
     if (!(button.contains(event.target)) && !(dropdown.contains(event.target))) {
         if (!dropdown.classList.contains("no-display")) {
             dropdown.classList.add("no-display");
@@ -143,8 +144,43 @@ export const setFormValue = (inputId, value) => {
     }
 }
 
-export const checkIfPreset = (currentFormVal, presetVal) => {
-    if (formDataObj.name !== empToEdit.emp_name) {
-        hasChanged = true;
-    }
+// Function to check if any form field has changed
+export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
+    return (
+        formDataObj.name !== empToEdit.emp_name ||
+        formDataObj.email !== empToEdit.email ||
+        formDataObj.phone !== empToEdit.phone ||
+        formDataObj.address !== empToEdit.address ||
+        formDataObj.date_of_birth !== formatDate(empToEdit.date_of_birth) ||
+        formDataObj.date_of_joining !== formatDate(empToEdit.date_of_joining) ||
+        formDataObj.designation !== empToEdit.designation ||
+        formDataObj.department !== empToEdit.department ||
+        formDataObj.employment_mode !== empToEdit.employment_mode ||
+        (formDataObj.gender !== empToEdit.gender) ||
+        ((formDataObj.gender_other_val !== "") && (formDataObj.gender_other_val === empToEdit.gender)) ||
+        !arraysEqual(getSelectedSkills(dataObj), empToEdit.skills)
+    );
+}
+
+// Function to format the date
+export const formatDate = (dateString) => {
+    return isValidDateFormat(dateString) ? getDate(dateString) : dateString;
+}
+
+// Function to get selected skills from the DOM
+export const getSelectedSkills = (dataObj) => {
+    const skillsTagList = document.querySelectorAll(".chip");
+    const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);
+    return dataObj.skills.filter(skill => skillValues.includes(skill.name));
+}
+
+// Function to compare two arrays for equality
+export const arraysEqual = (arr1, arr2) => {
+    const flag = arr1.filter((value, index) => value === arr2[index]).length === 0
+    return arr1.length === arr2.length && flag;
+}
+
+export const updateButtonStyle = (submitBtn, hasChanged) => {
+    submitBtn.style.opacity = hasChanged ? "1" : "0.3";
+    submitBtn.disabled = !hasChanged;
 }

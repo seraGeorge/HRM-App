@@ -50,20 +50,7 @@ export const setTableData = (employees) => {
             const employeeIdVal = employeeIdTag.dataset.id;
             employeeDeleteBtnAction(employees, deleteSelector, employeeIdVal);
             employeeViewAction(employees, viewSelector, employeeIdVal);
-            employeeEditAction(editSelector, employeeIdVal)
-            // deleteSelector.onblur = () => {
-            //     if (!deleteModal.classList.contains("no-display")) {
-            //         deleteModal.classList.add("no-display");
-            //     }
-            // }
-            // document.addEventListener("click",()=>{
-            //     hideDropdownIfNotTarget(deleteModal,deleteSelector,event)
-            // })
-            viewSelector.onblur = () => {
-                if (!viewModal.classList.contains("no-display")) {
-                    viewModal.classList.add("no-display")
-                }
-            }
+            employeeEditAction(employees, editSelector, employeeIdVal)
         })
         toggleBtn(deleteModalCloseBtn, deleteModal);
         toggleBtn(deleteModalCancelBtn, deleteModal);
@@ -74,16 +61,17 @@ export const setTableData = (employees) => {
 }
 const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) => {
     toggleBtn(deleteSelector, deleteModal)
-    deleteSelector.addEventListener("click", () => {
+    deleteSelector.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent the click from reaching the document and closing the modal
+        deleteModal.classList.remove("no-display");
         empIdToDlt.innerHTML = employeeIdVal;
         employeeDeleteConfirmAction(employeeIdVal, employeeList)
     })
 }
 const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
-    console.log(employeeIdVal)
     deleteModalConfirmBtn.addEventListener("click", () => {
         const newEmpList = employeeList.filter((employee) => employee.id !== employeeIdVal);
-        if (newEmpList.length > 0) {
+        if (newEmpList.length > -1) {
             writeUserData('/employees', newEmpList) // Passing null to delete the data at the specified index.
                 .then(() => {
                     location.reload(true);
@@ -92,7 +80,10 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
                     console.error("Error updating user data:", error);
                 });
         }
+        // Hide the delete modal here
+        deleteModal.classList.add("no-display");
     })
+
 };
 const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
     toggleBtn(viewSelector, viewModal)
@@ -124,10 +115,14 @@ const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
         empSkillsList.innerHTML = temp
     })
 }
-const employeeEditAction = (editSelector, employeeIdVal) => {
+const employeeEditAction = (employees, editSelector, employeeIdVal) => {
     editSelector.addEventListener("click", () => {
         window.location.href = './employeeDetails.html';
         localStorage.setItem('source', "edit");
+        const data = localStorage.getItem('data');
+        const dataObj = JSON.parse(data);
+        dataObj.employees = employees
+        localStorage.setItem('data', JSON.stringify(dataObj));
         localStorage.setItem('empId', employeeIdVal);
     })
 }

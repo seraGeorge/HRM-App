@@ -68,13 +68,43 @@ export const addSelection = (item, listItem, selectedlist, optionsList, classNam
     if (!optionsList.classList.contains("no-display")) {
         optionsList.classList.add("no-display");
     }
+
+
+    // Create a custom event for changes in selectedlist
+    const selectionChangeEvent = new CustomEvent("selectionChange", {
+        detail: {
+            changeType: "add", // You can specify "add" or "remove" here
+            item: item,
+        },
+    });
+
+    // Dispatch the custom event
+    selectedlist.dispatchEvent(selectionChangeEvent);
+
+
+
+
     //Cancel Button interaction
     const chipCancelBtn = listItemChip.querySelector("#chip-cancel-btn")
     chipCancelBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         selectedlist.removeChild(listItemChip)
         optionsList.appendChild(listItem)
-    })
+
+
+
+        // Create a custom event for changes in selectedlist
+        const removalEvent = new CustomEvent("selectionChange", {
+            detail: {
+                changeType: "remove",
+                item: item,
+            },
+        });
+
+        // Dispatch the custom event
+        selectedlist.dispatchEvent(removalEvent);
+
+    });
 
 }
 const createChip = (text, className) => {

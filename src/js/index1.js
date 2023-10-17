@@ -1,6 +1,6 @@
 import { empDOBVal, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList } from "./elements.js";
 import { updateUserData, writeUserData } from "./firebase.js";
-import { hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn } from "./handlers.js";
+import { hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
 import { addSelection, createListItem, setDropDown } from "./setFilterDropdownData.js";
 import { setTableData } from "./setTable.js";
@@ -57,6 +57,7 @@ if (dataStr !== undefined) {
 
 
     const empToEdit = dataObj.employees.find((employee) => employee.id === empIdToEdit);
+
     if (source == "add") {
         pageTitle.innerHTML = "Add New employee"
     }
@@ -103,22 +104,29 @@ if (dataStr !== undefined) {
                 return listItem.innerHTML.includes(skill.name);
             })
             addSelection(skill.name, listItem, skillsFormEntrySelectedList, skillsFormEntryList, "skills-select")
+
         })
 
     }
 
 
+    let hasChanged = false;
+    updateButtonStyle(submitBtn, hasChanged);
 
-
-
-
-
-
-
-
-
-
-
+    form.addEventListener("input", (event) => {
+        // Mark changes when any form input changes
+        const formData = new FormData(form);
+        formData.forEach((value, key) => (formDataObj[key] = value));
+        hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj)
+        updateButtonStyle(submitBtn, hasChanged);
+    });
+    skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
+        // Mark changes when any skill input changes
+        const formData = new FormData(form);
+        formData.forEach((value, key) => (formDataObj[key] = value));
+        hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj)
+        updateButtonStyle(submitBtn, hasChanged);
+    });
 
 
     //Form submission
@@ -128,71 +136,23 @@ if (dataStr !== undefined) {
     submitBtn.addEventListener("click", async (event) => {
         event.preventDefault();
 
-        //Get form data
-        const formData = new FormData(form);
-        formData.forEach((value, key) => (formDataObj[key] = value));
-        console.log(empToEdit)
-        // checkIfPreset(formDataObj.name, empToEdit);
 
         //Set new Data
-        let hasChanged = false;
         newDataObj.emp_name = formDataObj.name;
-        if (formDataObj.name !== empToEdit.emp_name) {
-            hasChanged = true;
-        }
         newDataObj.email = formDataObj.email;
-        if (formDataObj.email !== empToEdit.email) {
-            hasChanged = true;
-        }
         newDataObj.phone = formDataObj.phone;
-        if (formDataObj.phone !== empToEdit.phone) {
-            hasChanged = true;
-        }
         newDataObj.address = formDataObj.address;
-        if (formDataObj.address !== empToEdit.address) {
-            hasChanged = true;
-        }
         newDataObj.date_of_birth = formDataObj.date_of_birth;
-        const dobValue = isValidDateFormat(empToEdit.date_of_birth) ? getDate(empToEdit.date_of_birth) : empToEdit.date_of_birth;
-
-        if (formDataObj.date_of_birth !== dobValue) {
-            hasChanged = true;
-        }
-
         newDataObj.date_of_joining = formDataObj.date_of_joining;
-        const dojValue = isValidDateFormat(empToEdit.date_of_joining) ? getDate(empToEdit.date_of_joining) : empToEdit.date_of_joining;
-        if (formDataObj.date_of_joining !== dojValue) {
-            hasChanged = true;
-        }
         newDataObj.designation = formDataObj.designation;
-        if (formDataObj.designation !== empToEdit.designation) {
-            hasChanged = true;
-        }
         newDataObj.department = formDataObj.department;
-        if (formDataObj.department !== empToEdit.department) {
-            hasChanged = true;
-        }
         newDataObj.employment_mode = formDataObj.employment_mode;
-        if (formDataObj.employment_mode !== empToEdit.employment_mode) {
-            hasChanged = true;
-        }
-
         newDataObj.gender = formDataObj.gender === "Other" ? formDataObj.gender_other_val : formDataObj.gender;
-        if ((formDataObj.gender !== empToEdit.gender) || ((formDataObj.gender_other_val !== "") && (formDataObj.gender_other_val === empToEdit.gender))) {
-            hasChanged = true;
-        }
         const skillsTagList = document.querySelectorAll(".chip");
         const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);
         const skillArrayObj = dataObj.skills.filter(skill => skillValues.includes(skill.name))
         newDataObj.skills = skillArrayObj
-        if (skillArrayObj.length === empToEdit.length) {
-            if (formDataObj.every((value, index) => value === empToEdit[index])) {
-                hasChanged = true;
-            }
-        }
-        console.log(hasChanged)
         if (hasChanged) {
-            submitBtn.style.opacity = "1"
             let largestId = null;
             for (const employee of dataObj.employees) {
                 const idNumber = parseInt(employee.id.substring(3));
