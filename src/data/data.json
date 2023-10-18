@@ -1,0 +1,358 @@
+{
+    "employees": [
+        {
+          "id": "EMP001",
+          "emp_name": "John Doe",
+          "email": "john.doe@example.com",
+          "phone": "8451234567",
+          "address": "123 Main Street, Anytown, CA, 12345, USA",
+          "skills": [
+            {
+              "id": "PYT789",
+              "name": "Python"
+            },
+            {
+              "id": "JAV456",
+              "name": "Java"
+            },
+            {
+              "id": "JVS123",
+              "name": "JavaScript"
+            }
+          ],
+          "gender": "Male",
+          "date_of_birth": "15-04-1985",
+          "date_of_joining": "10-01-2020",
+          "designation": "Intern",
+          "department": "Software Development",
+          "employment_mode": "Part-Time"
+        },
+        {
+          "id": "EMP002",
+          "emp_name": "Alice Smith",
+          "email": "alice.smith@example.com",
+          "phone": "9876543210",
+          "address": "456 Elm Street, Anytown, CA, 54321, USA",
+          "skills": [
+            {
+              "id": "PYT789",
+              "name": "Python"
+            },
+            {
+              "id": "JAV456",
+              "name": "Java"
+            }
+          ],
+          "gender": "Female",
+          "date_of_birth": "25-07-1990",
+          "date_of_joining": "15-03-2018",
+          "designation": "Engineer",
+          "department": "Software Development",
+          "employment_mode": "Full-Time"
+        },
+        {
+          "id": "EMP003",
+          "emp_name": "Robert Johnson",
+          "email": "robert.johnson@example.com",
+          "phone": "7788899000",
+          "address": "789 Oak Avenue, Anytown, CA, 67890, USA",
+          "skills": [
+            {
+              "id": "JAV456",
+              "name": "Java"
+            },
+            {
+              "id": "JVS123",
+              "name": "JavaScript"
+            }
+          ],
+          "gender": "Male",
+          "date_of_birth": "10-12-1988",
+          "date_of_joining": "05-06-2015",
+          "designation": "Associate Engineer",
+          "department": "Web Development",
+          "employment_mode": "Contract"
+        },
+        {
+          "id": "EMP004",
+          "emp_name": "Emily Davis",
+          "email": "emily.davis@example.com",
+          "phone": "5551112233",
+          "address": "567 Maple Lane, Anytown, CA, 54321, USA",
+          "skills": [
+            {
+              "id": "PYT789",
+              "name": "Python"
+            },
+            {
+              "id": "JVS123",
+              "name": "JavaScript"
+            }
+          ],
+          "gender": "Female",
+          "date_of_birth": "20-09-1992",
+          "date_of_joining": "02-04-2017",
+          "designation": "Director",
+          "department": "Project Management",
+          "employment_mode": "Full-Time"
+        },
+        {
+          "id": "EMP005",
+          "emp_name": "Michael Wilson",
+          "email": "michael.wilson@example.com",
+          "phone": "1234567890",
+          "address": "101 Pine Road, Anytown, CA, 12345, USA",
+          "skills": [
+            {
+              "id": "PYT789",
+              "name": "Python"
+            }
+          ],
+          "gender": "Male",
+          "date_of_birth": "18-03-1987",
+          "date_of_joining": "20-11-2019",
+          "designation": "CTO",
+          "department": "Software Development",
+          "employment_mode": "Full-Time"
+        },
+        {
+          "id": "EMP006",
+          "emp_name": "Sarah Lee",
+          "email": "sarah.lee@example.com",
+          "phone": "4445556666",
+          "address": "222 Cedar Street, Anytown, CA, 98765, USA",
+          "skills": [
+            {
+              "id": "JAV456",
+              "name": "Java"
+            }
+          ],
+          "gender": "Female",
+          "date_of_birth": "12-08-1993",
+          "date_of_joining": "30-07-2016",
+          "designation": "CFO",
+          "department": "Database Management",
+          "employment_mode": "Part-Time"
+        },
+        {
+          "id": "EMP007",
+          "emp_name": "Daniel Brown",
+          "email": "daniel.brown@example.com",
+          "phone": "3334445555",
+          "address": "789 Oak Avenue, Anytown, CA, 67890, USA",
+          "skills": [
+            {
+              "id": "PYT789",
+              "name": "Python"
+            }
+          ],
+          "gender": "Male",
+          "date_of_birth": "05-11-1991",
+          "date_of_joining": "10-09-2019",
+          "designation": "Engineer",
+          "department": "Software Development",
+          "employment_mode": "Contract"
+        },
+    {
+     "id": "EMP009",
+     "emp_name": "David Miller",
+     "email": "david.miller@example.com",
+     "phone": "1112223333",
+     "address": "123 Main Street, Anytown, CA, 12345, USA",
+     "skills": [
+     {
+     "id": "JAV456",
+     "name": "Java"
+     }
+     ],
+     "gender": "Male",
+    "date_of_birth": "20-04-1984",
+     "date_of_joining": "02-01-2020",
+     "designation": "Engineer",
+     "department": "Web Development",
+     "employment_mode": "Full-Time"
+     },
+     {
+     "id": "EMP010",
+     "emp_name": "Sophia Wilson",
+     "email": "sophia.wilson@example.com",
+     "phone": "7778889999",
+          "address": "789 Oak Avenue, Anytown, CA, 67890, USA",
+          "skills": [
+            {
+              "id": "JAV456",
+              "name": "Java"
+            },
+            {
+              "id": "JVS123",
+              "name": "JavaScript"
+            }
+          ],
+          "gender": "Female",
+          "date_of_birth": "30-12-1987",
+          "date_of_joining": "15-09-2016",
+          "designation": "Associate Engineer",
+          "department": "Web Development",
+          "employment_mode": "Full-Time"
+        },
+        {
+          "id": "EMP011",
+          "emp_name": "Liam Taylor",
+          "email": "liam.taylor@example.com",
+          "phone": "6667778888",
+          "address": "101 Pine Road, Anytown, CA, 12345, USA",
+          "skills": [
+            {
+              "id": "PYT789",
+              "name": "Python"
+            },
+            {
+              "id": "JAV456",
+              "name": "Java"
+            }
+          ],
+          "gender": "Male",
+          "date_of_birth": "18-05-1989",
+          "date_of_joining": "20-07-2017",
+          "designation": "Engineer",
+          "department": "Software Development",
+          "employment_mode": "Full-Time"
+        },
+        {
+          "id": "EMP012",
+          "emp_name": "Sophia Lee",
+          "email": "sophia.lee@example.com",
+          "phone": "2223334444",
+          "address": "222 Cedar Street, Anytown, CA, 98765, USA",
+          "skills": [
+            {
+              "id": "PYT789",
+              "name": "Python"
+            },
+            {
+              "id": "JVS123",
+              "name": "JavaScript"
+            }
+          ],
+          "gender": "Female",
+          "date_of_birth": "12-01-1994",
+          "date_of_joining": "30-04-2019",
+          "designation": "Associate Engineer",
+          "department": "Software Development",
+          "employment_mode": "Contract"
+        },
+        {
+          "id": "EMP013",
+          "emp_name": "James Brown",
+          "email": "james.brown@example.com",
+          "phone": "5556667777",
+          "address": "456 Elm Street, Anytown, CA, 54321, USA",
+          "skills": [
+            {
+              "id": "JAV456",
+              "name": "Java"
+            },
+            {
+              "id": "JVS123",
+              "name": "JavaScript"
+            }
+          ],
+          "gender": "Male",
+          "date_of_birth": "15-08-1990",
+          "date_of_joining": "02-03-2018",
+          "designation": "Director",
+          "department": "Project Management",
+          "employment_mode": "Full-Time"
+        },
+        {
+          "id": "EMP014",
+          "emp_name": "Ava Miller",
+          "email": "ava.miller@example.com",
+          "phone": "1112223333",
+          "address": "123 Main Street, Anytown, CA, 12345, USA",
+          "skills": [
+            {
+              "id": "PYT789",
+              "name": "Python"
+            },
+            {
+              "id": "JAV456",
+              "name": "Java"
+            },
+            {
+              "id": "JVS123",
+              "name": "JavaScript"
+            }
+          ],
+          "gender": "Female",
+          "date_of_birth": "20-11-1986",
+          "date_of_joining": "02-10-2019",
+          "designation": "CTO",
+          "department": "Software Development",
+          "employment_mode": "Full-Time"
+        }
+      ],    
+    "skills": [
+        {
+            "id": "PYT789",
+            "name": "Python"
+        },
+        {
+            "id": "JAV456",
+            "name": "Java"
+        },
+        {
+            "id": "JVS123",
+            "name": "JavaScript"
+        },
+        {
+            "id": "C#123",
+            "name": "C#"
+        },
+        {
+            "id": "MKT789",
+            "name": "Marketing"
+        },
+        {
+            "id": "SLS456",
+            "name": "Sales"
+        },
+        {
+            "id": "CSV123",
+            "name": "Customer Service"
+        }
+    ],
+    "designations": [
+        "Intern",
+        "Engineer",
+        "Associate Engineer",
+        "Director",
+        "CTO",
+        "CFO"
+    ],
+    "departments": [
+        "Software Development",
+        "Network and Infrastructure",
+        "Cybersecurity",
+        "Database Management",
+        "Web Development",
+        "IT Support",
+        "Quality Assurance",
+        "Project Management",
+        "Business Analysis",
+        "UI/UX Design",
+        "Data Science and Analytics"
+    ],
+    "employment_modes": [
+        "Full-Time",
+        "Part-Time",
+        "Contract",
+        "Freelance",
+        "Temporary",
+        "Internship",
+        "Remote",
+        "Consultant",
+        "Permanent",
+        "Probationary"
+    ]
+}
