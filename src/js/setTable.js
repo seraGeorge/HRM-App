@@ -1,15 +1,14 @@
 import { state } from "./context.js";
 import { deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
-import { filterData, formatDate, getSearchedData, sortBtnHandler, toggleBtn } from "./handlers.js";
+import { displayLoading, filterData, formatDate, getSearchedData, hideLoading, sortBtnHandler, toggleBtn } from "./handlers.js";
 
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";
     let sortedEmployees = sortBtnHandler(employees, state.sort)
     let filteredEmployees = filterData(sortedEmployees, state.filter.designationFilters, state.filter.departmentFilters, state.filter.skillsFilters)
     let searchedEmployees = getSearchedData(filteredEmployees, state.search.property, state.search.searchTerm)
-
-    if (searchedEmployees === undefined) {
+    if ((searchedEmployees === undefined) || (searchedEmployees.length === 0)) {
         const tableRow = document.createElement('tr');
 
         tableRow.innerHTML = `<td class="no-data" colspan="6">No data Available</td>`;
@@ -70,10 +69,17 @@ const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) =>
 const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
     deleteModalConfirmBtn.addEventListener("click", () => {
         const newEmpList = employeeList.filter((employee) => employee.id !== employeeIdVal);
+        const toast = document.getElementById("toast");
+
         if (newEmpList.length > -1) {
             writeUserData('/employees', newEmpList) // Passing null to delete the data at the specified index.
                 .then(() => {
-                    location.reload(true);
+                    setTableData(newEmpList);
+                    // toast.classList.add("toast-animation")
+                    setTimeout(() => {
+                        toast.classList.add("toast-animation")
+                    }, "1000");
+
                 })
                 .catch((error) => {
                     console.error("Error updating user data:", error);
@@ -82,7 +88,6 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
         // Hide the delete modal here
         deleteModal.classList.add("no-display");
     })
-
 };
 const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
     toggleBtn(viewSelector, viewModal)

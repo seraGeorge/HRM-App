@@ -248,11 +248,15 @@ export const getNewEmpId = (dataObj) => {
 
 export const validationIcon = (inputElement, flag) => {
     const validationIcon = inputElement.nextElementSibling;
+    const errorMsg = inputElement.parentNode.nextElementSibling;
+
     if (flag) {
         validationIcon.innerHTML = `<i class="fa fa-check input-icon-val" style="color:green"></i>`;
+        errorMsg.classList.add("no-display")
     }
     else {
         validationIcon.innerHTML = `<i class="fa fa-warning input-icon-val" style="color:red"></i>`
+        errorMsg.classList.remove("no-display")
     }
 
 }
@@ -284,6 +288,7 @@ export const formEntryInputValidate = (inputElement) => {
 }
 
 export const formEntryValid = (inputElements, selectElements) => {
+
     const errorEntries = Array.from(inputElements).filter((inputElement) => {
         const validationIcon = inputElement.nextElementSibling;
         return ((validationIcon.innerHTML === `<i class="fa fa-warning input-icon-val" style="color:red"></i>`)
@@ -291,12 +296,15 @@ export const formEntryValid = (inputElements, selectElements) => {
     })
 
     const isAnyRequired = Array.from(inputElements).filter((inputElement) => {
+
         if ((inputElement.type === "radio")) {
 
         }
         else {
             const flag = formEntryInputValidate(inputElement);
-            validationIcon(inputElement, flag)
+            if (inputElement.id !== "gender_other_val") {
+                validationIcon(inputElement, flag)
+            }
         }
         return inputElement.hasAttribute("required") && inputElement.value === ""
     })
@@ -304,9 +312,15 @@ export const formEntryValid = (inputElements, selectElements) => {
     const isSelectElementsChosen = Array.from(selectElements).filter((selectElement) => {
         const index = selectElement.selectedIndex;
         const selectedOption = selectElement.options[index];
+        const errorMsg = selectElement.nextElementSibling;
+        if (selectedOption.disabled) {
+            errorMsg.classList.remove("no-display")
+        }
+        else {
+            errorMsg.classList.add("no-display")
+        }
         return selectedOption.disabled
     })
-
 
     return errorEntries.length === 0 &&
         isAnyRequired.length === 0 && isSelectElementsChosen.length === 0;

@@ -2,13 +2,12 @@ import { pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySele
 import { updateUserData } from "./firebase.js";
 import { formEntryInputValidate, formEntryValid, getNewEmpId, getNewEmployeeDetails, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle, validationIcon } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
-import { addSelection,  setDropDown } from "./setFilterDropdownData.js";
-import { form, genderOtherVal, otherEntryField, submitBtn,  designationSelectEntry, departmentSelectEntry, empModeSelectEntry, genderRadiobuttons } from "./elements.js"
+import { addSelection, setDropDown } from "./setFilterDropdownData.js";
+import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectEntry, departmentSelectEntry, empModeSelectEntry, genderRadiobuttons } from "./elements.js"
 
 const source = localStorage["source"];
 const dataStr = localStorage['data'];
 const empIdToEdit = localStorage["empId"]
-
 if (dataStr !== undefined) {
 
     const dataObj = JSON.parse(dataStr)
@@ -47,12 +46,26 @@ if (dataStr !== undefined) {
     // Form Input Interactions
     form.addEventListener("input", (event) => {
         const inputElement = event.target;
-        if ((inputElement.type === "radio") || (inputElement.tagName === "SELECT")) {
+        if ((inputElement.type === "radio")) {
+
+        }
+        else if (inputElement.tagName === "SELECT"){
+            const index = inputElement.selectedIndex;
+            const selectedOption = inputElement.options[index];
+            const errorMsg = inputElement.nextElementSibling;
+            if (selectedOption.disabled) {
+                errorMsg.classList.remove("no-display")
+            }
+            else {
+                errorMsg.classList.add("no-display")
+            }
 
         }
         else {
             const flag = formEntryInputValidate(inputElement);
-            validationIcon(inputElement, flag)
+            if (inputElement.id !== "gender_other_val") {
+                validationIcon(inputElement, flag)
+            }
         }
     });
 
@@ -75,16 +88,17 @@ if (dataStr !== undefined) {
             if (isUpdate) {
                 let formDataObj = {};
                 const formData = new FormData(form);
-                formData.forEach((value, key) => (formDataObj[key] = value));    
+                formData.forEach((value, key) => (formDataObj[key] = value));
                 let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
                 newDataObj.id = getNewEmpId(dataObj)
                 await updateUserData('/employees', newDataObj, dataObj.employees.length)
-                history.back();
+                window.history.back();
                 return false;
             }
 
 
         })
+        localStorage.clear()
 
     }
     else if (source == "edit") {
@@ -175,16 +189,17 @@ if (dataStr !== undefined) {
                 //Set new Data
                 if (hasChanged) {
                     await updateUserData('/employees', newDataObj, empToEditArrayIndex)
-                    history.back();
+                    window.history.back();
                     return false;
                 }
             }
 
         })
 
+        localStorage.clear()
 
     }
-    
+
     document.addEventListener("click", (event) => {
         hideDropdownIfNotTarget(skillsFormEntryList, skillsFormEntryBtn, event);
     })
@@ -192,5 +207,6 @@ if (dataStr !== undefined) {
 }
 else {
     console.error("Error occurred.");
+    window.history.back()
 }
 

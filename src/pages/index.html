@@ -27,7 +27,7 @@
       <div class="global-width main-content">
         <section class="heading-section common-section">
           <h1 class="page-title">Employees</h1>
-          <button class="button common-button-container common-flex add-btn" id="add-employee-btn" >
+          <button class="button common-button-container common-flex add-btn" id="add-employee-btn">
             <span class="material-symbols-outlined add_btn_icon"> add_circle </span>
             Add New Employee
           </button>
@@ -52,11 +52,13 @@
                   <label for="search-all" class="search-filter-label">All</label><br>
                 </div>
                 <div class="list-item">
-                  <input type="radio" id="search-designation" name="search-filter" class="search-filter" value="Designation">
+                  <input type="radio" id="search-designation" name="search-filter" class="search-filter"
+                    value="Designation">
                   <label for="search-designation" class="search-filter-label">Designation</label><br>
                 </div>
                 <div class="list-item">
-                  <input type="radio" id="search-department" name="search-filter" class="search-filter" value="Department">
+                  <input type="radio" id="search-department" name="search-filter" class="search-filter"
+                    value="Department">
                   <label for="search-department" class="search-filter-label">Department</label><br>
                 </div>
                 <div class="list-item">
@@ -118,7 +120,8 @@
                   <div class="dropdown-list common-flex">
                     <div class="selected-list common-flex" id="filter-skill-selected-list">
                     </div>
-                    <button class="button dropdown-icon material-symbols-outlined dropdown-btn" id="filter-skill-dropdown-btn">
+                    <button class="button dropdown-icon material-symbols-outlined dropdown-btn"
+                      id="filter-skill-dropdown-btn">
                       expand_more
                     </button>
                   </div>
@@ -175,12 +178,11 @@
                     </button>
                   </th>
                   <th class="table-heading">
-                      <span class="table-title"> Skills </span>
-                      </span>
+                    <span class="table-title"> Skills </span>
+
                   </th>
                   <th class="table-heading">
-                      <span class="table-title"> Actions </span>
-                      </span>
+                    <span class="table-title"> Actions </span>
                   </th>
                 </tr>
               </thead>
@@ -221,7 +223,7 @@
                 Designation
               </h3>
               <p class="modal-heading designation-val" id="designation-val">
-                
+
               </p>
             </span>
             <span class="category emp-mode-detail">
@@ -309,6 +311,10 @@
             </p>
           </span>
         </div>
+        <div class="toast common-flex" id="toast">
+          <span class="material-symbols-outlined search-dropdown-icon"> expand_more </span>
+          <p class="toast-title">User</p>
+        </div>
       </div>
     </main>
     <footer class="footer">
@@ -320,7 +326,7 @@
 
     </footer>
     <script type="module" src="../js/index.js"></script>
-    <!-- <script type="module" src="../js/writeData.js"></script> -->
+    <script type="module" src="../js/writeData.js"></script>
   </body>
 
 </html>
