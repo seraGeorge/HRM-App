@@ -1,7 +1,7 @@
 import { getDataFromJson } from "./helperFunctions.js";
 import { writeUserData } from "./firebase.js";
 
-const result = getDataFromJson('../data/data.json');
+const result = getDataFromJson('src/data/data.json');
 
 result.then(data => {
     writeUserData('/employees', data["employees"]);

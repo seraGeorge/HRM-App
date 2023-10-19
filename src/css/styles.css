@@ -345,17 +345,20 @@ td {
 .input-grp {
   border: 1px solid var(--secondary-color);
 }
-.skills-detail .input-grp{
+.skills-detail .input-grp {
   border: none;
 }
-.input[type='text'],
-.input[type='email'],
-.input[type='date'],
-.input[type='tel'],textarea,select {
+.input[type="text"],
+.input[type="email"],
+.input[type="date"],
+.input[type="tel"],
+textarea,
+select {
   flex: 1;
   background: transparent;
 }
-input,textarea {
+input,
+textarea {
   border: none;
   padding: 10px;
   outline: none;
@@ -365,7 +368,7 @@ input,textarea {
 .input-icon {
   padding: 10px;
 }
-.error-msg{
+.error-msg {
   color: red;
   font-size: 12px;
   margin: 0;
@@ -396,11 +399,10 @@ input,textarea {
 select {
   padding: 10px;
 }
-.select-box .input-grp{
+.select-box .input-grp {
   border: none;
-
 }
-textarea{
+textarea {
   resize: none;
   padding: 10px;
 }
@@ -410,9 +412,31 @@ textarea{
 .skills-list .material-symbols-outlined {
   font-size: 24px;
 }
-.skills-detail .input-grp{
+.skills-detail .input-grp {
   display: flex;
 }
+.submit-btn {
+  position: relative;
+}
+.button--loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 4px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: button-loading-spinner 1s ease infinite;
+}
+.button--loading .submit-btn-text {
+  visibility: hidden;
+}
+
 .toast {
   background-color: blue;
   position: fixed;
@@ -428,4 +452,13 @@ textarea{
 }
 .toast-title {
   color: white;
+}
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
 }

@@ -147,6 +147,7 @@ export const setFormValue = (inputId, value) => {
         element.value = value;
     }
 }
+
 // Function to check if any form field has changed
 export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
     let genderFlag = true
@@ -168,6 +169,20 @@ export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
         formDataObj.employment_mode !== empToEdit.employment_mode ||
         genderFlag || !arraysEqual(getSelectedSkills(dataObj), empToEdit.skills)
     );
+}
+//Function to handle button style on form change
+export const handleFormChange = (formDataObj, empToEdit, dataObj, submitBtn) => {
+    // Getting the latest form data each time
+    const formData = new FormData(form);
+    formData.forEach((value, key) => (formDataObj[key] = value));
+
+    // Check if the form has changed
+    const hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj);
+
+    // Update the submit button style
+    updateButtonStyle(submitBtn, hasChanged);
+
+    return hasChanged;
 }
 // Function to format the date
 export const formatDate = (dateString) => {
@@ -214,9 +229,11 @@ export const getNewEmployeeDetails = (formDataObj, dataObj) => {
 export const getNewEmpId = (dataObj) => {
     let largestId = null;
     for (const employee of dataObj.employees) {
-        const idNumber = parseInt(employee.id.substring(3));
-        if (largestId === null || idNumber > parseInt(largestId.substring(3))) {
-            largestId = employee.id;
+        if (employee != null) {
+            const idNumber = parseInt(employee.id.substring(3));
+            if (largestId === null || idNumber > parseInt(largestId.substring(3))) {
+                largestId = employee.id;
+            }
         }
     }
     const newEmpId = parseInt(largestId.substring(3)) + 1;
@@ -319,11 +336,11 @@ export const handleValidation = (inputElement) => {
     else if (inputElement.type === "text") {
         errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateText(inputElement);
     } else if (inputElement.type === "tel") {
-        errorMessage =validateRequired(inputElement) ? validateRequired(inputElement) : validateTel(inputElement);
+        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateTel(inputElement);
     } else if (inputElement.type === "date") {
-        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) :validateDate(inputElement);
+        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateDate(inputElement);
     } else if (inputElement.tagName === "SELECT") {
-        errorMessage =validateRequired(inputElement) ? validateRequired(inputElement) : validateSelect(inputElement);
+        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateSelect(inputElement);
     }
 
     if (errorMessage === null) {

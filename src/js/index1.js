@@ -1,6 +1,6 @@
-import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList,  } from "./elements.js";
+import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
 import { updateUserData } from "./firebase.js";
-import { getNewEmpId, getNewEmployeeDetails, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
+import { getNewEmpId, getNewEmployeeDetails, handleFormChange, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
 import { addSelection, setDropDown } from "./setFilterDropdownData.js";
 import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectEntry, departmentSelectEntry, empModeSelectEntry, genderRadiobuttons } from "./elements.js"
@@ -51,18 +51,23 @@ if (dataStr !== undefined) {
     form.addEventListener("input", (event) => {
         handleValidation(event.target)
     });
-    skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
-        validateSkills()
-    });
 
 
-
-    if (empIdToEdit == undefined) { // editing existing employee
+    if (empIdToEdit == undefined) { // adding existing employee
         //Adding new Employee
+
+        // Form Input Interactions
+        form.addEventListener("input", (event) => {
+            handleValidation(event.target)
+        });
+        skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
+            validateSkills()
+        });
+
         pageTitle.innerHTML = "Add New employee"
         submitBtn.addEventListener("click", async (event) => {
             event.preventDefault();
-
+            submitBtn.classList.add("button--loading")
             //Check if valid to add employee
             const inputElements = form.querySelectorAll(".input");
             let errorCount = 0;
@@ -81,18 +86,28 @@ if (dataStr !== undefined) {
                 formData.forEach((value, key) => (formDataObj[key] = value));
                 let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
                 newDataObj.id = getNewEmpId(dataObj)
-                console.log(newDataObj)
-                await updateUserData('/employees', newDataObj, dataObj.employees.length)
-                window.history.back();
+                try {
+                    await updateUserData('/employees', newDataObj, dataObj.employees.length)
+                }
+                catch (error) {
+                    console.error("Error on updating the data")
+                }
+                finally {
+                    submitBtn.classList.remove("button--loading");
+                    window.history.back();
+                }
                 return false;
+            }
+            else {
+                submitBtn.classList.remove("button--loading");
             }
         })
 
     }
-    else if (empIdToEdit !== undefined) {
+    else if (empIdToEdit !== undefined) {//editing existing employee
         //Editing a Employee
         pageTitle.innerHTML = "Update Details of a employee"
-        submitBtn.innerHTML = "Save"
+        submitBtnText.innerHTML = "Save"
 
         // Set employee details
         const empToEdit = dataObj.employees.find((employee) => employee.id === empIdToEdit);
@@ -143,27 +158,22 @@ if (dataStr !== undefined) {
         let formDataObj = {};
         updateButtonStyle(submitBtn, hasChanged);
 
-
+        // Event listener for form input changes
         form.addEventListener("input", (event) => {
-            //Getting latest form data each time
-            const formData = new FormData(form);
-            formData.forEach((value, key) => (formDataObj[key] = value));
-            // Update button if form is changed
-            hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj)
-            updateButtonStyle(submitBtn, hasChanged);
+            handleFormChange(formDataObj, empToEdit, dataObj, submitBtn);
         });
 
+        // Event listener for skills form selection changes
         skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
-            //Getting latest form data each time
-            const formData = new FormData(form);
-            formData.forEach((value, key) => (formDataObj[key] = value));
-            hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj)
-            updateButtonStyle(submitBtn, hasChanged);
+            if (handleFormChange(formDataObj, empToEdit, dataObj, submitBtn)) {
+                validateSkills();
+            }
         });
+
 
         submitBtn.addEventListener("click", async (event) => {
             event.preventDefault();
-
+            submitBtn.classList.add("button--loading")
             //Check if valid to add employee
             const inputElements = form.querySelectorAll(".input");
             let errorCount = 0;
@@ -181,23 +191,20 @@ if (dataStr !== undefined) {
                 const formData = new FormData(form);
                 formData.forEach((value, key) => (formDataObj[key] = value));
                 let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
-                newDataObj.id = getNewEmpId(dataObj)
-                console.log(newDataObj)
-                await updateUserData('/employees', newDataObj, dataObj.employees.length)
-                window.history.back();
+                try {
+                    await updateUserData('/employees', newDataObj, empToEditArrayIndex)
+                }
+                catch (error) {
+                    console.error("Error on updating the data")
+                }
+                finally {
+                    submitBtn.classList.remove("button--loading");
+                    window.history.back();
+                }
                 return false;
             }
-
-            //Set new Data
-            if (isUpdate) {
-
-                let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
-                //Set new Data
-                if (hasChanged) {
-                    await updateUserData('/employees', newDataObj, empToEditArrayIndex)
-                    window.history.back();
-                    return false;
-                }
+            else {
+                submitBtn.classList.remove("button--loading");
             }
 
         })
