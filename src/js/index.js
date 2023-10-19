@@ -90,7 +90,7 @@ result.then(data => {
         })
 
         addEmployeeBtn.addEventListener("click", () => {
-            window.location.href='./employeeDetails.html';
+            window.location.href='./src/pages/employeeDetails.html';
         })
 
         document.addEventListener("click", (event) => {

@@ -121,7 +121,7 @@ const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
 }
 const employeeEditAction = (employees, editSelector, employeeIdVal) => {
     editSelector.addEventListener("click", () => {
-        window.location.href = './employeeDetails.html';
+        window.location.href = './src/pages/employeeDetails.html';
         localStorage.setItem('empId', employeeIdVal);
     })
 }
