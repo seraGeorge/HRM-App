@@ -1,6 +1,6 @@
-import { pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList } from "./elements.js";
+import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, skillsList } from "./elements.js";
 import { updateUserData } from "./firebase.js";
-import { formEntryInputValidate, formEntryValid, getNewEmpId, getNewEmployeeDetails, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle, validationIcon } from "./handlers.js";
+import { getNewEmpId, getNewEmployeeDetails, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
 import { addSelection, setDropDown } from "./setFilterDropdownData.js";
 import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectEntry, departmentSelectEntry, empModeSelectEntry, genderRadiobuttons } from "./elements.js"
@@ -35,71 +35,61 @@ if (dataStr !== undefined) {
             if (!genderOtherVal.contains(event.target)) {
                 otherEntryField.value = ""
                 closestInpGrp.classList.add("no-display");
-                otherEntryField.nextElementSibling.innerHTML = ""
-
+                otherEntryField.nextElementSibling.innerHTML = ""//sets " " each time other button is clicked
             }
         })
+    })
+
+    //Setting max date for all date fields
+    dateList.forEach((date) => {
+        const today = new Date().toISOString().split("T")[0];
+        date.setAttribute("max", today);
     })
 
 
     // Form Input Interactions
     form.addEventListener("input", (event) => {
-        const inputElement = event.target;
-        if ((inputElement.type === "radio")) {
-
-        }
-        else if (inputElement.tagName === "SELECT"){
-            const index = inputElement.selectedIndex;
-            const selectedOption = inputElement.options[index];
-            const errorMsg = inputElement.nextElementSibling;
-            if (selectedOption.disabled) {
-                errorMsg.classList.remove("no-display")
-            }
-            else {
-                errorMsg.classList.add("no-display")
-            }
-
-        }
-        else {
-            const flag = formEntryInputValidate(inputElement);
-            if (inputElement.id !== "gender_other_val") {
-                validationIcon(inputElement, flag)
-            }
-        }
+        handleValidation(event.target)
+    });
+    skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
+        validateSkills()
     });
 
 
 
-    if (empIdToEdit==undefined) {
+    if (empIdToEdit == undefined) { // editing existing employee
         //Adding new Employee
         pageTitle.innerHTML = "Add New employee"
         submitBtn.addEventListener("click", async (event) => {
             event.preventDefault();
 
             //Check if valid to add employee
-            const inputElements = form.querySelectorAll("input");
-            const selectElements = form.querySelectorAll("select");
-
-            const isSkillsEmpty = skillsFormEntrySelectedList.hasChildNodes()
-            const isUpdate = formEntryValid(inputElements, selectElements) && isSkillsEmpty;
-
-            //Set new Data
-            if (isUpdate) {
+            const inputElements = form.querySelectorAll(".input");
+            let errorCount = 0;
+            inputElements.forEach((inputElement) => {
+                const isValid = handleValidation(inputElement);
+                if ((isValid !== undefined) && !isValid) {//error is present
+                    errorCount++
+                }
+            })
+            if (!validateSkills()) {// error is present
+                errorCount++
+            }
+            if (errorCount == 0) {
                 let formDataObj = {};
                 const formData = new FormData(form);
                 formData.forEach((value, key) => (formDataObj[key] = value));
                 let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
                 newDataObj.id = getNewEmpId(dataObj)
+                console.log(newDataObj)
                 await updateUserData('/employees', newDataObj, dataObj.employees.length)
                 window.history.back();
                 return false;
             }
-
-
         })
 
     }
-    else if (empIdToEdit!==undefined) {
+    else if (empIdToEdit !== undefined) {
         //Editing a Employee
         pageTitle.innerHTML = "Update Details of a employee"
         submitBtn.innerHTML = "Save"
@@ -108,6 +98,7 @@ if (dataStr !== undefined) {
         const empToEdit = dataObj.employees.find((employee) => employee.id === empIdToEdit);
         const empToEditArrayIndex = dataObj.employees.findIndex((employee) => employee.id === empIdToEdit);
 
+        //Setting form values
         setFormValue("name", empToEdit.emp_name);
         setFormValue("email", empToEdit.email);
         setFormValue("phone", empToEdit.phone);
@@ -135,7 +126,6 @@ if (dataStr !== undefined) {
             //handling other gender cases
             empGenderEntryToBeChecked = genderOtherVal;
             otherEntryField.parentNode.classList.remove("no-display");
-            console.log(empToEdit.gender)
             otherEntryField.value = empToEdit.gender;
         }
         empGenderEntryToBeChecked.checked = true;
@@ -149,12 +139,10 @@ if (dataStr !== undefined) {
             addSelection(skill.name, listItem, skillsFormEntrySelectedList, skillsFormEntryList, "skills-select")
         })
 
-
+        //Button is disabled if there is no change in the data
         let hasChanged = false;
         let formDataObj = {};
-
         updateButtonStyle(submitBtn, hasChanged);
-
         form.addEventListener("input", (event) => {
             // Mark changes when any form input changes
             const formData = new FormData(form);
@@ -172,13 +160,30 @@ if (dataStr !== undefined) {
 
         submitBtn.addEventListener("click", async (event) => {
             event.preventDefault();
-            //Check if valid
-            const inputElements = form.querySelectorAll("input");
-            const selectElements = form.querySelectorAll("select");
 
-            const isSkillsEmpty = skillsFormEntrySelectedList.hasChildNodes()
-            const isUpdate = formEntryValid(inputElements, selectElements) && isSkillsEmpty;
-            console.log(isUpdate)
+            //Check if valid to add employee
+            const inputElements = form.querySelectorAll(".input");
+            let errorCount = 0;
+            inputElements.forEach((inputElement) => {
+                const isValid = handleValidation(inputElement);
+                if ((isValid !== undefined) && !isValid) {//error is present
+                    errorCount++
+                }
+            })
+            if (!validateSkills()) {// error is present
+                errorCount++
+            }
+            if (errorCount == 0) {
+                let formDataObj = {};
+                const formData = new FormData(form);
+                formData.forEach((value, key) => (formDataObj[key] = value));
+                let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
+                newDataObj.id = getNewEmpId(dataObj)
+                console.log(newDataObj)
+                await updateUserData('/employees', newDataObj, dataObj.employees.length)
+                window.history.back();
+                return false;
+            }
 
             //Set new Data
             if (isUpdate) {

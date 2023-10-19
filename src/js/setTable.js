@@ -69,17 +69,11 @@ const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) =>
 const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
     deleteModalConfirmBtn.addEventListener("click", () => {
         const newEmpList = employeeList.filter((employee) => employee.id !== employeeIdVal);
-        const toast = document.getElementById("toast");
 
         if (newEmpList.length > -1) {
             writeUserData('/employees', newEmpList) // Passing null to delete the data at the specified index.
                 .then(() => {
                     setTableData(newEmpList);
-                    // toast.classList.add("toast-animation")
-                    setTimeout(() => {
-                        toast.classList.add("toast-animation")
-                    }, "1000");
-
                 })
                 .catch((error) => {
                     console.error("Error updating user data:", error);

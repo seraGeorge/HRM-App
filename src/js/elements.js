@@ -60,15 +60,14 @@ export const empSkillsList = document.getElementById("skill-list")
 export const empSkillsVal = document.querySelectorAll(".skill-card");
 export const empAddressVal = document.getElementById("address-val");
 
-
 export const addEmployeeBtn = document.getElementById("add-employee-btn");
 
+// 2nd page
 export const pageTitle = document.getElementById("page_title");
 export const skillsFormEntryBtn = document.getElementById("skill-entry-btn")
 export const skillsFormEntryList = document.getElementById("skill-entry-list")
 export const skillsFormEntrySelectedList = document.getElementById("skills-entry-selected-list")
-
-// 2nd page
+export const skillsList = document.getElementById("skills-list");
 export const form = document.querySelector("#form")
 export const genderOtherVal = document.querySelector("#gender-other-entry");
 export const otherEntryField = document.querySelector("#gender_other_val");
@@ -77,7 +76,7 @@ export const designationSelectEntry = document.querySelector("#designation")
 export const departmentSelectEntry = document.querySelector("#department")
 export const empModeSelectEntry = document.querySelector("#employment_mode")
 export const genderRadiobuttons = document.querySelectorAll(".gender");
-
+export const dateList = document.querySelectorAll(".date");
 
 
 

@@ -1,4 +1,4 @@
-import { loader, sortIcon, tableData, year } from "./elements.js";
+import { loader, skillsFormEntrySelectedList, skillsList, sortIcon, tableData, year } from "./elements.js";
 import { getDate, getYear, isValidDateFormat, sortCriteria, sortFn } from "./helperFunctions.js";
 
 year.innerHTML = getYear()
@@ -6,14 +6,11 @@ export const displayLoading = () => {
     loader.classList.add("display");
     tableData.style.display = "none"
 }
-
 export const hideLoading = () => {
     loader.classList.remove("display");
     tableData.style.display = "table"
 
 }
-
-
 export const makeSortIconVisible = (index) => {
     sortIcon.forEach((item, id) => {
         if (id != index) {
@@ -41,7 +38,6 @@ export function sortBtnHandler(employees, index) {
 
     return employees;
 }
-
 export const toggleBtn = (button, popUp) => {
     button.addEventListener("click", () => {
         popUp.classList.toggle("no-display")
@@ -57,8 +53,6 @@ export const getFilterChips = (selector) => {
     });
     return filterValues;
 }
-
-
 export const filterData = (result, designationFilters, departmentFilters, skillsFilters) => {
     let tableData;
     if (skillsFilters.length != 0 || departmentFilters.length != 0 || designationFilters.length != 0) {
@@ -74,22 +68,18 @@ export const filterData = (result, designationFilters, departmentFilters, skills
     }
     return tableData
 }
-
 function filterBySkills(employee, searchText) {
     const skillNames = employee.skills.map((skill) => skill.name.toLowerCase());
     return skillNames.some((skill) => skill.includes(searchText.toLowerCase()));
 }
-
 function filterByName(employee, searchText) {
     const empName = employee.emp_name.toLowerCase();
     return empName.includes(searchText.toLowerCase());
 }
-
 function filterByProperty(employee, selectedProperty, searchText) {
     const propertyValue = employee[selectedProperty].toLowerCase();
     return propertyValue.includes(searchText.toLowerCase());
 }
-
 export function filterEmployeesByProperty(employees, searchText, selectedProperty) {
 
     const filteredVal = employees.filter((employee) => {
@@ -104,7 +94,6 @@ export function filterEmployeesByProperty(employees, searchText, selectedPropert
 
     return filteredVal;
 }
-
 export function getSearchedData(employeeList, selectedProperty, searchText) {
     let tableData = [];
     if (searchText !== "") {
@@ -136,7 +125,6 @@ export function getSearchedData(employeeList, selectedProperty, searchText) {
     }
     return tableData
 }
-
 export const hideDropdownIfNotTarget = (dropdown, button, event) => {
 
     if (!(button.contains(event.target)) && !(dropdown.contains(event.target))) {
@@ -159,7 +147,6 @@ export const setFormValue = (inputId, value) => {
         element.value = value;
     }
 }
-
 // Function to check if any form field has changed
 export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
     let genderFlag = true
@@ -182,19 +169,16 @@ export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
         genderFlag || !arraysEqual(getSelectedSkills(dataObj), empToEdit.skills)
     );
 }
-
 // Function to format the date
 export const formatDate = (dateString) => {
     return isValidDateFormat(dateString) ? getDate(dateString) : dateString;
 }
-
 // Function to get selected skills from the DOM
 export const getSelectedSkills = (dataObj) => {
     const skillsTagList = document.querySelectorAll(".chip");
     const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);
     return dataObj.skills.filter(skill => skillValues.includes(skill.name));
 }
-
 export const arraysEqual = (arr1, arr2) => {
     if (arr1.length !== arr2.length) {
         return false;
@@ -205,13 +189,10 @@ export const arraysEqual = (arr1, arr2) => {
 
     return [...idSet1].every(id => idSet2.has(id));
 }
-
 export const updateButtonStyle = (submitBtn, hasChanged) => {
     submitBtn.style.opacity = hasChanged ? "1" : "0.3";
     submitBtn.disabled = !hasChanged;
 }
-
-
 export const getNewEmployeeDetails = (formDataObj, dataObj) => {
     let newDataObj = {}
     newDataObj.emp_name = formDataObj.name;
@@ -246,84 +227,108 @@ export const getNewEmpId = (dataObj) => {
 
 }
 
-export const validationIcon = (inputElement, flag) => {
+export const validationIcon = (inputElement, flag, errorMsgContent = "") => {
     const validationIcon = inputElement.nextElementSibling;
     const errorMsg = inputElement.parentNode.nextElementSibling;
 
     if (flag) {
+        validationIcon.innerHTML = `<i class="fa fa-warning input-icon-val" style="color:red"></i>`
+        errorMsg.classList.remove("no-display")
+        errorMsg.innerHTML = errorMsgContent
+    }
+    else {
         validationIcon.innerHTML = `<i class="fa fa-check input-icon-val" style="color:green"></i>`;
         errorMsg.classList.add("no-display")
     }
-    else {
-        validationIcon.innerHTML = `<i class="fa fa-warning input-icon-val" style="color:red"></i>`
-        errorMsg.classList.remove("no-display")
-    }
 
 }
-export const formEntryInputValidate = (inputElement) => {
-    // console.log(inputElement)
+// Function to validate a required field
+export const validateRequired = (inputElement) => {
+    if (inputElement.hasAttribute("required") && inputElement.value === "") {
+        return "This is a required field.";
+    }
+    return null;
+}
+// Function to validate text input
+export const validateText = (inputElement) => {
     const inputValue = inputElement.value;
-    let typeCheck = inputElement.checkValidity();
-    let flag = true;
-    let isPattern = true;
-
-
-    if (inputElement.type === "text") {
-        isPattern = /^[a-z A-Z]+$/.test(inputValue) && inputValue.length > 2;
+    if (inputValue.length < 2) {
+        return "The entry must have a length of at least 2.";
     }
-    else if (inputElement.type === "email") {
+    if (!/^[A-Za-z\s'.-]+$/.test(inputValue)) {
+        return "The field can have alphabets, spaces, single quotes, hyphens, and periods.";
     }
-    else if (inputElement.type === "tel") {
-        isPattern = /^[0-9]*$/.test(inputValue) && inputValue.length == 10;
-    }
-    else if (inputElement.type === "date") {
-        const enteredDate = new Date(inputValue);
-        const today = new Date();
-        isPattern = /^\d{4}-\d{2}-\d{2}$/.test(inputValue) && enteredDate <= today;
-    }
-
-    flag = isPattern && typeCheck;
-
-    return flag;
+    return null;
 }
+// Function to validate text input
+export const validateEmail = (inputElement) => {
+    if (!inputElement.checkValidity()) {
+        return "The entry is not a valid email.";
+    }
+    return null;
+}
+// Function to validate telephone input
+export const validateTel = (inputElement) => {
+    const inputValue = inputElement.value;
+    if (inputValue.length !== 10) {
+        return "The entry should have a length of 10.";
+    }
+    if (!/^[0-9]*$/.test(inputValue)) {
+        return "This field can only have numeric data.";
+    }
+    return null;
+}
+// Function to validate date input
+export const validateDate = (inputElement) => {
+    const enteredDate = new Date(inputElement.value);
+    const today = new Date();
+    if (enteredDate >= today) {
+        return "The entry must not exceed today.";
+    }
+    return null;
+}
+//Function to validate select box
+export const validateSelect = (inputElement) => {
+    const index = inputElement.selectedIndex;
+    const selectedOption = inputElement.options[index];
+    if (selectedOption.disabled) {
+        return "This is a required field."
+    }
+    return null
+}
+//Function to validate skills
+export const validateSkills = () => {
+    let errorMessage = null;
+    if (!skillsFormEntrySelectedList.hasChildNodes()) {
+        errorMessage = "This is a required field."
+    }
+    validationIcon(skillsList, errorMessage !== null, errorMessage);
+    return errorMessage === null
+}
+// Form Validation
+export const handleValidation = (inputElement) => {
+    let errorMessage = null;
 
-export const formEntryValid = (inputElements, selectElements) => {
+    if (!inputElement.hasAttribute("required")) {
+        return; // Skip non-required inputs
+    }
 
-    const errorEntries = Array.from(inputElements).filter((inputElement) => {
-        const validationIcon = inputElement.nextElementSibling;
-        return ((validationIcon.innerHTML === `<i class="fa fa-warning input-icon-val" style="color:red"></i>`)
-        )
-    })
+    if (inputElement.type === "email") {
+        errorMessage = validateEmail(inputElement)
+    }
+    else if (inputElement.type === "text") {
+        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateText(inputElement);
+    } else if (inputElement.type === "tel") {
+        errorMessage =validateRequired(inputElement) ? validateRequired(inputElement) : validateTel(inputElement);
+    } else if (inputElement.type === "date") {
+        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) :validateDate(inputElement);
+    } else if (inputElement.tagName === "SELECT") {
+        errorMessage =validateRequired(inputElement) ? validateRequired(inputElement) : validateSelect(inputElement);
+    }
 
-    const isAnyRequired = Array.from(inputElements).filter((inputElement) => {
-
-        if ((inputElement.type === "radio")) {
-
-        }
-        else {
-            const flag = formEntryInputValidate(inputElement);
-            if (inputElement.id !== "gender_other_val") {
-                validationIcon(inputElement, flag)
-            }
-        }
-        return inputElement.hasAttribute("required") && inputElement.value === ""
-    })
-
-    const isSelectElementsChosen = Array.from(selectElements).filter((selectElement) => {
-        const index = selectElement.selectedIndex;
-        const selectedOption = selectElement.options[index];
-        const errorMsg = selectElement.nextElementSibling;
-        if (selectedOption.disabled) {
-            errorMsg.classList.remove("no-display")
-        }
-        else {
-            errorMsg.classList.add("no-display")
-        }
-        return selectedOption.disabled
-    })
-
-    return errorEntries.length === 0 &&
-        isAnyRequired.length === 0 && isSelectElementsChosen.length === 0;
-
-
+    if (errorMessage === null) {
+        errorMessage = validateRequired(inputElement);
+    }
+    validationIcon(inputElement, errorMessage !== null, errorMessage);
+    return errorMessage === null
 }

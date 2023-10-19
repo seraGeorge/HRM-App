@@ -1,181 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Employee Details</title>
-    <link rel="icon" type="image/x-icon" href="../assets/logo.png" />
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Employee Details</title>
+  <link rel="icon" type="image/x-icon" href="../assets/logo.png" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="../css/normalize.css" />
-    <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/normalize.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
 
-    <link rel="stylesheet" href="../css/commonClasses.css" />
-  </head>
+  <link rel="stylesheet" href="../css/commonClasses.css" />
+</head>
 
-  <body class="body">
-    <header class="header">
-      <div class="header-content global-width">
-        <a href="javascript:void(0)" class="logo-wrap">
-          <h1 class="page-title">HRM</h1>
-        </a>
-      </div>
-    </header>
-    <main class="main-section">
-      <section class="global-width main-content">
-        <section class="heading-section common-section">
-          <h1 class="page-title" id="page_title"></h1>
-        </section>
-        <section class="information">
-          <form action="" id="form" class="form" novalidate>
-            <fieldset class="personal-details">
-              <legend class="subheading">Personal Information</legend>
-              <span class="entry-details-row common-flex">
-                <span class="category name-detail detail">
-                  <label for="name" class="label-heading m-10">Name</label>
-                  <div class="input-grp common-flex">
-                    <input type="text" id="name" class="name input" name="name" required />
-                    <span class="input-icon"></span>
-                  </div>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
+<body class="body">
+  <header class="header">
+    <div class="header-content global-width">
+      <a href="javascript:void(0)" class="logo-wrap">
+        <h1 class="page-title">HRM</h1>
+      </a>
+    </div>
+  </header>
+  <main class="main-section">
+    <section class="global-width main-content">
+      <section class="heading-section common-section">
+        <h1 class="page-title" id="page_title"></h1>
+      </section>
+      <section class="information">
+        <form action="" id="form" class="form" novalidate>
+          <fieldset class="personal-details">
+            <legend class="subheading">Personal Information</legend>
+            <span class="entry-details-row common-flex">
+              <span class="category name-detail detail">
+                <label for="name" class="label-heading m-10">Name</label>
+                <div class="input-grp common-flex">
+                  <input type="text" id="name" class="name input" name="name" required />
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
               </span>
-              <span class="entry-details-row common-flex">
-                <span class="category email-detail detail">
-                  <label for="email" class="label-heading m-10">Email</label>
-                  <div class="input-grp common-flex">
-                    <input type="email" id="email" class="email-entry input" name="email" required />
-                    <span class="input-icon"></span>
-                  </div>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
-                <span class="category phone-no-detail detail">
-                  <label for="phone" class="label-heading m-10">Phone No:</label>
-                  <div class="input-grp common-flex">
-                    <input type="tel" id="phone" class="phone-entry input" name="phone" maxlength="10" required />
-                    <span class="input-icon"></span>
-                  </div>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
+            </span>
+            <span class="entry-details-row common-flex">
+              <span class="category email-detail detail">
+                <label for="email" class="label-heading m-10">Email</label>
+                <div class="input-grp common-flex">
+                  <input type="email" id="email" class="email-entry input" name="email" required />
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
               </span>
-              <span class="entry-details-row common-flex">
-                <span class="category address-detail detail">
-                  <label for="address" class="label-heading m-10">Address</label>
-                  <div class="input-grp common-flex">
-                    <input type="text" id="address" class="address-entry input" name="address" required />
-                    <span class="input-icon"></span>
-                  </div>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
+              <span class="category phone-no-detail detail">
+                <label for="phone" class="label-heading m-10">Phone No:</label>
+                <div class="input-grp common-flex">
+                  <input type="tel" id="phone" class="phone-entry input" name="phone" maxlength="10" required />
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
               </span>
-              <span class="entry-details-row common-flex">
-                <span class="category date-of-birth-detail detail">
-                  <label for="date-of-birth" class="label-heading m-10">Date Of Birth</label>
-                  <div class="input-grp common-flex">
-                    <input type="date" id="date_of_birth" class="date-of-birth-entry input" name="date_of_birth"
-                      required />
-                    <span class="input-icon"></span>
-                  </div>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
-                <span class="category gender-detail-row">
-                  <p class="gender-label-heading">Gender</p>
-                  <span class="gender-options common-flex">
-                    <span class="category gender-detail">
-                      <input type="radio" id="gender-male-entry" class="gender-male-entry gender input" name="gender"
-                        value="Male" />
-                      <label for="gender-male-entry">Male</label>
-                    </span>
-                    <span class="category gender-detail">
-                      <input type="radio" id="gender-female-entry" class="gender-female-entry gender input"
-                        name="gender" value="Female" />
-                      <label for="gender-female-entry">Female</label>
-                    </span>
-                    <span class="category gender-detail">
-                      <input type="radio" id="gender-other-entry" class="gender-other-entry gender input" name="gender"
-                        value="Other" />
-                      <label for="gender-other-entry">Other</label>
-                    </span>
-                    <div class="input-grp no-display common-flex">
-                      <input type="text" id="gender_other_val" class="gender-other-val " name="gender_other_val" />
-                      <span class="input-icon"></span>
-                    </div>
+            </span>
+            <span class="entry-details-row common-flex">
+              <span class="category address-detail detail">
+                <label for="address" class="label-heading m-10">Address</label>
+                <div class="input-grp common-flex">
+                  <textarea id="address" class="address-entry input" name="address" required rows="2"></textarea>
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
+              </span>
+            </span>
+            <span class="entry-details-row common-flex">
+              <span class="category date-of-birth-detail detail">
+                <label for="date-of-birth" class="label-heading m-10">Date Of Birth</label>
+                <div class="input-grp common-flex">
+                  <input type="date" id="date_of_birth" class="date-of-birth-entry input date" name="date_of_birth"
+                    required />
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
+              </span>
+              <span class="category gender-detail-row">
+                <p class="gender-label-heading">Gender</p>
+                <span class="gender-options common-flex">
+                  <span class="category gender-detail">
+                    <input type="radio" id="gender-male-entry" class="gender-male-entry gender input" name="gender"
+                      value="Male" />
+                    <label for="gender-male-entry">Male</label>
                   </span>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
-              </span>
-            </fieldset>
-            <fieldset class="other-details">
-              <legend class="subheading">Other Information</legend>
-              <span class="entry-details-row common-flex">
-                <span class="category designation-detail detail">
-                  <label for="designation" class="label-heading m-10">Designation</label>
-                  <select name="designation" id="designation" required>
-                    <option disabled selected value> -- select an option -- </option>
-                  </select>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
-                <span class="category department-detail detail">
-                  <label for="department" class="label-heading m-10">Department</label>
-                  <select name="department" id="department" required>
-                    <option disabled selected value> -- select an option -- </option>
-                  </select>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
-                <span class="category department-detail detail">
-                  <label for="employment_mode" class="label-heading m-10">Employment Mode</label>
-                  <select name="employment_mode" id="employment_mode" required>
-                    <option disabled selected value> -- select an option -- </option>
-                  </select>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
-                </span>
-                <span class="category date-of-joining-detail detail">
-                  <label for="date-of-joining" class="label-heading m-10">Date Of Joining</label>
-                  <div class="input-grp common-flex">
-                    <input type="date" id="date_of_joining" class="date-of-joining-entry input" name="date_of_joining"
-                      required />
+                  <span class="category gender-detail">
+                    <input type="radio" id="gender-female-entry" class="gender-female-entry gender input" name="gender"
+                      value="Female" />
+                    <label for="gender-female-entry">Female</label>
+                  </span>
+                  <span class="category gender-detail">
+                    <input type="radio" id="gender-other-entry" class="gender-other-entry gender input" name="gender"
+                      value="Other" />
+                    <label for="gender-other-entry">Other</label>
+                  </span>
+                  <div class="input-grp no-display common-flex">
+                    <input type="text" id="gender_other_val" class="gender-other-val " name="gender_other_val" />
                     <span class="input-icon"></span>
                   </div>
-                  <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
                 </span>
+                <p class="error-msg no-display" id="input-error-msg"></p>
               </span>
-              <span class="entry-details-row common-flex">
-                <span class="skills-detail detail">
-                  <label for="skills" class="label-heading m-10">Skills</label>
-                  <div class="skills-list common-flex">
+            </span>
+          </fieldset>
+          <fieldset class="other-details">
+            <legend class="subheading">Other Information</legend>
+            <span class="entry-details-row common-flex">
+              <span class="category designation-detail select-box detail">
+                <label for="designation" class="label-heading m-10">Designation</label>
+                <div class="input-grp common-flex">
+                  <select class="input" name="designation" id="designation" required>
+                    <option disabled selected value> -- select an option -- </option>
+                  </select>
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
+              </span>
+              <span class="category department-detail select-box detail">
+                <label for="department" class="label-heading m-10">Department</label>
+                <div class="input-grp common-flex">
+                  <select class="input" name="department" id="department" required>
+                    <option disabled selected value> -- select an option -- </option>
+                  </select>
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
+              </span>
+              <span class="category department-detail select-box detail">
+                <label for="employment_mode" class="label-heading m-10">Employment Mode</label>
+                <div class="input-grp common-flex">
+                  <select class="input" name="employment_mode" id="employment_mode" required>
+                    <option disabled selected value> -- select an option -- </option>
+                  </select>
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
+              </span>
+              <span class="category date-of-joining-detail detail">
+                <label for="date-of-joining" class="label-heading m-10">Date Of Joining</label>
+                <div class="input-grp common-flex">
+                  <input type="date" id="date_of_joining" class="date-of-joining-entry input date"
+                    name="date_of_joining" required />
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
+              </span>
+            </span>
+            <span class="entry-details-row common-flex">
+              <span class="skills-detail detail">
+                <label for="skills" class="label-heading m-10">Skills</label>
+                <div class="input-grp">
+                  <div class="skills-list common-flex" id="skills-list">
                     <div class="selected-list common-flex" id="skills-entry-selected-list"></div>
                     <button type="button" class="button dropdown-icon material-symbols-outlined dropdown-btn"
                       id="skill-entry-btn">
                       add_circle
                     </button>
-                    <p class="error-msg no-display" id="input-error-msg">This cant be it</p>
+                    <p class="error-msg no-display" id="input-error-msg"></p>
                   </div>
-                  <ul class="ul-reset no-display options-list" id="skill-entry-list">
-                  </ul>
-                </span>
+                  <span class="input-icon"></span>
+                </div>
+                <p class="error-msg no-display" id="input-error-msg"></p>
+                <ul class="ul-reset no-display options-list" id="skill-entry-list">
+                </ul>
               </span>
-            </fieldset>
-            <div class="button-row dropdown-row form-buttons">
-              <button type="reset" class="button common-button-container common-flex" id="reset-btn">Clear</button>
-              <button type="submit" class="button common-button-container common-flex" id="submit-btn">Submit</button>
-            </div>
-          </form>
-        </section>
+            </span>
+          </fieldset>
+          <div class="button-row dropdown-row form-buttons">
+            <button type="reset" class="button common-button-container common-flex" id="reset-btn">Clear</button>
+            <button type="submit" class="button common-button-container common-flex" id="submit-btn">Submit</button>
+          </div>
+        </form>
       </section>
-    </main>
+    </section>
+  </main>
 
-    <footer class="footer">
-      <div class="copyright-section global-padding">
-        <span class="copyright-content">
-          Copyright @<span id="year"></span> HRM, All Rights Reserved
-        </span>
-      </div>
-    </footer>
-    <script type="module" src="../js/index1.js"></script>
-  </body>
+  <footer class="footer">
+    <div class="copyright-section global-padding">
+      <span class="copyright-content">
+        Copyright @<span id="year"></span> HRM, All Rights Reserved
+      </span>
+    </div>
+  </footer>
+  <script type="module" src="../js/index1.js"></script>
+</body>
 
 </html>

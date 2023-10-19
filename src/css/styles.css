@@ -344,20 +344,23 @@ td {
 .input-grp {
   border: 1px solid var(--secondary-color);
 }
+.skills-detail .input-grp{
+  border: none;
+}
 .input[type='text'],
 .input[type='email'],
 .input[type='date'],
-.input[type='tel'] {
+.input[type='tel'],textarea,select {
   flex: 1;
+  background: transparent;
 }
-.input {
+input,textarea {
   border: none;
   padding: 10px;
+  outline: none;
   color: var(--secondary-color);
 }
-.input:focus {
-  outline: none;
-}
+
 .input-icon {
   padding: 10px;
 }
@@ -392,13 +395,23 @@ td {
 select {
   padding: 10px;
 }
+.select-box .input-grp{
+  border: none;
+
+}
+textarea{
+  resize: none;
+  padding: 10px;
+}
 .skills-detail .options-list {
   width: fit-content;
 }
 .skills-list .material-symbols-outlined {
   font-size: 24px;
 }
-
+.skills-detail .input-grp{
+  display: flex;
+}
 .toast {
   background-color: blue;
   position: fixed;
