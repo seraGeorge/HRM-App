@@ -67,7 +67,7 @@ if (dataStr !== undefined) {
         pageTitle.innerHTML = "Add New employee"
         submitBtn.addEventListener("click", async (event) => {
             event.preventDefault();
-            submitBtn.classList.add("button--loading")
+            submitBtn.classList.add("loader")
             //Check if valid to add employee
             const inputElements = form.querySelectorAll(".input");
             let errorCount = 0;
@@ -93,13 +93,13 @@ if (dataStr !== undefined) {
                     console.error("Error on updating the data")
                 }
                 finally {
-                    submitBtn.classList.remove("button--loading");
+                    submitBtn.classList.remove("loader");
                     window.history.back();
                 }
                 return false;
             }
             else {
-                submitBtn.classList.remove("button--loading");
+                submitBtn.classList.remove("loader");
             }
         })
 
@@ -173,7 +173,7 @@ if (dataStr !== undefined) {
 
         submitBtn.addEventListener("click", async (event) => {
             event.preventDefault();
-            submitBtn.classList.add("button--loading")
+            submitBtn.classList.add("loader")
             //Check if valid to add employee
             const inputElements = form.querySelectorAll(".input");
             let errorCount = 0;
@@ -198,13 +198,13 @@ if (dataStr !== undefined) {
                     console.error("Error on updating the data")
                 }
                 finally {
-                    submitBtn.classList.remove("button--loading");
+                    submitBtn.classList.remove("loader");
                     window.history.back();
                 }
                 return false;
             }
             else {
-                submitBtn.classList.remove("button--loading");
+                submitBtn.classList.remove("loader");
             }
 
         })

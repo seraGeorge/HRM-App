@@ -23,6 +23,7 @@
         </a>
       </div>
     </header>
+    <div class="overlay" id="overlay"></div>
     <main class="main-section">
       <div class="global-width main-content">
         <section class="heading-section common-section">
@@ -140,7 +141,7 @@
             </div>
           </div>
           <div class="employee-list" id="employee-list">
-            <div id="loader" class="loader"></div>
+            <div id="loader" class="loader no-display"></div>
             <table class="employee-table" id="table">
               <thead>
                 <tr class="table-row" id="head-row">
@@ -191,126 +192,126 @@
             </table>
           </div>
         </div>
-        <div class="modal employee-delete-modal no-display" id="employee-delete-modal">
-          <button class="button close-button material-symbols-outlined" id="delete-modal-close">
-            close
+      </div>
+      <div class="modal employee-delete-modal no-display" id="employee-delete-modal">
+        <button class="button close-button material-symbols-outlined" id="delete-modal-close">
+          close
+        </button>
+        <h2 class="subheading delete-modal-title" id="delete-modal-title">
+          Are you sure you want to delete the employee <span id="emp-id-to-dlt"></span>?
+        </h2>
+        <p class="text">
+          The data selected will be permanently removed. It would remove all the details related to the employee. Are
+          you sure you want to continue?
+        </p>
+        <div class="button-row dropdown-row common-flex">
+          <button class="button common-button-container common-flex" id="delete-modal-cancel-btn">
+            Cancel
           </button>
-          <h2 class="subheading delete-modal-title" id="delete-modal-title">
-            Are you sure you want to delete the employee <span id="emp-id-to-dlt"></span>?
-          </h2>
-          <p class="text">
-            The data selected will be permanently removed. It would remove all the details related to the employee. Are
-            you sure you want to continue?
-          </p>
-          <div class="button-row dropdown-row common-flex">
-            <button class="button common-button-container common-flex" id="delete-modal-cancel-btn">
-              Cancel
-            </button>
-            <button class="button common-button-container common-flex" id="delete-modal-confirm-btn">
-              Confirm
-            </button>
-          </div>
+          <button class="button common-button-container common-flex" id="delete-modal-confirm-btn">
+            Confirm
+          </button>
         </div>
-        <div class="modal view-modal no-display" id="view-modal">
-          <button class="button close-button material-symbols-outlined" id="view-modal-close">
-            close
-          </button>
-          <h2 class="subheading view-modal-title" id="view-modal-title">
-          </h2>
-          <span class="detail-row common-flex">
-            <span class="category designation-detail">
-              <h3 class="modal-heading detail-title designation-title">
-                Designation
-              </h3>
-              <p class="modal-heading designation-val" id="designation-val">
+      </div>
+      <div class="modal view-modal no-display" id="view-modal">
+        <button class="button close-button material-symbols-outlined" id="view-modal-close">
+          close
+        </button>
+        <h2 class="subheading view-modal-title" id="view-modal-title">
+        </h2>
+        <span class="detail-row common-flex">
+          <span class="category designation-detail">
+            <h3 class="modal-heading detail-title designation-title">
+              Designation
+            </h3>
+            <p class="modal-heading designation-val" id="designation-val">
 
-              </p>
-            </span>
-            <span class="category emp-mode-detail">
-              <h3 class="modal-heading detail-title emp-mode-title">
-                Employment Mode
-              </h3>
-              <p class="modal-heading emp-mod-val" id="emp-mod-val">
-              </p>
-            </span>
-            <span class="category department-detail">
-              <h3 class="modal-heading detail-title department-title">
-                Department
-              </h3>
-              <p class="modal-heading department-val" id="department-val">
-              </p>
-            </span>
+            </p>
           </span>
-          <span class="detail-row common-flex">
-            <span class="category date-of-joining">
-              <h3 class="modal-heading detail-title date-of-joining-title">
-                Date of Joining
-              </h3>
-              <p class="modal-heading date-of-joining-val" id="date-of-joining">
-              </p>
-            </span>
-            <span class="category work-exp">
-              <h3 class="modal-heading detail-title work-exp-title">
-                Total Work Experience
-              </h3>
-              <p class="modal-heading work-exp-val" id="work-exp-val">
-              </p>
-            </span>
+          <span class="category emp-mode-detail">
+            <h3 class="modal-heading detail-title emp-mode-title">
+              Employment Mode
+            </h3>
+            <p class="modal-heading emp-mod-val" id="emp-mod-val">
+            </p>
           </span>
-          <span class="detail-row common-flex">
-            <span class="category date-of-birth">
-              <h3 class="modal-heading detail-title date-of-birth-title">
-                Date of Birth
-              </h3>
-              <p class="modal-heading date-of-birth-val" id="date-of-birth">
-              </p>
-            </span>
-            <span class="category work-exp">
-              <h3 class="modal-heading detail-title gender-title">
-                Gender
-              </h3>
-              <p class="modal-heading gender-val" id="gender-val">
-              </p>
-            </span>
+          <span class="category department-detail">
+            <h3 class="modal-heading detail-title department-title">
+              Department
+            </h3>
+            <p class="modal-heading department-val" id="department-val">
+            </p>
           </span>
-          <span class="detail-row">
-            <span class="contact-details">
-              <h3 class="modal-heading detail-title contact-details-title">
-                Contact Details
-              </h3>
-              <span class="contact-details-val-row common-flex">
-                <span class="category contact-detail-val ">
-                  <span class="material-symbols-outlined contact-detail-icon">
-                    mail
-                  </span>
-                  <p class="modal-heading detail-title email-val" id="email-val">
-                  </p>
+        </span>
+        <span class="detail-row common-flex">
+          <span class="category date-of-joining">
+            <h3 class="modal-heading detail-title date-of-joining-title">
+              Date of Joining
+            </h3>
+            <p class="modal-heading date-of-joining-val" id="date-of-joining">
+            </p>
+          </span>
+          <span class="category work-exp">
+            <h3 class="modal-heading detail-title work-exp-title">
+              Total Work Experience
+            </h3>
+            <p class="modal-heading work-exp-val" id="work-exp-val">
+            </p>
+          </span>
+        </span>
+        <span class="detail-row common-flex">
+          <span class="category date-of-birth">
+            <h3 class="modal-heading detail-title date-of-birth-title">
+              Date of Birth
+            </h3>
+            <p class="modal-heading date-of-birth-val" id="date-of-birth">
+            </p>
+          </span>
+          <span class="category work-exp">
+            <h3 class="modal-heading detail-title gender-title">
+              Gender
+            </h3>
+            <p class="modal-heading gender-val" id="gender-val">
+            </p>
+          </span>
+        </span>
+        <span class="detail-row">
+          <span class="contact-details">
+            <h3 class="modal-heading detail-title contact-details-title">
+              Contact Details
+            </h3>
+            <span class="contact-details-val-row common-flex">
+              <span class="category contact-detail-val ">
+                <span class="material-symbols-outlined contact-detail-icon">
+                  mail
                 </span>
-                <span class="category contact-detail-val ">
-                  <span class="material-symbols-outlined contact-detail-icon">
-                    phone
-                  </span>
-                  <p class="modal-heading detail-title phone-val" id="phone-val">
-                  </p>
+                <p class="modal-heading detail-title email-val" id="email-val">
+                </p>
+              </span>
+              <span class="category contact-detail-val ">
+                <span class="material-symbols-outlined contact-detail-icon">
+                  phone
                 </span>
+                <p class="modal-heading detail-title phone-val" id="phone-val">
+                </p>
               </span>
             </span>
           </span>
-          <span class="detail-row">
-            <h3 class="modal-heading detail-title skill-title">
-              Skills
-            </h3>
-            <span class="skill-list" id="skill-list">
-            </span>
+        </span>
+        <span class="detail-row">
+          <h3 class="modal-heading detail-title skill-title">
+            Skills
+          </h3>
+          <span class="skill-list" id="skill-list">
           </span>
-          <span class="detail-row">
-            <h3 class="modal-heading detail-title address-title">
-              Address
-            </h3>
-            <p class="modal-heading address-val" id="address-val">
-            </p>
-          </span>
-        </div>
+        </span>
+        <span class="detail-row">
+          <h3 class="modal-heading detail-title address-title">
+            Address
+          </h3>
+          <p class="modal-heading address-val" id="address-val">
+          </p>
+        </span>
       </div>
     </main>
     <footer class="footer">

@@ -1,13 +1,13 @@
-import { loader, skillsFormEntrySelectedList, skillsList, sortIcon, tableData, year } from "./elements.js";
+import { body, loader, overlay, skillsFormEntrySelectedList, skillsList, sortIcon, tableData, year } from "./elements.js";
 import { getDate, getYear, isValidDateFormat, sortCriteria, sortFn } from "./helperFunctions.js";
 
 year.innerHTML = getYear()
 export const displayLoading = () => {
-    loader.classList.add("display");
+    loader.classList.remove("no-display");
     tableData.style.display = "none"
 }
 export const hideLoading = () => {
-    loader.classList.remove("display");
+    loader.classList.add("no-display");
     tableData.style.display = "table"
 
 }
@@ -42,7 +42,10 @@ export const toggleBtn = (button, popUp) => {
     button.addEventListener("click", () => {
         popUp.classList.toggle("no-display")
     })
-
+}
+export const overlayEffect = (bodyStyle) => {
+    overlay.classList.toggle("open")
+    body.style.overflow = bodyStyle
 }
 export const getFilterChips = (selector) => {
     const filterChips = document.querySelectorAll(selector);

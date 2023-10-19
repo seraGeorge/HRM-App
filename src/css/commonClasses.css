@@ -111,3 +111,18 @@ html {
 .no-display {
   display: none;
 }
+.overlay {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  pointer-events: none;
+  transition: 0.5s ease;
+}
+.open{
+  opacity: 0.6;
+  pointer-events: visible;
+}

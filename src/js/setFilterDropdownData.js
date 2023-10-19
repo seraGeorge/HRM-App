@@ -1,7 +1,8 @@
 import { state } from "./context.js";
-import {  departmentOptionsList, departmentResetBtn, departmentSelectedList, designationOptionsList, designationResetBtn, designationSelectedList,  mainFilterDropDown, resetAllBtn,  skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
+import { departmentOptionsList, departmentResetBtn, departmentSelectedList, designationOptionsList, designationResetBtn, designationSelectedList, mainFilterDropDown, resetAllBtn, skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
 import { setTableData } from "./setTable.js";
 
+//Setting data for the dropdown
 export const setFilterDropdownData = (data) => {
 
     const departmentsDataList = data.departments;
@@ -41,8 +42,8 @@ export const setFilterDropdownData = (data) => {
         setTableData(data.employees)
     })
 }
+//Creating the dropdown
 export const setDropDown = (dataList, optionsList, selectedlist, className) => {
-    optionsList.innerHTML = "";
     dataList.forEach((item) => {
         //List Item in the dropdown
         const listItem = createListItem(item);
@@ -50,11 +51,18 @@ export const setDropDown = (dataList, optionsList, selectedlist, className) => {
 
         listItem.addEventListener("click", (event) => {
             event.stopPropagation();
-
             addSelection(item, listItem, selectedlist, optionsList, className)
         });
     })
 }
+//Create list items for the dropdown
+export const createListItem = (text) => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = text;
+    listItem.classList.add('list-item');
+    return listItem;
+};
+//Add chips on clicking the list item
 export const addSelection = (item, listItem, selectedlist, optionsList, className) => {
     optionsList.classList.add("no-display")
     const listItemClass = className;
@@ -99,6 +107,7 @@ export const addSelection = (item, listItem, selectedlist, optionsList, classNam
     });
 
 }
+//Create chips on selection
 const createChip = (text, className) => {
     const listItemChip = document.createElement("div");
     listItemChip.classList.add("common-flex");
@@ -110,12 +119,7 @@ const createChip = (text, className) => {
     `;
     return listItemChip;
 };
-export const createListItem = (text) => {
-    const listItem = document.createElement("li");
-    listItem.innerHTML = text;
-    listItem.classList.add('list-item');
-    return listItem;
-};
+//Reset button action
 export const resetFilter = (selectedlist, optionsList) => {
     selectedlist.innerHTML = "";
     optionsList.innerHTML = "";
