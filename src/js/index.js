@@ -91,8 +91,6 @@ result.then(data => {
 
         addEmployeeBtn.addEventListener("click", () => {
             window.location.href='./employeeDetails.html';
-            localStorage.setItem('source', "add");   
-            localStorage.setItem('data', JSON.stringify(dataCopy));         
         })
 
         document.addEventListener("click", (event) => {

@@ -5,7 +5,6 @@ import { getDate, isValidDateFormat } from "./helperFunctions.js";
 import { addSelection, setDropDown } from "./setFilterDropdownData.js";
 import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectEntry, departmentSelectEntry, empModeSelectEntry, genderRadiobuttons } from "./elements.js"
 
-const source = localStorage["source"];
 const dataStr = localStorage['data'];
 const empIdToEdit = localStorage["empId"]
 if (dataStr !== undefined) {
@@ -71,7 +70,7 @@ if (dataStr !== undefined) {
 
 
 
-    if (source == "add") {
+    if (empIdToEdit==undefined) {
         //Adding new Employee
         pageTitle.innerHTML = "Add New employee"
         submitBtn.addEventListener("click", async (event) => {
@@ -98,10 +97,9 @@ if (dataStr !== undefined) {
 
 
         })
-        localStorage.clear()
 
     }
-    else if (source == "edit") {
+    else if (empIdToEdit!==undefined) {
         //Editing a Employee
         pageTitle.innerHTML = "Update Details of a employee"
         submitBtn.innerHTML = "Save"
@@ -196,7 +194,7 @@ if (dataStr !== undefined) {
 
         })
 
-        localStorage.clear()
+        localStorage.removeItem("empId")
 
     }
 
@@ -207,6 +205,5 @@ if (dataStr !== undefined) {
 }
 else {
     console.error("Error occurred.");
-    window.history.back()
 }
 
