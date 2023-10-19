@@ -1,4 +1,4 @@
-import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, skillsList } from "./elements.js";
+import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList,  } from "./elements.js";
 import { updateUserData } from "./firebase.js";
 import { getNewEmpId, getNewEmployeeDetails, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
@@ -114,7 +114,6 @@ if (dataStr !== undefined) {
         setFormValue("department", empToEdit.department);
         setFormValue("employment_mode", empToEdit.employment_mode);
 
-
         //Employee Gender value setting
         let empGenderEntryToBeChecked;
         if (["Male", "Female"].includes(empToEdit.gender)) {
@@ -143,15 +142,19 @@ if (dataStr !== undefined) {
         let hasChanged = false;
         let formDataObj = {};
         updateButtonStyle(submitBtn, hasChanged);
+
+
         form.addEventListener("input", (event) => {
-            // Mark changes when any form input changes
+            //Getting latest form data each time
             const formData = new FormData(form);
             formData.forEach((value, key) => (formDataObj[key] = value));
+            // Update button if form is changed
             hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj)
             updateButtonStyle(submitBtn, hasChanged);
         });
+
         skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
-            // Mark changes when any skill input changes
+            //Getting latest form data each time
             const formData = new FormData(form);
             formData.forEach((value, key) => (formDataObj[key] = value));
             hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj)
