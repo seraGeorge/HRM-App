@@ -210,20 +210,14 @@ export const updateButtonStyle = (submitBtn, hasChanged) => {
 }
 export const getNewEmployeeDetails = (formDataObj, dataObj) => {
     let newDataObj = {}
-    newDataObj.emp_name = formDataObj.name;
-    newDataObj.email = formDataObj.email;
-    newDataObj.phone = formDataObj.phone;
-    newDataObj.address = formDataObj.address;
-    newDataObj.date_of_birth = formDataObj.date_of_birth;
-    newDataObj.date_of_joining = formDataObj.date_of_joining;
-    newDataObj.designation = formDataObj.designation;
-    newDataObj.department = formDataObj.department;
-    newDataObj.employment_mode = formDataObj.employment_mode;
+    let { name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode } = formDataObj;
+    newDataObj = { name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode };
     newDataObj.gender = formDataObj.gender === "Other" ? formDataObj.gender_other_val : formDataObj.gender;
     const skillsTagList = document.querySelectorAll(".chip");
     const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);
     const skillArrayObj = dataObj.skills.filter(skill => skillValues.includes(skill.name))
     newDataObj.skills = skillArrayObj
+    console.log(newDataObj)
     return newDataObj;
 }
 export const getNewEmpId = (dataObj) => {
@@ -336,9 +330,9 @@ export const handleValidation = (inputElement) => {
         else if (inputElement.type === "text") {
             errorMessage = validateText(inputElement);
         } else if (inputElement.type === "tel") {
-            errorMessage =  validateTel(inputElement);
+            errorMessage = validateTel(inputElement);
         } else if (inputElement.type === "date") {
-            errorMessage =  validateDate(inputElement);
+            errorMessage = validateDate(inputElement);
         } else if (inputElement.tagName === "SELECT") {
             errorMessage = validateSelect(inputElement);
         }

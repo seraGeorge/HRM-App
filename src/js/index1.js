@@ -12,9 +12,8 @@ if (dataStr !== undefined) {
     const dataObj = JSON.parse(dataStr)
 
     //dropdown data setting
-    const designationsDataList = dataObj.designations;
-    const departmentsDataList = dataObj.departments;
-    const empModeDataList = dataObj.employment_modes;
+    const { designations: designationsDataList, departments: departmentsDataList, employment_modes: empModeDataList }
+        = dataObj
     setOptionsList(designationsDataList, designationSelectEntry)
     setOptionsList(departmentsDataList, departmentSelectEntry)
     setOptionsList(empModeDataList, empModeSelectEntry)
