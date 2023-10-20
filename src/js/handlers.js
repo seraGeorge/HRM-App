@@ -72,10 +72,6 @@ function filterBySkills(employee, searchText) {
     const skillNames = employee.skills.map((skill) => skill.name.toLowerCase());
     return skillNames.some((skill) => skill.includes(searchText.toLowerCase()));
 }
-function filterByName(employee, searchText) {
-    const empName = employee.emp_name.toLowerCase();
-    return empName.includes(searchText.toLowerCase());
-}
 function filterByProperty(employee, selectedProperty, searchText) {
     const propertyValue = employee[selectedProperty].toLowerCase();
     return propertyValue.includes(searchText.toLowerCase());
@@ -86,7 +82,7 @@ export function filterEmployeesByProperty(employees, searchText, selectedPropert
         if (selectedProperty === "skills") {
             return filterBySkills(employee, searchText);
         } else if (selectedProperty === "name") {
-            return filterByName(employee, searchText);
+            return filterByProperty(employee,"emp_name",searchText);
         } else {
             return filterByProperty(employee, selectedProperty, searchText);
         }
@@ -133,12 +129,12 @@ export const hideDropdownIfNotTarget = (dropdown, button, event) => {
         }
     }
 }
-export const setOptionsList = (data, selectEntry) => {
+export const setOptionsList = (data, selectInput) => {
     data.forEach((value) => {
         const optionVal = document.createElement("option");
         optionVal.value = value;
         optionVal.innerHTML = value;
-        selectEntry.appendChild(optionVal);
+        selectInput.appendChild(optionVal);
     })
 }
 export const setFormValue = (inputId, value) => {
@@ -211,7 +207,7 @@ export const updateButtonStyle = (submitBtn, hasChanged) => {
 export const getNewEmployeeDetails = (formDataObj, dataObj) => {
     let newDataObj = {}
     let { name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode } = formDataObj;
-    newDataObj = { name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode };
+    newDataObj = { emp_name: name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode };
     newDataObj.gender = formDataObj.gender === "Other" ? formDataObj.gender_other_val : formDataObj.gender;
     const skillsTagList = document.querySelectorAll(".chip");
     const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);

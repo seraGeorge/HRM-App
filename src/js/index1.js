@@ -3,7 +3,7 @@ import { updateUserData } from "./firebase.js";
 import { getNewEmpId, getNewEmployeeDetails, handleFormChange, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, showSnackbar, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
 import { addSelection, setDropDown } from "./setFilterDropdownData.js";
-import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectEntry, departmentSelectEntry, empModeSelectEntry, genderRadiobuttons } from "./elements.js"
+import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectInput, departmentSelectInput, empModeSelectInput, genderRadiobuttons } from "./elements.js"
 
 const dataStr = localStorage['data'];
 const empIdToEdit = localStorage["empId"]
@@ -14,9 +14,9 @@ if (dataStr !== undefined) {
     //dropdown data setting
     const { designations: designationsDataList, departments: departmentsDataList, employment_modes: empModeDataList }
         = dataObj
-    setOptionsList(designationsDataList, designationSelectEntry)
-    setOptionsList(departmentsDataList, departmentSelectEntry)
-    setOptionsList(empModeDataList, empModeSelectEntry)
+    setOptionsList(designationsDataList, designationSelectInput)
+    setOptionsList(departmentsDataList, departmentSelectInput)
+    setOptionsList(empModeDataList, empModeSelectInput)
 
     //Skill custom dropdown
     const skillsDataList = dataObj.skills.map((e) => e.name)

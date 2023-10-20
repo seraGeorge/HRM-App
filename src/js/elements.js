@@ -63,9 +63,9 @@ export const genderOtherVal = document.querySelector("#gender-other-entry");
 export const otherEntryField = document.querySelector("#gender_other_val");
 export const submitBtn = document.querySelector("#submit-btn");
 export const submitBtnText = document.querySelector(".submit-btn-text")
-export const designationSelectEntry = document.querySelector("#designation")
-export const departmentSelectEntry = document.querySelector("#department")
-export const empModeSelectEntry = document.querySelector("#employment_mode")
+export const designationSelectInput = document.querySelector("#designation")
+export const departmentSelectInput = document.querySelector("#department")
+export const empModeSelectInput = document.querySelector("#employment_mode")
 export const genderRadiobuttons = document.querySelectorAll(".gender");
 export const dateList = document.querySelectorAll(".date");
 
