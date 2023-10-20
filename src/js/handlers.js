@@ -1,7 +1,6 @@
 import { body, deleteModal, loader, overlay, skillsFormEntrySelectedList, skillsList, snackbar, sortIcon, tableData, year } from "./elements.js";
 import { getDate, getYear, isValidDateFormat, sortCriteria, sortFn } from "./helperFunctions.js";
 
-year.innerHTML = getYear()
 export const displayLoading = () => {
     loader.classList.remove("no-display");
     tableData.style.display = "none"
@@ -43,7 +42,6 @@ export const toggleBtn = (button, popUp) => {
         popUp.classList.toggle("no-display")
     })
 }
-
 export const getFilterChips = (selector) => {
     const filterChips = document.querySelectorAll(selector);
     const filterValues = [];

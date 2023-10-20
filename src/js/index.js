@@ -2,9 +2,11 @@ import { state } from "./context.js";
 import { addEmployeeBtn, applyAllBtn, deleteModal, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon } from "./elements.js";
 import { readUserData } from "./firebase.js";
 import { displayLoading, getFilterChips, getQueryParam, hideDropdownIfNotTarget, hideLoading, showSnackbar, toggleBtn } from "./handlers.js";
-import { setFilterDropdownData } from "./setFilterDropdownData.js";
+import { getYear } from "./helperFunctions.js";
+import { setFilterDropdownData } from "./dropdown.js";
 import { setTableData } from "./setTable.js";
 
+year.innerHTML = getYear()
 
 //Loader before the table Data
 displayLoading();

@@ -2,7 +2,7 @@ import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFor
 import { updateUserData } from "./firebase.js";
 import { getNewEmpId, getNewEmployeeDetails, handleFormChange, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, showSnackbar, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
-import { addSelection, setDropDown } from "./setFilterDropdownData.js";
+import { addSelection, setDropDown } from "./dropdown.js";
 import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectInput, departmentSelectInput, empModeSelectInput, genderRadiobuttons } from "./elements.js"
 
 const dataStr = localStorage['data'];
