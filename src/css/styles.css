@@ -429,19 +429,34 @@ textarea {
   }
 }
 
-.toast {
-  background-color: blue;
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: var(--secondary-color);
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
   position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translate(-50%, -50%);
-  gap: 10px;
-  transform: translateX(100%);
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
 }
-.toast-animation {
-  transition: 3s;
-  transform: translateX(-100%) !important;
+
+.snackbar.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-.toast-title {
-  color: white;
+
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }

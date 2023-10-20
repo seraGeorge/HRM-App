@@ -1,7 +1,7 @@
 import { state } from "./context.js";
-import { addEmployeeBtn, applyAllBtn, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon } from "./elements.js";
+import { addEmployeeBtn, applyAllBtn, deleteModal, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon } from "./elements.js";
 import { readUserData } from "./firebase.js";
-import { displayLoading, getFilterChips, hideDropdownIfNotTarget, hideLoading, toggleBtn } from "./handlers.js";
+import { displayLoading, getFilterChips, getQueryParam, hideDropdownIfNotTarget, hideLoading, showSnackbar, toggleBtn } from "./handlers.js";
 import { setFilterDropdownData } from "./setFilterDropdownData.js";
 import { setTableData } from "./setTable.js";
 
@@ -19,7 +19,7 @@ result.then(data => {
     let employeeList = dataCopy.employees;
 
 
-    if( (employeeList !== null)||(employeeList!==undefined) ){
+    if ((employeeList !== null) || (employeeList !== undefined)) {
 
 
         state.sort = 0
@@ -90,7 +90,7 @@ result.then(data => {
         })
 
         addEmployeeBtn.addEventListener("click", () => {
-            window.location.href='./src/pages/employeeDetails.html';
+            window.location.href = './src/pages/employeeDetails.html';
         })
 
         document.addEventListener("click", (event) => {
@@ -101,7 +101,17 @@ result.then(data => {
             hideDropdownIfNotTarget(searchDropDown, searchDropDownBtn, event);
         })
 
+        // Get the snackbar message from the URL
+        const snackbarMessage = getQueryParam("snackbarMessage");
 
+        // Check if a snackbar message is present and display it
+        if (snackbarMessage) {
+            // Use your showSnackbar function to display the message
+            showSnackbar(decodeURIComponent(snackbarMessage));
+            //Clearing the url from the snackbar msg once it the snackbar is gone
+            const updatedURL = window.location.href.replace(/\?snackbarMessage=.*/, '');
+            history.replaceState(null, '', updatedURL);
+        }
     } else {
         console.error("Error occurred.");
     }

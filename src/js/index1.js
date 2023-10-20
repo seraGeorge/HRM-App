@@ -1,6 +1,6 @@
 import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
 import { updateUserData } from "./firebase.js";
-import { getNewEmpId, getNewEmployeeDetails, handleFormChange, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
+import { getNewEmpId, getNewEmployeeDetails, handleFormChange, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, showSnackbar, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
 import { addSelection, setDropDown } from "./setFilterDropdownData.js";
 import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectEntry, departmentSelectEntry, empModeSelectEntry, genderRadiobuttons } from "./elements.js"
@@ -94,7 +94,8 @@ if (dataStr !== undefined) {
                 }
                 finally {
                     submitBtn.classList.remove("loader");
-                    window.history.back();
+                    const snackbarTxt = newDataObj.emp_name + " has been added";
+                    window.location.href = "../../index.html?snackbarMessage=" + encodeURIComponent(snackbarTxt);
                 }
                 return false;
             }
@@ -199,7 +200,8 @@ if (dataStr !== undefined) {
                 }
                 finally {
                     submitBtn.classList.remove("loader");
-                    window.history.back();
+                    const snackbarTxt = empToEdit.emp_name + " has been edited";
+                    window.location.href = "../../index.html?snackbarMessage=" + encodeURIComponent(snackbarTxt);
                 }
                 return false;
             }

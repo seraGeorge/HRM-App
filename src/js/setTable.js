@@ -1,7 +1,7 @@
 import { state } from "./context.js";
-import { body, deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, overlay, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
+import { body, deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, overlay, snackbar, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
-import { displayLoading, filterData, formatDate, getSearchedData, hideLoading, overlayEffect, sortBtnHandler, toggleBtn } from "./handlers.js";
+import {  displayLoading, filterData, formatDate, getSearchedData, hideLoading, showSnackbar, sortBtnHandler, toggleBtn } from "./handlers.js";
 
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";
@@ -60,15 +60,10 @@ export const setTableData = (employees) => {
 const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) => {
     toggleBtn(deleteSelector, deleteModal)
     deleteSelector.addEventListener("click", (event) => {
-        overlayEffect("visible")
-
         event.stopPropagation(); // Prevent the click from reaching the document and closing the modal
         deleteModal.classList.remove("no-display");
         empIdToDlt.innerHTML = employeeIdVal;
         employeeDeleteConfirmAction(employeeIdVal, employeeList)
-    })
-    deleteModalCloseBtn.addEventListener("click",()=>{
-        overlayEffect("hidden")
     })
 }
 const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
@@ -79,6 +74,8 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
             writeUserData('/employees', newEmpList) // Passing null to delete the data at the specified index.
                 .then(() => {
                     setTableData(newEmpList);
+                    const snackbarTxt= employeeIdVal+" has been deleted"
+                    showSnackbar(snackbarTxt);
                 })
                 .catch((error) => {
                     console.error("Error updating user data:", error);
@@ -90,10 +87,7 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
 };
 const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
     toggleBtn(viewSelector, viewModal)
-
     viewSelector.addEventListener("click", () => {
-        overlayEffect("visible")
-
         const indexToView = employeeList.findIndex((employee) => employee.id === employeeIdVal)
         const currentEmployee = employeeList[indexToView];
 
@@ -124,9 +118,6 @@ const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
             temp = '-'
         }
         empSkillsList.innerHTML = temp
-    })
-    viewModalCloseBtn.addEventListener("click",()=>{
-        overlayEffect("hidden")
     })
 }
 const employeeEditAction = (employees, editSelector, employeeIdVal) => {

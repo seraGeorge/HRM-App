@@ -1,4 +1,4 @@
-import { body, loader, overlay, skillsFormEntrySelectedList, skillsList, sortIcon, tableData, year } from "./elements.js";
+import { body, deleteModal, loader, overlay, skillsFormEntrySelectedList, skillsList, snackbar, sortIcon, tableData, year } from "./elements.js";
 import { getDate, getYear, isValidDateFormat, sortCriteria, sortFn } from "./helperFunctions.js";
 
 year.innerHTML = getYear()
@@ -43,10 +43,7 @@ export const toggleBtn = (button, popUp) => {
         popUp.classList.toggle("no-display")
     })
 }
-export const overlayEffect = (bodyStyle) => {
-    overlay.classList.toggle("open")
-    body.style.overflow = bodyStyle
-}
+
 export const getFilterChips = (selector) => {
     const filterChips = document.querySelectorAll(selector);
     const filterValues = [];
@@ -351,4 +348,20 @@ export const handleValidation = (inputElement) => {
     }
     validationIcon(inputElement, errorMessage !== null, errorMessage);
     return errorMessage === null
+}
+
+export const showSnackbar = (snackbarTxt) => {
+    snackbar.classList.add("show");
+    snackbar.innerHTML = snackbarTxt
+
+    setTimeout(function () {
+        snackbar.classList.remove("show")
+        snackbar.innerHTML = ""
+    }, 1000);
+}
+
+// Function to parse query parameters from the URL
+export const getQueryParam = (parameter) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(parameter);
 }
