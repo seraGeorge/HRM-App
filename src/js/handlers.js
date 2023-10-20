@@ -277,7 +277,7 @@ export const validateText = (inputElement) => {
     }
     return null;
 }
-// Function to validate text input
+// Function to validate email input
 export const validateEmail = (inputElement) => {
     if (!inputElement.checkValidity()) {
         return "The entry is not a valid email.";
@@ -329,18 +329,19 @@ export const handleValidation = (inputElement) => {
     if (!inputElement.hasAttribute("required")) {
         return; // Skip non-required inputs
     }
-
-    if (inputElement.type === "email") {
-        errorMessage = validateEmail(inputElement)
-    }
-    else if (inputElement.type === "text") {
-        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateText(inputElement);
-    } else if (inputElement.type === "tel") {
-        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateTel(inputElement);
-    } else if (inputElement.type === "date") {
-        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateDate(inputElement);
-    } else if (inputElement.tagName === "SELECT") {
-        errorMessage = validateRequired(inputElement) ? validateRequired(inputElement) : validateSelect(inputElement);
+    if (validateRequired(inputElement) === null) {
+        if (inputElement.type === "email") {
+            errorMessage = validateEmail(inputElement)
+        }
+        else if (inputElement.type === "text") {
+            errorMessage = validateText(inputElement);
+        } else if (inputElement.type === "tel") {
+            errorMessage =  validateTel(inputElement);
+        } else if (inputElement.type === "date") {
+            errorMessage =  validateDate(inputElement);
+        } else if (inputElement.tagName === "SELECT") {
+            errorMessage = validateSelect(inputElement);
+        }
     }
 
     if (errorMessage === null) {

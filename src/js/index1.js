@@ -53,13 +53,9 @@ if (dataStr !== undefined) {
     });
 
 
-    if (empIdToEdit == undefined) { // adding existing employee
+    if (empIdToEdit == undefined) { // adding new employee
         //Adding new Employee
 
-        // Form Input Interactions
-        form.addEventListener("input", (event) => {
-            handleValidation(event.target)
-        });
         skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
             validateSkills()
         });
@@ -158,11 +154,6 @@ if (dataStr !== undefined) {
         let hasChanged = false;
         let formDataObj = {};
         updateButtonStyle(submitBtn, hasChanged);
-
-        // Event listener for form input changes
-        form.addEventListener("input", (event) => {
-            handleFormChange(formDataObj, empToEdit, dataObj, submitBtn);
-        });
 
         // Event listener for skills form selection changes
         skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
