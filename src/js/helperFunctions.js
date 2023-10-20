@@ -43,3 +43,13 @@ export const getDate = (dateVal) => {
     date.setDate(date.getDate() + 1); // Adding one day to correct the date
     return date.toISOString().slice(0, 10);
 }
+export const arraysEqual = (arr1, arr2) => {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+    const idSet1 = new Set(arr1.map(obj => obj.id));
+    const idSet2 = new Set(arr2.map(obj => obj.id));
+
+    return [...idSet1].every(id => idSet2.has(id));
+}

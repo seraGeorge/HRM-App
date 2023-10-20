@@ -124,3 +124,12 @@ export const resetFilter = (selectedlist, optionsList) => {
     selectedlist.innerHTML = "";
     optionsList.innerHTML = "";
 }
+//Hide dropdown if it is not targetted
+export const hideDropdownIfNotTarget = (dropdown, button, event) => {
+
+    if (!(button.contains(event.target)) && !(dropdown.contains(event.target))) {
+        if (!dropdown.classList.contains("no-display")) {
+            dropdown.classList.add("no-display");
+        }
+    }
+}

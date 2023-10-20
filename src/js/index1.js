@@ -1,9 +1,12 @@
 import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
 import { updateUserData } from "./firebase.js";
-import { getNewEmpId, getNewEmployeeDetails, handleFormChange, handleValidation, hasFormChanged, hideDropdownIfNotTarget, setFormValue, setOptionsList, showSnackbar, toggleBtn, updateButtonStyle, validateDate, validateRequired, validateSelect, validateSkills, validateTel, validateText, validationIcon } from "./handlers.js";
+import {   toggleBtn, updateButtonStyle, } from "./handlers.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
-import { addSelection, setDropDown } from "./dropdown.js";
+import { addSelection, hideDropdownIfNotTarget, setDropDown } from "./dropdown.js";
 import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectInput, departmentSelectInput, empModeSelectInput, genderRadiobuttons } from "./elements.js"
+import { handleFormChange, setFormValue, setOptionsList } from "./formInteractions.js";
+import { getNewEmpId, getNewEmployeeDetails } from "./formInput.js";
+import { handleValidation, validateSkills } from "./validationService.js";
 
 const dataStr = localStorage['data'];
 const empIdToEdit = localStorage["empId"]
@@ -151,12 +154,14 @@ if (dataStr !== undefined) {
 
         //Button is disabled if there is no change in the data
         let hasChanged = false;
-        let formDataObj = {};
         updateButtonStyle(submitBtn, hasChanged);
 
+        form.addEventListener("input", (event) => {
+            handleFormChange(empToEdit, dataObj.skills, submitBtn)
+        });
         // Event listener for skills form selection changes
         skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
-            if (handleFormChange(formDataObj, empToEdit, dataObj.skills, submitBtn)) {
+            if (handleFormChange(empToEdit, dataObj.skills, submitBtn)) {
                 validateSkills();
             }
         });

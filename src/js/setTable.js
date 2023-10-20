@@ -1,7 +1,8 @@
+import { filterData, getSearchedData, sortBtnHandler } from "./actions.js";
 import { state } from "./context.js";
 import { body, deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, overlay, snackbar, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
-import {  displayLoading, filterData, formatDate, getSearchedData, hideLoading, showSnackbar, sortBtnHandler, toggleBtn } from "./handlers.js";
+import {  displayLoading, formatDate, hideLoading, showSnackbar, toggleBtn } from "./handlers.js";
 
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";
