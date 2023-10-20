@@ -79,8 +79,8 @@ if (dataStr !== undefined) {
                 let formDataObj = {};
                 const formData = new FormData(form);
                 formData.forEach((value, key) => (formDataObj[key] = value));
-                let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
-                newDataObj.id = getNewEmpId(dataObj)
+                let newDataObj = getNewEmployeeDetails(formDataObj, dataObj.skills);
+                newDataObj.id = getNewEmpId(dataObj.employees)
                 try {
                     await updateUserData('/employees', newDataObj, dataObj.employees.length)
                 }
@@ -156,7 +156,7 @@ if (dataStr !== undefined) {
 
         // Event listener for skills form selection changes
         skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
-            if (handleFormChange(formDataObj, empToEdit, dataObj, submitBtn)) {
+            if (handleFormChange(formDataObj, empToEdit, dataObj.skills, submitBtn)) {
                 validateSkills();
             }
         });
@@ -181,7 +181,7 @@ if (dataStr !== undefined) {
                 let formDataObj = {};
                 const formData = new FormData(form);
                 formData.forEach((value, key) => (formDataObj[key] = value));
-                let newDataObj = getNewEmployeeDetails(formDataObj, dataObj);
+                let newDataObj = getNewEmployeeDetails(formDataObj, dataObj.skills);
                 try {
                     await updateUserData('/employees', newDataObj, empToEditArrayIndex)
                 }

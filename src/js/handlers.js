@@ -145,7 +145,7 @@ export const setFormValue = (inputId, value) => {
 }
 
 // Function to check if any form field has changed
-export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
+export const hasFormChanged = (formDataObj, empToEdit, skills) => {
     let genderFlag = true
     if (["Male", "Female"].includes(empToEdit.gender)) {
         genderFlag = formDataObj.gender !== empToEdit.gender;
@@ -163,17 +163,17 @@ export const hasFormChanged = (formDataObj, empToEdit, dataObj) => {
         formDataObj.designation !== empToEdit.designation ||
         formDataObj.department !== empToEdit.department ||
         formDataObj.employment_mode !== empToEdit.employment_mode ||
-        genderFlag || !arraysEqual(getSelectedSkills(dataObj), empToEdit.skills)
+        genderFlag || !arraysEqual(getSelectedSkills(skills), empToEdit.skills)
     );
 }
 //Function to handle button style on form change
-export const handleFormChange = (formDataObj, empToEdit, dataObj, submitBtn) => {
+export const handleFormChange = (formDataObj, empToEdit, skills, submitBtn) => {
     // Getting the latest form data each time
     const formData = new FormData(form);
     formData.forEach((value, key) => (formDataObj[key] = value));
 
     // Check if the form has changed
-    const hasChanged = hasFormChanged(formDataObj, empToEdit, dataObj);
+    const hasChanged = hasFormChanged(formDataObj, empToEdit, skills);
 
     // Update the submit button style
     updateButtonStyle(submitBtn, hasChanged);
@@ -185,10 +185,10 @@ export const formatDate = (dateString) => {
     return isValidDateFormat(dateString) ? getDate(dateString) : dateString;
 }
 // Function to get selected skills from the DOM
-export const getSelectedSkills = (dataObj) => {
+export const getSelectedSkills = (skills) => {
     const skillsTagList = document.querySelectorAll(".chip");
     const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);
-    return dataObj.skills.filter(skill => skillValues.includes(skill.name));
+    return skills.filter(skill => skillValues.includes(skill.name));
 }
 export const arraysEqual = (arr1, arr2) => {
     if (arr1.length !== arr2.length) {
@@ -204,21 +204,17 @@ export const updateButtonStyle = (submitBtn, hasChanged) => {
     submitBtn.style.opacity = hasChanged ? "1" : "0.3";
     submitBtn.disabled = !hasChanged;
 }
-export const getNewEmployeeDetails = (formDataObj, dataObj) => {
+export const getNewEmployeeDetails = (formDataObj, skills) => {
     let newDataObj = {}
     let { name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode } = formDataObj;
     newDataObj = { emp_name: name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode };
     newDataObj.gender = formDataObj.gender === "Other" ? formDataObj.gender_other_val : formDataObj.gender;
-    const skillsTagList = document.querySelectorAll(".chip");
-    const skillValues = Array.from(skillsTagList).map((skillTag) => skillTag.querySelector(".chip-heading").innerHTML);
-    const skillArrayObj = dataObj.skills.filter(skill => skillValues.includes(skill.name))
-    newDataObj.skills = skillArrayObj
-    console.log(newDataObj)
+    newDataObj.skills = getSelectedSkills(skills);
     return newDataObj;
 }
-export const getNewEmpId = (dataObj) => {
+export const getNewEmpId = (employees) => {
     let largestId = null;
-    for (const employee of dataObj.employees) {
+    for (const employee of employees) {
         if (employee != null) {
             const idNumber = parseInt(employee.id.substring(3));
             if (largestId === null || idNumber > parseInt(largestId.substring(3))) {
