@@ -13,28 +13,19 @@ export const setFilterDropdownData = (data) => {
     setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
 
     designationResetBtn.addEventListener("click", () => {
-        resetFilter(designationSelectedList, designationOptionsList)
-        setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
+        resetFilter(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
     })
     departmentResetBtn.addEventListener("click", () => {
-        resetFilter(departmentSelectedList, departmentOptionsList)
-        setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
+        resetFilter(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
     })
     skillsResetBtn.addEventListener("click", () => {
-        resetFilter(skillsSelectedList, skillsOptionsList)
-        setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
+        resetFilter(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
     })
     resetAllBtn.addEventListener("click", (event) => {
         event.stopPropagation()
-        resetFilter(designationSelectedList, designationOptionsList);
-        setDropDown(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter");
-        resetFilter(departmentSelectedList, departmentOptionsList);
-        setDropDown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter");
-        resetFilter(skillsSelectedList, skillsOptionsList);
-        setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter");
-        if (!mainFilterDropDown.classList.contains("no-display")) {
-            mainFilterDropDown.classList.add("no-display")
-        }
+        resetFilter(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
+        resetFilter(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
+        resetFilter(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
         state.filter.designationFilters = [];
         state.filter.departmentFilters = [];
         state.filter.skillsFilters = [];
@@ -120,9 +111,10 @@ const createChip = (text, className) => {
     return listItemChip;
 };
 //Reset button action
-export const resetFilter = (selectedlist, optionsList) => {
+export const resetFilter = (dataList, optionsList, selectedlist, className) => {
     selectedlist.innerHTML = "";
     optionsList.innerHTML = "";
+    setDropDown(dataList, optionsList, selectedlist, className)
 }
 //Hide dropdown if it is not targetted
 export const hideDropdownIfNotTarget = (dropdown, button, event) => {
