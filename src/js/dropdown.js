@@ -29,7 +29,6 @@ export const setFilterDropdownData = (data) => {
         state.filter.designationFilters = [];
         state.filter.departmentFilters = [];
         state.filter.skillsFilters = [];
-
         setTableData(data.employees)
     })
 }

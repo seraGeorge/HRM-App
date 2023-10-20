@@ -1,4 +1,4 @@
-import { body, deleteModal, loader, overlay, skillsFormEntrySelectedList, skillsList, snackbar, sortIcon, tableData, year } from "./elements.js";
+import { body, deleteModal, genderOtherVal, loader, otherEntryField, overlay, skillsFormEntrySelectedList, skillsList, snackbar, sortIcon, tableData, year } from "./elements.js";
 import { getDate, getYear, isValidDateFormat, sortCriteria, sortFn } from "./helperFunctions.js";
 
 //Function to show loader until data is fetched
@@ -61,6 +61,17 @@ export const validationIcon = (inputElement, flag, errorMsgContent = "") => {
     }
 
 }
+//Function to check radio buttons while editing the form
+export const checkRadioBtn = (empGenderEntryToBeChecked,gender) => {
+    if (empGenderEntryToBeChecked === undefined) {
+        otherEntryField.classList.remove("no-display");
+        otherEntryField.value = gender;
+        genderOtherVal.checked = true;
+    }
+    else {
+        empGenderEntryToBeChecked.checked = true;
+    }
+}
 //Function to show Snackbar
 export const showSnackbar = (snackbarTxt) => {
     snackbar.classList.add("show");
@@ -69,7 +80,7 @@ export const showSnackbar = (snackbarTxt) => {
     setTimeout(function () {
         snackbar.classList.remove("show")
         snackbar.innerHTML = ""
-    }, 1000);
+    }, 4000);
 }
 // Function to parse query parameters from the URL
 export const getQueryParam = (parameter) => {

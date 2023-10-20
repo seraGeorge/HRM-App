@@ -26,3 +26,4 @@ export const getNewEmpId = (employees) => {
     return largestId.substring(0, 3).concat(newEmpIdStr)
 
 }
+//submit data

@@ -326,6 +326,9 @@ td {
 .input-grp {
   border: 1px solid var(--secondary-color);
 }
+.other-input-grp{
+  border: none;
+}
 .skills-detail .input-grp {
   border: none;
 }
