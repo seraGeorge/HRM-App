@@ -1,7 +1,7 @@
 import { state } from "./context.js";
-import { addEmployeeBtn, applyAllBtn, deleteModal, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon } from "./elements.js";
+import { addEmployeeBtn, applyAllBtn, deleteModal, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, overlay, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon, viewModal } from "./elements.js";
 import { readUserData } from "./firebase.js";
-import { displayLoading, getQueryParam, hideLoading, showSnackbar, toggleBtn } from "./handlers.js";
+import { displayLoading, getQueryParam, hideLoading, removeOverlay, showSnackbar, toggleBtn } from "./handlers.js";
 import { getYear } from "./helperFunctions.js";
 import { hideDropdownIfNotTarget, setFilterDropdownData } from "./dropdown.js";
 import { setTableData } from "./setTable.js";
@@ -104,6 +104,12 @@ result.then(data => {
             hideDropdownIfNotTarget(searchDropDown, searchDropDownBtn, event);
         })
 
+        overlay.addEventListener("click", () => {
+            if (!deleteModal.classList.contains("no-display"))
+                removeOverlay(deleteModal);
+            if (!viewModal.classList.contains("no-display"))
+                removeOverlay(viewModal)
+        })
         // Get the snackbar message from the URL
         const snackbarMessage = getQueryParam("snackbarMessage");
 

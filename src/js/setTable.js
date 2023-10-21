@@ -1,8 +1,9 @@
 import { filterData, getSearchedData, sortBtnHandler } from "./actions.js";
 import { state } from "./context.js";
+import { hideDropdownIfNotTarget } from "./dropdown.js";
 import { body, deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, overlay, snackbar, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
-import {  displayLoading, formatDate, hideLoading, showSnackbar, toggleBtn } from "./handlers.js";
+import { displayLoading, formatDate, hideLoading, showSnackbar, toggleBtn, removeOverlay, addOverlay } from "./handlers.js";
 
 export const setTableData = (employees) => {
     tableBody.innerHTML = "";
@@ -51,21 +52,22 @@ export const setTableData = (employees) => {
             employeeViewAction(employees, viewSelector, employeeIdVal);
             employeeEditAction(employees, editSelector, employeeIdVal)
         })
-        toggleBtn(deleteModalCloseBtn, deleteModal);
-        toggleBtn(deleteModalCancelBtn, deleteModal);
-        toggleBtn(deleteModalConfirmBtn, deleteModal)
-        toggleBtn(viewModalCloseBtn, viewModal);
+        toggleBtn(deleteModalCloseBtn, deleteModal, true);
+        toggleBtn(deleteModalCancelBtn, deleteModal, true);
+        toggleBtn(deleteModalConfirmBtn, deleteModal, true)
+        toggleBtn(viewModalCloseBtn, viewModal, true);
     }
 
 }
 const employeeDeleteBtnAction = (employeeList, deleteSelector, employeeIdVal) => {
-    toggleBtn(deleteSelector, deleteModal)
     deleteSelector.addEventListener("click", (event) => {
+        addOverlay(deleteModal)
         event.stopPropagation(); // Prevent the click from reaching the document and closing the modal
         deleteModal.classList.remove("no-display");
         empIdToDlt.innerHTML = employeeIdVal;
         employeeDeleteConfirmAction(employeeIdVal, employeeList)
     })
+
 }
 const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
     deleteModalConfirmBtn.addEventListener("click", () => {
@@ -75,20 +77,19 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
             writeUserData('/employees', newEmpList) // Passing null to delete the data at the specified index.
                 .then(() => {
                     setTableData(newEmpList);
-                    const snackbarTxt= employeeIdVal+" has been deleted"
+                    const snackbarTxt = employeeIdVal + " has been deleted"
                     showSnackbar(snackbarTxt);
                 })
                 .catch((error) => {
                     console.error("Error updating user data:", error);
                 });
         }
-        // Hide the delete modal here
-        deleteModal.classList.add("no-display");
     })
 };
 const employeeViewAction = (employeeList, viewSelector, employeeIdVal) => {
     toggleBtn(viewSelector, viewModal)
     viewSelector.addEventListener("click", () => {
+        addOverlay(viewModal)
         const indexToView = employeeList.findIndex((employee) => employee.id === employeeIdVal)
         const currentEmployee = employeeList[indexToView];
 

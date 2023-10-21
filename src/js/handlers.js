@@ -1,6 +1,6 @@
 import { state } from "./context.js";
-import {  genderOtherVal, loader, otherEntryField, snackbar, sortIcon, submitBtn, tableData } from "./elements.js";
-import { getDate,  isValidDateFormat } from "./helperFunctions.js";
+import { genderOtherVal, loader, otherEntryField, overlay, snackbar, sortIcon, submitBtn, tableData } from "./elements.js";
+import { getDate, isValidDateFormat } from "./helperFunctions.js";
 
 //Function to show loader until data is fetched
 export const displayLoading = () => {
@@ -26,10 +26,23 @@ export const makeSortIconVisible = (index) => {
 
 }
 //Function to toggle dropdowns
-export const toggleBtn = (button, popUp) => {
+export const toggleBtn = (button, popUp, isModal = false) => {
     button.addEventListener("click", () => {
         popUp.classList.toggle("no-display")
+        if (isModal) {
+            removeOverlay(popUp)
+        }
     })
+}
+//Function to remove overlay onClick
+export const removeOverlay = (popUp) => {
+    popUp.classList.add("no-display")
+    overlay.classList.remove("open")
+}
+//Function to add overlay on button click
+export const addOverlay = (popUp) => {
+    popUp.classList.remove("no-display")
+    overlay.classList.add("open")
 }
 // Function to format the date
 export const formatDate = (dateString) => {
