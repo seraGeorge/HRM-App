@@ -8,5 +8,10 @@ export const state = {
     search: {
         searchTerm: "",
         property: "all"
+    },
+    form: {
+        isInputValid: false,
+        isSkillsValid: false,
+        errorMsg:"",
     }
 }

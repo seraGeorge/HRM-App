@@ -1,9 +1,9 @@
 import { addSelection, setDropDown } from "./dropdown.js";
-import { dateList, departmentSelectInput, designationSelectInput, empModeSelectInput, form, genderOtherVal, genderRadiobuttons, otherEntryField, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtn } from "./elements.js";
+import { dateList, departmentSelectInput, designationSelectInput, empModeSelectInput, genderOtherVal, genderRadiobuttons, otherEntryField, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtn } from "./elements.js";
 import { updateUserData } from "./firebase.js";
-import { getNewEmployeeDetails } from "./formInput.js";
-import { checkRadioBtn, formatDate, getSelectedSkills, toggleBtn, updateButtonStyle } from "./handlers.js";
-import { arraysEqual, getDate, isValidDateFormat } from "./helperFunctions.js";
+import { getLatestFormData, getNewEmployeeDetails } from "./formInput.js";
+import { checkRadioBtn, formatDate, toggleBtn } from "./handlers.js";
+import {  getDate, isValidDateFormat } from "./helperFunctions.js";
 
 //Set up basic ui for the form
 export const setFormUI = (dataObj) => {
@@ -95,7 +95,7 @@ export const setFormData = (empToEdit) => {
 
 }
 // On editing existing employee, function to check if any form field has changed
-const hasFormChanged = (formDataObj, empToEdit, skills) => {
+export const hasFormChanged = (formDataObj, empToEdit) => {
     let genderFlag = true
     if (["Male", "Female"].includes(empToEdit.gender)) {
         genderFlag = formDataObj.gender !== empToEdit.gender;
@@ -113,26 +113,12 @@ const hasFormChanged = (formDataObj, empToEdit, skills) => {
         formDataObj.designation !== empToEdit.designation ||
         formDataObj.department !== empToEdit.department ||
         formDataObj.employment_mode !== empToEdit.employment_mode ||
-        genderFlag || !arraysEqual(getSelectedSkills(skills), empToEdit.skills)
+        genderFlag
     );
 }
-// On editing existing employee, function to handle button style on form change
-export const handleFormChange = (empToEdit, skills, submitBtn) => {
-    let formDataObj = {}
-    // Getting the latest form data each time
-    const formData = new FormData(form);
-    formData.forEach((value, key) => (formDataObj[key] = value));
-    // Check if the form has changed
-    const hasChanged = hasFormChanged(formDataObj, empToEdit, skills);
-    // Update the submit button style
-    updateButtonStyle(submitBtn, hasChanged);
-    return hasChanged;
-}
 //Submitting the form
-export const submitForm = async (id,index,skills) => {
-    let formDataObj = {};
-    const formData = new FormData(form);
-    formData.forEach((value, key) => (formDataObj[key] = value));
+export const submitForm = async (id, index, skills, snackbarMsg) => {
+    let formDataObj = getLatestFormData()
     let newDataObj = getNewEmployeeDetails(formDataObj, skills);
     newDataObj.id = id;
     try {
@@ -143,7 +129,7 @@ export const submitForm = async (id,index,skills) => {
     }
     finally {
         submitBtn.classList.remove("loader");
-        const snackbarTxt = newDataObj.emp_name + " has been added";
+        const snackbarTxt = newDataObj.emp_name + " has been " + snackbarMsg;
         window.location.href = "../../index.html?snackbarMessage=" + encodeURIComponent(snackbarTxt);
     }
 }

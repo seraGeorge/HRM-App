@@ -1,12 +1,12 @@
-import { dateList, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
-import { updateUserData } from "./firebase.js";
-import { checkRadioBtn, toggleBtn, updateButtonStyle, } from "./handlers.js";
-import { getDate, isValidDateFormat } from "./helperFunctions.js";
-import { addSelection, hideDropdownIfNotTarget, setDropDown } from "./dropdown.js";
-import { form, genderOtherVal, otherEntryField, submitBtn, designationSelectInput, departmentSelectInput, empModeSelectInput, genderRadiobuttons } from "./elements.js"
-import { handleFormChange, setFormUI, setFormInput, setOptionsList, setFormData, submitForm } from "./formInteractions.js";
-import { getNewEmpId, getNewEmployeeDetails } from "./formInput.js";
-import { handleValidation, validateSkills } from "./validationService.js";
+import { pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
+import { getSelectedSkills, showSnackbar, updateButtonStyle, } from "./handlers.js";
+import { hasSkillArrayChanged } from "./helperFunctions.js";
+import { hideDropdownIfNotTarget } from "./dropdown.js";
+import { form, submitBtn } from "./elements.js"
+import { setFormUI, setFormData, submitForm, hasFormChanged } from "./formInteractions.js";
+import { getLatestFormData, getNewEmpId } from "./formInput.js";
+import { checkFormValidity, validateSkills } from "./validationService.js";
+import { state } from "./context.js";
 
 const dataStr = localStorage['data'];
 const empIdToEdit = localStorage["empId"]
@@ -19,113 +19,82 @@ if (dataStr !== undefined) {
     pageTitle.innerHTML = empIdToEdit ? "Update Details of a employee" : "Add New employee";
     submitBtnText.innerHTML = empIdToEdit ? "Save" : "Submit"
 
-
-    form.addEventListener("input", (event) => {
-        handleValidation(event.target)
-    });
-
-    if (empIdToEdit == undefined) {
-        // adding new employee
-
-        // Form Input Interactions
-
-        skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
-            validateSkills()
-        });
-
-
-        submitBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            submitBtn.classList.add("loader")
-            //Check if valid to add employee
-            const inputElements = form.querySelectorAll(".input");
-            let errorCount = 0;
-            inputElements.forEach((inputElement) => {
-                const isValid = handleValidation(inputElement);
-                if ((isValid !== undefined) && !isValid) {//error is present
-                    errorCount++
-                }
-            })
-            if (!validateSkills()) {// error is present
-                errorCount++
-            }
-            if (errorCount == 0) {
-                const updateIndex = dataObj.employees.length;
-                const id = getNewEmpId(dataObj.employees);
-                submitForm(id, updateIndex, dataObj.skills)
-            }
-            else {
-                submitBtn.classList.remove("loader");
-            }
-        })
-
-    }
-    else if (empIdToEdit !== undefined) {
-        //editing existing employee
-
+    let empToEdit;
+    let empToEditArrayIndex;
+    if (empIdToEdit) {
         // Set employee details
-        const empToEdit = dataObj.employees.find((employee) => employee.id === empIdToEdit);
-        const empToEditArrayIndex = dataObj.employees.findIndex((employee) => employee.id === empIdToEdit);
-
+        empToEdit = dataObj.employees.find((employee) => employee.id === empIdToEdit);
+        empToEditArrayIndex = dataObj.employees.findIndex((employee) => employee.id === empIdToEdit);
         //Setting form values
         setFormData(empToEdit);
+        localStorage.removeItem("empId")
+    }
 
-        //Button is disabled if there is no change in the data
+
+    // Form Input Interactions
+    form.addEventListener("input", (event) => {
         let hasChanged = false;
-        updateButtonStyle(submitBtn, hasChanged);
+        const isValid = checkFormValidity(event.target)
+        if (empIdToEdit) {
 
+            //Getting latest form data
+            const formDataObj = getLatestFormData();
 
-        // Event listener for skills form selection changes
-        skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
-            if (handleFormChange(empToEdit, dataObj.skills, submitBtn)) {
-                validateSkills();
+            //Button is disabled if there is no change in the data
+            hasChanged = hasFormChanged(formDataObj, empToEdit);
+            state.form.isInputValid = isValid && hasChanged;
+            if (!hasChanged) {
+                state.form.errorMsg = "No need to resubmit an unedited employee details. It is saved already"
             }
-        });
-
-
-        submitBtn.addEventListener("click", async (event) => {
-            event.preventDefault();
-            submitBtn.classList.add("loader")
-            //Check if valid to add employee
-            const inputElements = form.querySelectorAll(".input");
-            let errorCount = 0;
-            inputElements.forEach((inputElement) => {
-                const isValid = handleValidation(inputElement);
-                if ((isValid !== undefined) && !isValid) {//error is present
-                    errorCount++
-                }
-            })
-            if (!validateSkills()) {// error is present
-                errorCount++
+            if (!isValid) {
+                state.form.errorMsg = "There has been an invalid entry. Please do rectify it."
             }
+        }
+        else {
+            state.form.isInputValid = isValid;
+        }
+        updateButtonStyle();
+    });
+    // Event listener for skills form selection changes
+    skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
+        let hasChanged = false;
+        const isValid = validateSkills();
+        if (empIdToEdit) {
+            //Button is disabled if there is no change in the data
+            hasChanged = !hasSkillArrayChanged(getSelectedSkills(dataObj.skills), empToEdit.skills);
+            state.form.isSkillsValid = isValid && hasChanged;
+            if (!hasChanged) {
+                state.form.errorMsg = "No need to resubmit an unedited employee details. It is saved already"
+            }
+            if (!isValid) {
+                state.form.errorMsg = "There has been an invalid entry. Please do rectify it."
+            }
+        }
+        else {
+            state.form.isSkillsValid = isValid;
+        }
+        updateButtonStyle();
+    });
 
-            if (errorCount == 0) {
-                let formDataObj = {};
-                const formData = new FormData(form);
-                formData.forEach((value, key) => (formDataObj[key] = value));
-                let newDataObj = getNewEmployeeDetails(formDataObj, dataObj.skills);
-                try {
-                    await updateUserData('/employees', newDataObj, empToEditArrayIndex)
-                }
-                catch (error) {
-                    console.error("Error on updating the data")
-                }
-                finally {
-                    submitBtn.classList.remove("loader");
-                    const snackbarTxt = empToEdit.emp_name + " has been edited";
-                    window.location.href = "../../index.html?snackbarMessage=" + encodeURIComponent(snackbarTxt);
-                }
-                return false;
+
+    submitBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        submitBtn.classList.add("loader")
+        //Check if valid to add employee
+        if (state.form.isInputValid || state.form.isSkillsValid) {
+            if (!empToEdit) {
+                submitForm(getNewEmpId(dataObj.employees), dataObj.employees.length, dataObj.skills, "added")
             }
             else {
-                submitBtn.classList.remove("loader");
+                submitForm(empIdToEdit, empToEditArrayIndex, dataObj.skills, "edited")
             }
-
-        })
-
-        localStorage.removeItem("empId")
-
-    }
+        }
+        else {
+            if (state.form.errorMsg != "")
+                showSnackbar(state.form.errorMsg);
+            submitBtn.classList.remove("loader");
+        }
+    })
 
     document.addEventListener("click", (event) => {
         hideDropdownIfNotTarget(skillsFormEntryList, skillsFormEntryBtn, event);

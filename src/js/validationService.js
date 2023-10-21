@@ -1,4 +1,4 @@
-import { skillsFormEntrySelectedList, skillsList } from "./elements.js";
+import {  skillsFormEntrySelectedList, skillsList } from "./elements.js";
 import { validationIcon } from "./handlers.js";
 
 // Function to validate a required field
@@ -65,11 +65,11 @@ export const validateSkills = () => {
     return errorMessage === null
 }
 // Validating each form input
-export const handleValidation = (inputElement) => {
+export const handleValidation = (inputElement, currentInputElement) => {
     let errorMessage = null;
 
     if (!inputElement.hasAttribute("required")) {
-        return; // Skip non-required inputs
+        return true; // Skip non-required inputs
     }
     if (validateRequired(inputElement) === null) {
         if (inputElement.type === "email") {
@@ -89,6 +89,21 @@ export const handleValidation = (inputElement) => {
     if (errorMessage === null) {
         errorMessage = validateRequired(inputElement);
     }
-    validationIcon(inputElement, errorMessage !== null, errorMessage);
+    if (inputElement.id === currentInputElement.id) {
+        validationIcon(inputElement, errorMessage !== null, errorMessage);
+    }
     return errorMessage === null
+}
+
+// Create a function to check the validity of all form inputs
+export const checkFormValidity = (currentInputElement) => {
+    const inputs = document.querySelectorAll(".input"); // Adjust the selector as needed
+    let isValid = true;
+    let isCurrentElementValid;
+    inputs.forEach(input => {
+        isCurrentElementValid = handleValidation(input, currentInputElement)
+        isValid = isValid && isCurrentElementValid;
+    });
+    
+    return isValid;
 }

@@ -1,5 +1,6 @@
-import { body, deleteModal, genderOtherVal, loader, otherEntryField, overlay, skillsFormEntrySelectedList, skillsList, snackbar, sortIcon, tableData, year } from "./elements.js";
-import { getDate, getYear, isValidDateFormat, sortCriteria, sortFn } from "./helperFunctions.js";
+import { state } from "./context.js";
+import {  genderOtherVal, loader, otherEntryField, snackbar, sortIcon, submitBtn, tableData } from "./elements.js";
+import { getDate,  isValidDateFormat } from "./helperFunctions.js";
 
 //Function to show loader until data is fetched
 export const displayLoading = () => {
@@ -41,9 +42,10 @@ export const getSelectedSkills = (skills) => {
     return skills.filter(skill => skillValues.includes(skill.name));
 }
 //Function to disable and enable button style
-export const updateButtonStyle = (submitBtn, hasChanged) => {
+export const updateButtonStyle = () => {
+    let hasChanged = state.form.isInputValid || state.form.isSkillsValid;
     submitBtn.style.opacity = hasChanged ? "1" : "0.3";
-    submitBtn.disabled = !hasChanged;
+    // submitBtn.disabled = !hasChanged;
 }
 //Function to add icons while validating input
 export const validationIcon = (inputElement, flag, errorMsgContent = "") => {
@@ -62,7 +64,7 @@ export const validationIcon = (inputElement, flag, errorMsgContent = "") => {
 
 }
 //Function to check radio buttons while editing the form
-export const checkRadioBtn = (empGenderEntryToBeChecked,gender) => {
+export const checkRadioBtn = (empGenderEntryToBeChecked, gender) => {
     if (empGenderEntryToBeChecked === undefined) {
         otherEntryField.classList.remove("no-display");
         otherEntryField.value = gender;
@@ -71,6 +73,21 @@ export const checkRadioBtn = (empGenderEntryToBeChecked,gender) => {
     else {
         empGenderEntryToBeChecked.checked = true;
     }
+}
+//Function to check if any input is invalid or not
+export const checkValidity = () => {
+    const inputElements = form.querySelectorAll(".input");
+    let errorCount = 0;
+    inputElements.forEach((inputElement) => {
+        const isValid = handleValidation(inputElement);
+        if ((isValid !== undefined) && !isValid) {//error is present
+            errorCount++
+        }
+    })
+    if (!validateSkills()) {// error is present
+        errorCount++
+    }
+    return errorCount;
 }
 //Function to show Snackbar
 export const showSnackbar = (snackbarTxt) => {

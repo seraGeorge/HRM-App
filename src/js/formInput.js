@@ -1,7 +1,16 @@
 import { getSelectedSkills } from "./handlers.js";
 
-//fetching new employeee details
+//Getting the latest form data
+export const getLatestFormData = () => {
+    let formDataObj = {};
+    // Getting the latest form data each time
+    const formData = new FormData(form);
+    formData.forEach((value, key) => (formDataObj[key] = value));
+    return formDataObj;
+}
+//ADDING NEW EMPLOYEE
 export const getNewEmployeeDetails = (formDataObj, skills) => {
+    //fetching new employeee details
     let newDataObj = {}
     let { name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode } = formDataObj;
     newDataObj = { emp_name: name, email, phone, address, date_of_birth, date_of_joining, designation, department, employment_mode };
@@ -11,6 +20,7 @@ export const getNewEmployeeDetails = (formDataObj, skills) => {
 }
 export const getNewEmpId = (employees) => {
     let largestId = null;
+    //Comparing the ids of the employee
     for (const employee of employees) {
         if (employee != null) {
             const idNumber = parseInt(employee.id.substring(3));
@@ -19,6 +29,7 @@ export const getNewEmpId = (employees) => {
             }
         }
     }
+    //Creating the new id
     const newEmpId = parseInt(largestId.substring(3)) + 1;
     const newEmpIdStr = (newEmpId).toString().length <= 2 ?
         "0".concat((newEmpId).toString())
@@ -26,4 +37,3 @@ export const getNewEmpId = (employees) => {
     return largestId.substring(0, 3).concat(newEmpIdStr)
 
 }
-//submit data
