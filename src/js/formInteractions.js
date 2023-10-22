@@ -2,8 +2,8 @@ import { addSelection, setDropDown } from "./dropdown.js";
 import { dateList, departmentSelectInput, designationSelectInput, empModeSelectInput, genderOtherVal, genderRadiobuttons, otherEntryField, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtn } from "./elements.js";
 import { updateUserData } from "./firebase.js";
 import { getLatestFormData, getNewEmployeeDetails } from "./formInput.js";
-import { checkRadioBtn, formatDate, toggleBtn } from "./handlers.js";
-import {  getDate, isValidDateFormat } from "./helperFunctions.js";
+import { checkRadioBtn, formatDate, getSelectedSkills, toggleBtn } from "./handlers.js";
+import { getDate, hasSkillArrayChanged, isValidDateFormat } from "./helperFunctions.js";
 
 //Set up basic ui for the form
 export const setFormUI = (dataObj) => {
@@ -95,7 +95,9 @@ export const setFormData = (empToEdit) => {
 
 }
 // On editing existing employee, function to check if any form field has changed
-export const hasFormChanged = (formDataObj, empToEdit) => {
+export const hasFormChanged = (empToEdit,skills) => {
+    //Getting latest form data
+    const formDataObj = getLatestFormData();
     let genderFlag = true
     if (["Male", "Female"].includes(empToEdit.gender)) {
         genderFlag = formDataObj.gender !== empToEdit.gender;
@@ -113,7 +115,7 @@ export const hasFormChanged = (formDataObj, empToEdit) => {
         formDataObj.designation !== empToEdit.designation ||
         formDataObj.department !== empToEdit.department ||
         formDataObj.employment_mode !== empToEdit.employment_mode ||
-        genderFlag
+        genderFlag || !hasSkillArrayChanged(getSelectedSkills(skills), empToEdit.skills)
     );
 }
 //Submitting the form

@@ -5,7 +5,7 @@ import { hideDropdownIfNotTarget } from "./dropdown.js";
 import { form, submitBtn } from "./elements.js"
 import { setFormUI, setFormData, submitForm, hasFormChanged } from "./formInteractions.js";
 import { getLatestFormData, getNewEmpId } from "./formInput.js";
-import { checkFormValidity, validateSkills } from "./validationService.js";
+import { checkFormValidity, isElligibleToSubmit, validateSkills } from "./validationService.js";
 import { state } from "./context.js";
 
 const dataStr = localStorage['data'];
@@ -33,44 +33,11 @@ if (dataStr !== undefined) {
 
     // Form Input Interactions
     form.addEventListener("input", (event) => {
-        let hasChanged = false;
-        const isValid = checkFormValidity(event.target)
-        state.form.isValid = isValid;
-        if (empIdToEdit) {
-
-            //Getting latest form data
-            const formDataObj = getLatestFormData();
-
-            //Button is disabled if there is no change in the data
-            hasChanged = hasFormChanged(formDataObj, empToEdit);
-            state.form.hasChanged = hasChanged;
-            if (!hasChanged) {
-                state.form.errorMsg = "No need to resubmit an unedited employee details. It is saved already"
-            }
-            if (!isValid) {
-                state.form.errorMsg = "There has been an invalid entry. Please do rectify it."
-            }
-        }
-        updateButtonStyle();
+        isElligibleToSubmit(event.target, empToEdit, dataObj.skills);
     });
     // Event listener for skills form selection changes
     skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
-        let hasChanged = false;
-        const isValid = validateSkills();
-        state.form.isValid=isValid
-        if (empIdToEdit) {
-            //Button is disabled if there is no change in the data
-            hasChanged = !hasSkillArrayChanged(getSelectedSkills(dataObj.skills), empToEdit.skills);
-            state.form.hasChanged= hasChanged;
-            if (!hasChanged) {
-                state.form.errorMsg = "No need to resubmit an unedited employee details. It is saved already"
-            }
-            if (!isValid) {
-                state.form.errorMsg = "There has been an invalid entry. Please do rectify it."
-            }
-        }
-
-        updateButtonStyle();
+        isElligibleToSubmit(event.target, empToEdit, dataObj.skills);
     });
 
 
@@ -87,7 +54,8 @@ if (dataStr !== undefined) {
             }
         }
         else {
-            if (state.form.errorMsg != "")
+            console.log("hi")
+            if (state.form.errorMsg)
                 showSnackbar(state.form.errorMsg);
             submitBtn.classList.remove("loader");
         }
@@ -101,5 +69,3 @@ if (dataStr !== undefined) {
 else {
     console.error("Error occurred.");
 }
-
-

@@ -109,7 +109,7 @@ export const showSnackbar = (snackbarTxt) => {
     setTimeout(function () {
         snackbar.classList.remove("show")
         snackbar.innerHTML = ""
-    }, 4000);
+    }, 5000);
 }
 // Function to parse query parameters from the URL
 export const getQueryParam = (parameter) => {

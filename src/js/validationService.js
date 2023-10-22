@@ -1,5 +1,7 @@
-import {  skillsFormEntrySelectedList, skillsList } from "./elements.js";
-import { validationIcon } from "./handlers.js";
+import { state } from "./context.js";
+import { skillsFormEntrySelectedList, skillsList } from "./elements.js";
+import { hasFormChanged } from "./formInteractions.js";
+import { updateButtonStyle, validationIcon } from "./handlers.js";
 
 // Function to validate a required field
 const validateRequired = (inputElement) => {
@@ -56,12 +58,14 @@ const validateSelect = (inputElement) => {
     return null
 }
 //Function to validate skills
-export const validateSkills = () => {
+export const validateSkills = (currentInputElement) => {
     let errorMessage = null;
     if (!skillsFormEntrySelectedList.hasChildNodes()) {
         errorMessage = "This is a required field."
     }
-    validationIcon(skillsList, errorMessage !== null, errorMessage);
+    if (currentInputElement.id === skillsFormEntrySelectedList.id) {
+        validationIcon(skillsList, errorMessage !== null, errorMessage);
+    }
     return errorMessage === null
 }
 // Validating each form input
@@ -85,7 +89,6 @@ export const handleValidation = (inputElement, currentInputElement) => {
             errorMessage = validateSelect(inputElement);
         }
     }
-
     if (errorMessage === null) {
         errorMessage = validateRequired(inputElement);
     }
@@ -98,12 +101,33 @@ export const handleValidation = (inputElement, currentInputElement) => {
 // Create a function to check the validity of all form inputs
 export const checkFormValidity = (currentInputElement) => {
     const inputs = document.querySelectorAll(".input"); // Adjust the selector as needed
-    let isValid = true;
+    let isFormValid = true;
     let isCurrentElementValid;
     inputs.forEach(input => {
         isCurrentElementValid = handleValidation(input, currentInputElement)
-        isValid = isValid && isCurrentElementValid;
+        isFormValid = isFormValid && isCurrentElementValid;
     });
-    
+    let isSkillsValid = validateSkills(currentInputElement);
+    let isValid = isFormValid && isSkillsValid
     return isValid;
 }
+
+
+export const isElligibleToSubmit = (currentInputElement, empToEdit, skills) => {
+    let hasChanged = false;
+    const isValid = checkFormValidity(currentInputElement);
+    state.form.isValid = isValid;
+    if (empToEdit) {
+        //Button is disabled if there is no change in the data
+        hasChanged = hasFormChanged(empToEdit, skills);
+        state.form.hasChanged = hasChanged;
+        if (!hasChanged) {
+            state.form.errorMsg = "Warning:No changes have been made.<br/>You are attempting to submit the same employee details that are already saved";
+        }
+        if(!isValid){
+            state.form.errorMsg = "Error: Invalid entry detected.<br/>Please review and correct the input.";
+        }
+    }
+    updateButtonStyle();
+}
+

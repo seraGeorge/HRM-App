@@ -436,7 +436,7 @@ textarea {
 .snackbar {
   visibility: hidden;
   min-width: 250px;
-  margin-left: -125px;
+  margin-left: 0;
   background-color: var(--secondary-color);
   color: #fff;
   text-align: center;
@@ -444,23 +444,19 @@ textarea {
   padding: 16px;
   position: fixed;
   z-index: 1;
-  left: 50%;
-  bottom: 30px;
+  right: -100%;
+  top: 10vh;
   font-size: 17px;
 }
 
 .snackbar.show {
   visibility: visible;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  right: 0;
+  transition: right 0.5s;
+  animation: slideout 1.5s 2.5s;
 }
 
-
-@keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
-}
-
-@keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
+@keyframes slideout {
+  from { right:  0; opacity: 1; }
+  to { right:  -100%; opacity: 0; }
 }
