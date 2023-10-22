@@ -326,7 +326,7 @@ td {
 .input-grp {
   border: 1px solid var(--secondary-color);
 }
-.other-input-grp{
+.other-input-grp {
   border: none;
 }
 .skills-detail .input-grp {
@@ -418,7 +418,7 @@ textarea {
   border-radius: 100%;
   animation: spin 1s ease infinite;
 }
-.loader.submit-btn::after{
+.loader.submit-btn::after {
   border-top: 6px solid var(--background-color) !important;
 }
 .loader .submit-btn-text {
@@ -433,6 +433,14 @@ textarea {
   }
 }
 
+.snackbar-details-page {
+  top: 10vh;
+}
+.snackbar-index-page {
+  top: 27%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .snackbar {
   visibility: hidden;
   min-width: 250px;
@@ -445,7 +453,6 @@ textarea {
   position: fixed;
   z-index: 1;
   right: -100%;
-  top: 10vh;
   font-size: 17px;
 }
 
@@ -457,6 +464,12 @@ textarea {
 }
 
 @keyframes slideout {
-  from { right:  0; opacity: 1; }
-  to { right:  -100%; opacity: 0; }
+  from {
+    right: 0;
+    opacity: 1;
+  }
+  to {
+    right: -100%;
+    opacity: 0;
+  }
 }
