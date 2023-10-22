@@ -56,9 +56,8 @@ export const getSelectedSkills = (skills) => {
 }
 //Function to disable and enable button style
 export const updateButtonStyle = () => {
-    let hasChanged = state.form.isInputValid || state.form.isSkillsValid;
+    let hasChanged = state.form.isValid && state.form.hasChanged;
     submitBtn.style.opacity = hasChanged ? "1" : "0.3";
-    // submitBtn.disabled = !hasChanged;
 }
 //Function to add icons while validating input
 export const validationIcon = (inputElement, flag, errorMsgContent = "") => {

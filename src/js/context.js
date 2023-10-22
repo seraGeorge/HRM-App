@@ -10,8 +10,8 @@ export const state = {
         property: "all"
     },
     form: {
-        isInputValid: false,
-        isSkillsValid: false,
+        isValid: false,
+        hasChanged: true,
         errorMsg:"",
     }
 }

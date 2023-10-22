@@ -35,6 +35,7 @@ if (dataStr !== undefined) {
     form.addEventListener("input", (event) => {
         let hasChanged = false;
         const isValid = checkFormValidity(event.target)
+        state.form.isValid = isValid;
         if (empIdToEdit) {
 
             //Getting latest form data
@@ -42,16 +43,13 @@ if (dataStr !== undefined) {
 
             //Button is disabled if there is no change in the data
             hasChanged = hasFormChanged(formDataObj, empToEdit);
-            state.form.isInputValid = isValid && hasChanged;
+            state.form.hasChanged = hasChanged;
             if (!hasChanged) {
                 state.form.errorMsg = "No need to resubmit an unedited employee details. It is saved already"
             }
             if (!isValid) {
                 state.form.errorMsg = "There has been an invalid entry. Please do rectify it."
             }
-        }
-        else {
-            state.form.isInputValid = isValid;
         }
         updateButtonStyle();
     });
@@ -59,10 +57,11 @@ if (dataStr !== undefined) {
     skillsFormEntrySelectedList.addEventListener("selectionChange", (event) => {
         let hasChanged = false;
         const isValid = validateSkills();
+        state.form.isValid=isValid
         if (empIdToEdit) {
             //Button is disabled if there is no change in the data
             hasChanged = !hasSkillArrayChanged(getSelectedSkills(dataObj.skills), empToEdit.skills);
-            state.form.isSkillsValid = isValid && hasChanged;
+            state.form.hasChanged= hasChanged;
             if (!hasChanged) {
                 state.form.errorMsg = "No need to resubmit an unedited employee details. It is saved already"
             }
@@ -70,9 +69,7 @@ if (dataStr !== undefined) {
                 state.form.errorMsg = "There has been an invalid entry. Please do rectify it."
             }
         }
-        else {
-            state.form.isSkillsValid = isValid;
-        }
+
         updateButtonStyle();
     });
 
@@ -81,7 +78,7 @@ if (dataStr !== undefined) {
         event.preventDefault();
         submitBtn.classList.add("loader")
         //Check if valid to add employee
-        if (state.form.isInputValid || state.form.isSkillsValid) {
+        if (state.form.isValid && state.form.hasChanged) {
             if (!empToEdit) {
                 submitForm(getNewEmpId(dataObj.employees), dataObj.employees.length, dataObj.skills, "added")
             }
@@ -104,4 +101,5 @@ if (dataStr !== undefined) {
 else {
     console.error("Error occurred.");
 }
+
 
