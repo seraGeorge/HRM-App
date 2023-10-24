@@ -149,8 +149,8 @@ export const isElligibleToSubmit = (currentInputElement, empToEdit, skills) => {
         if (!hasChanged) {
             state.form.errorMsg = "No changes have been made.<br/>You are attempting to submit the same employee details that are already saved";
         }
-        if (!isValid) {
-            state.form.errorMsg = "Invalid entry detected.<br/>Please review and correct the input.";
+        if(!isValid){
+            state.form.errorMsg = "Enter all the required fields correctly."
         }
     }
     updateButtonStyle();

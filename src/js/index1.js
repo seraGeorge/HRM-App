@@ -1,4 +1,4 @@
-import { clearBtn, inpErrorMsg, inpValidateIcon, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
+import { clearBtn, inpErrorMsg, inpValidateIcon, otherEntryField, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
 import { getSelectedSkills, showSnackbar, updateButtonStyle, } from "./handlers.js";
 import { hasSkillArrayChanged } from "./helperFunctions.js";
 import { hideDropdownIfNotTarget } from "./dropdown.js";
@@ -46,13 +46,14 @@ if (dataStr !== undefined) {
 
     clearBtn.addEventListener("click", (event) => {
         state.form.isEmpty = true;
-
+        state.form.errorMsg = "Empty form can't be submitted"
         inpErrorMsg.forEach((errorMsg) =>
             errorMsg.classList.add("no-display")
         )
         inpValidateIcon.forEach((valIcon) => {
             valIcon.innerHTML = ""
         })
+        otherEntryField.classList.add("no-display")
         skillsFormEntrySelectedList.innerHTML = ""
         updateButtonStyle();
     })
