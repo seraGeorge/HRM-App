@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { genderOtherVal, genderRadiobuttons, otherEntryField, skillsFormEntrySelectedList, skillsList } from "./elements.js";
+import { genderOtherVal, genderRadiobuttons, inputs, otherEntryField, skillsFormEntrySelectedList, skillsList } from "./elements.js";
 import { hasFormChanged } from "./formInteractions.js";
 import { updateButtonStyle, validationIcon } from "./handlers.js";
 
@@ -61,6 +61,12 @@ const validateSelect = (inputElement) => {
     return null
 }
 //Function to validate radio
+const findSelectedRadioBtn = () => {
+    const selectedGrade = Array.from(genderRadiobuttons).filter(radioBtn =>
+        radioBtn.checked == true
+    );
+    return selectedGrade.length;
+}
 const validateRadio = (inputElement) => {
     if (inputElement.checked) {
         if (inputElement.value === "Other") {
@@ -69,6 +75,9 @@ const validateRadio = (inputElement) => {
         else {
             otherEntryField.removeAttribute("required")
         }
+    }
+    if (findSelectedRadioBtn() === 0) {
+        return "This is a required field."
     }
     return null
 }
@@ -94,24 +103,24 @@ export const handleValidation = (inputElement, currentInputElement) => {
             return true;// ignoring gender other entry when it has required=false
         }
     }
-    if (validateRequired(inputElement) === null) {
-        if (inputElement.type === "email") {
-            errorMessage = validateEmail(inputElement)
-        }
-        else if (inputElement.type === "text") {
-            errorMessage = validateText(inputElement);
-        } else if (inputElement.type === "tel") {
-            errorMessage = validateTel(inputElement);
-        } else if (inputElement.type === "date") {
-            errorMessage = validateDate(inputElement);
-        } else if (inputElement.tagName === "SELECT") {
-            errorMessage = validateSelect(inputElement);
-        } else if (inputElement.tagName === "TEXTAREA") {
-            errorMessage = validateText(inputElement);
-        }
-    }
-    if (errorMessage === null) {
+    else {
         errorMessage = validateRequired(inputElement);
+        if (errorMessage === null) {
+            if (inputElement.type === "email") {
+                errorMessage = validateEmail(inputElement)
+            }
+            else if (inputElement.type === "text") {
+                errorMessage = validateText(inputElement);
+            } else if (inputElement.type === "tel") {
+                errorMessage = validateTel(inputElement);
+            } else if (inputElement.type === "date") {
+                errorMessage = validateDate(inputElement);
+            } else if (inputElement.tagName === "SELECT") {
+                errorMessage = validateSelect(inputElement);
+            } else if (inputElement.tagName === "TEXTAREA") {
+                errorMessage = validateText(inputElement);
+            }
+        }
     }
     if (inputElement.id === currentInputElement.id) {
         if ((inputElement.type === "radio") || (inputElement.id === "gender_other_val")) {
@@ -126,7 +135,6 @@ export const handleValidation = (inputElement, currentInputElement) => {
 
 // Create a function to check the validity of all form inputs
 export const checkFormValidity = (currentInputElement) => {
-    const inputs = document.querySelectorAll(".input"); // Adjust the selector as needed
     let isFormValid = true;
     let isCurrentElementValid;
     inputs.forEach(input => {
@@ -149,7 +157,7 @@ export const isElligibleToSubmit = (currentInputElement, empToEdit, skills) => {
         if (!hasChanged) {
             state.form.errorMsg = "No changes have been made.<br/>You are attempting to submit the same employee details that are already saved";
         }
-        if(!isValid){
+        if (!isValid) {
             state.form.errorMsg = "Enter all the required fields correctly."
         }
     }

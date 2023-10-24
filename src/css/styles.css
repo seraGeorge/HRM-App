@@ -332,10 +332,10 @@ td {
 .skills-detail .input-grp {
   border: none;
 }
-.input[type="text"],
-.input[type="email"],
-.input[type="date"],
-.input[type="tel"],
+.input[type='text'],
+.input[type='email'],
+.input[type='date'],
+.input[type='tel'],
 textarea,
 select {
   flex: 1;
@@ -372,10 +372,10 @@ textarea {
   padding: 5px;
   outline: none;
 }
-.gender-options-with-validation{
+.gender-options-with-validation {
   display: flex;
 }
-.gender-options{
+.gender-options {
   display: flex;
   justify-content: space-evenly;
   gap: 40px;
@@ -412,7 +412,7 @@ textarea {
   position: relative;
 }
 .loader::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 20px;
   height: 20px;
@@ -441,12 +441,6 @@ textarea {
   }
 }
 
-.snackbar-details-page {
-  top: 10vh;
-}
-.snackbar-index-page {
-  top: 50vh;
-}
 .snackbar {
   visibility: hidden;
   min-width: 250px;
@@ -458,13 +452,14 @@ textarea {
   padding: 16px;
   position: fixed;
   z-index: 1;
+  top: 10vh;
   right: -100%;
   gap: 15px;
   border-left: 5px solid;
   font-weight: 700;
-  box-shadow: -1px 4px 12px 0px rgba(0,0,0,0.75);
+  box-shadow: -1px 4px 12px 0px rgba(0, 0, 0, 0.75);
 }
-.snackbar-icon{
+.snackbar-icon {
   color: var(--secondary-color) !important;
 }
 .snackbar.show {
@@ -473,17 +468,17 @@ textarea {
   transition: right 0.5s;
   animation: slideout 1.5s 2.5s;
 }
-.snackbar-contents{
+.snackbar-contents {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   gap: 5px;
 }
-.snackbar-title{
+.snackbar-title {
   font-size: 20px;
 }
-.snackbar-details{
+.snackbar-details {
   font-size: 17px;
 }
 @keyframes slideout {
