@@ -1,4 +1,4 @@
-import { pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
+import { clearBtn, inpErrorMsg, inpValidateIcon, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
 import { getSelectedSkills, showSnackbar, updateButtonStyle, } from "./handlers.js";
 import { hasSkillArrayChanged } from "./helperFunctions.js";
 import { hideDropdownIfNotTarget } from "./dropdown.js";
@@ -44,12 +44,23 @@ if (dataStr !== undefined) {
         isElligibleToSubmit(event.target, empToEdit, dataObj.skills);
     });
 
+    clearBtn.addEventListener("click", (event) => {
+        state.form.isEmpty = true;
 
+        inpErrorMsg.forEach((errorMsg) =>
+            errorMsg.classList.add("no-display")
+        )
+        inpValidateIcon.forEach((valIcon) => {
+            valIcon.innerHTML = ""
+        })
+        skillsFormEntrySelectedList.innerHTML = ""
+        updateButtonStyle();
+    })
     submitBtn.addEventListener("click", (event) => {
         event.preventDefault();
         submitBtn.classList.add("loader")
         //Check if valid to add employee
-        if (state.form.isValid && state.form.hasChanged) {
+        if (state.form.isValid && state.form.hasChanged && !state.form.isEmpty) {
             if (!empToEdit) {
                 submitForm(getNewEmpId(dataObj.employees), dataObj.employees.length, dataObj.skills, "added")
             }

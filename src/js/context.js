@@ -12,7 +12,7 @@ export const state = {
     form: {
         isValid: false,
         hasChanged: true,
-        isEmpty: true,
+        isEmpty: false,
         errorMsg: "",
     }
 }

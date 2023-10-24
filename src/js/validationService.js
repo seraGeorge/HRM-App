@@ -12,7 +12,6 @@ const validateRequired = (inputElement) => {
 }
 // Function to validate text input
 const validateText = (inputElement) => {
-    console.log(inputElement)
     const inputValue = inputElement.value;
     if (inputValue.length < 2) {
         return "Please ensure that your entry is at least 2 characters long.";
@@ -139,6 +138,7 @@ export const checkFormValidity = (currentInputElement) => {
     return isValid;
 }
 export const isElligibleToSubmit = (currentInputElement, empToEdit, skills) => {
+    state.form.isEmpty = false;
     let hasChanged = false;
     const isValid = checkFormValidity(currentInputElement);
     state.form.isValid = isValid;

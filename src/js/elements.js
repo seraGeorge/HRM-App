@@ -73,7 +73,9 @@ export const departmentSelectInput = document.querySelector("#department")
 export const empModeSelectInput = document.querySelector("#employment_mode")
 export const genderRadiobuttons = document.querySelectorAll(".gender");
 export const dateList = document.querySelectorAll(".date");
-
+export const clearBtn = document.querySelector("#clear-btn");
+export const inpValidateIcon = document.querySelectorAll(".input-icon");
+export const inpErrorMsg = document.querySelectorAll(".error-msg")
 
 
 
