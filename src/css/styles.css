@@ -372,6 +372,14 @@ textarea {
   padding: 5px;
   outline: none;
 }
+.gender-options-with-validation{
+  display: flex;
+}
+.gender-options{
+  display: flex;
+  justify-content: space-evenly;
+  gap: 40px;
+}
 .form-buttons {
   display: flex;
   justify-content: flex-end;
@@ -437,32 +445,47 @@ textarea {
   top: 10vh;
 }
 .snackbar-index-page {
-  top: 27%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 50vh;
 }
 .snackbar {
   visibility: hidden;
   min-width: 250px;
   margin-left: 0;
-  background-color: var(--secondary-color);
-  color: #fff;
+  background-color: #fff;
+  color: var(--secondary-color);
   text-align: center;
-  border-radius: 2px;
+  border-radius: 10px;
   padding: 16px;
   position: fixed;
   z-index: 1;
   right: -100%;
-  font-size: 17px;
+  gap: 15px;
+  border-left: 5px solid;
+  font-weight: 700;
+  box-shadow: -1px 4px 12px 0px rgba(0,0,0,0.75);
 }
-
+.snackbar-icon{
+  color: var(--secondary-color) !important;
+}
 .snackbar.show {
   visibility: visible;
   right: 0;
   transition: right 0.5s;
   animation: slideout 1.5s 2.5s;
 }
-
+.snackbar-contents{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 5px;
+}
+.snackbar-title{
+  font-size: 20px;
+}
+.snackbar-details{
+  font-size: 17px;
+}
 @keyframes slideout {
   from {
     right: 0;

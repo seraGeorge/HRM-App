@@ -1,6 +1,7 @@
 import { state } from "./context.js";
-import { genderOtherVal, loader, otherEntryField, overlay, snackbar, sortIcon, submitBtn, tableData } from "./elements.js";
+import { genderOtherVal, loader, otherEntryField, overlay, snackbar, snackbarDetails, snackbarIcon, snackbarTitle, sortIcon, submitBtn, tableData } from "./elements.js";
 import { getDate, isValidDateFormat } from "./helperFunctions.js";
+import { handleValidation } from "./validationService.js";
 
 //Function to show loader until data is fetched
 export const displayLoading = () => {
@@ -102,13 +103,24 @@ export const checkValidity = () => {
     return errorCount;
 }
 //Function to show Snackbar
-export const showSnackbar = (snackbarTxt) => {
+export const showSnackbar = (icon, title, details) => {
     snackbar.classList.add("show");
-    snackbar.innerHTML = snackbarTxt
-
+    snackbarIcon.innerHTML = icon;
+    snackbarTitle.innerHTML = title;
+    snackbarDetails.innerHTML = details;
+    if (title === "Error") {
+        snackbar.style.borderColor = "red"
+        snackbarTitle.style.color = "red"
+    }
+    else {
+        snackbar.style.borderColor = "green"
+        snackbarTitle.style.color = "green"
+    }
     setTimeout(function () {
         snackbar.classList.remove("show")
-        snackbar.innerHTML = ""
+        snackbarIcon.innerHTML = "";
+        snackbarTitle.innerHTML = "";
+        snackbarDetails.innerHTML = ""
     }, 3000);
 }
 // Function to parse query parameters from the URL

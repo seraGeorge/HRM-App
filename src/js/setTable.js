@@ -78,7 +78,7 @@ const employeeDeleteConfirmAction = (employeeIdVal, employeeList) => {
                 .then(() => {
                     setTableData(newEmpList);
                     const snackbarTxt = employeeIdVal + " has been deleted"
-                    showSnackbar(snackbarTxt);
+                    showSnackbar("check_circle", "Success", snackbarTxt);
                 })
                 .catch((error) => {
                     console.error("Error updating user data:", error);

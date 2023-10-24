@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { skillsFormEntrySelectedList, skillsList } from "./elements.js";
+import { genderOtherVal, genderRadiobuttons, otherEntryField, skillsFormEntrySelectedList, skillsList } from "./elements.js";
 import { hasFormChanged } from "./formInteractions.js";
 import { updateButtonStyle, validationIcon } from "./handlers.js";
 
@@ -12,19 +12,23 @@ const validateRequired = (inputElement) => {
 }
 // Function to validate text input
 const validateText = (inputElement) => {
+    console.log(inputElement)
     const inputValue = inputElement.value;
     if (inputValue.length < 2) {
-        return "The entry must have a length of at least 2.";
+        return "Please ensure that your entry is at least 2 characters long.";
     }
-    if (!/^[A-Za-z\s'.-]+$/.test(inputValue)) {
-        return "The field can have alphabets, spaces, single quotes, hyphens, and periods.";
+    if ((!/^[A-Za-z\s'.-]+$/.test(inputValue)) && (inputElement.tagName != "TEXTAREA")) {
+        return "The field should contain only alphabets, spaces, single quotes, hyphens, and periods.";
+    }
+    if (/^\s*$/.test(inputValue)) {
+        return "Kindly provide a meaningful content for this field, meeting the specified criteria.";
     }
     return null;
 }
 // Function to validate email input
 const validateEmail = (inputElement) => {
     if (!inputElement.checkValidity()) {
-        return "The entry is not a valid email.";
+        return "Please ensure that you have entered a valid email.";
     }
     return null;
 }
@@ -32,10 +36,10 @@ const validateEmail = (inputElement) => {
 const validateTel = (inputElement) => {
     const inputValue = inputElement.value;
     if (inputValue.length !== 10) {
-        return "The entry should have a length of 10.";
+        return "Please ensure that your entry is at least 10 numbers long.";
     }
     if (!/^[0-9]*$/.test(inputValue)) {
-        return "This field can only have numeric data.";
+        return "This field should contain only numeric data.";
     }
     return null;
 }
@@ -44,7 +48,7 @@ const validateDate = (inputElement) => {
     const enteredDate = new Date(inputElement.value);
     const today = new Date();
     if (enteredDate >= today) {
-        return "The entry must not exceed today.";
+        return "Please ensure that the entered date is not later than today's date.";
     }
     return null;
 }
@@ -54,6 +58,18 @@ const validateSelect = (inputElement) => {
     const selectedOption = inputElement.options[index];
     if (selectedOption.disabled) {
         return "This is a required field."
+    }
+    return null
+}
+//Function to validate radio
+const validateRadio = (inputElement) => {
+    if (inputElement.checked) {
+        if (inputElement.value === "Other") {
+            otherEntryField.setAttribute("required", true)
+        }
+        else {
+            otherEntryField.removeAttribute("required")
+        }
     }
     return null
 }
@@ -71,9 +87,13 @@ export const validateSkills = (currentInputElement) => {
 // Validating each form input
 export const handleValidation = (inputElement, currentInputElement) => {
     let errorMessage = null;
-
     if (!inputElement.hasAttribute("required")) {
-        return true; // Skip non-required inputs
+        if (inputElement.type === "radio") {//radio buttons are unrequired
+            errorMessage = validateRadio(inputElement)
+        }
+        else {
+            return true;// ignoring gender other entry when it has required=false
+        }
     }
     if (validateRequired(inputElement) === null) {
         if (inputElement.type === "email") {
@@ -87,13 +107,20 @@ export const handleValidation = (inputElement, currentInputElement) => {
             errorMessage = validateDate(inputElement);
         } else if (inputElement.tagName === "SELECT") {
             errorMessage = validateSelect(inputElement);
+        } else if (inputElement.tagName === "TEXTAREA") {
+            errorMessage = validateText(inputElement);
         }
     }
     if (errorMessage === null) {
         errorMessage = validateRequired(inputElement);
     }
     if (inputElement.id === currentInputElement.id) {
-        validationIcon(inputElement, errorMessage !== null, errorMessage);
+        if ((inputElement.type === "radio") || (inputElement.id === "gender_other_val")) {
+            validationIcon(inputElement.parentNode.parentNode, errorMessage !== null, errorMessage);
+        }
+        else {
+            validationIcon(inputElement, errorMessage !== null, errorMessage);
+        }
     }
     return errorMessage === null
 }
@@ -111,8 +138,6 @@ export const checkFormValidity = (currentInputElement) => {
     let isValid = isFormValid && isSkillsValid
     return isValid;
 }
-
-
 export const isElligibleToSubmit = (currentInputElement, empToEdit, skills) => {
     let hasChanged = false;
     const isValid = checkFormValidity(currentInputElement);
@@ -122,12 +147,11 @@ export const isElligibleToSubmit = (currentInputElement, empToEdit, skills) => {
         hasChanged = hasFormChanged(empToEdit, skills);
         state.form.hasChanged = hasChanged;
         if (!hasChanged) {
-            state.form.errorMsg = "Warning:No changes have been made.<br/>You are attempting to submit the same employee details that are already saved";
+            state.form.errorMsg = "No changes have been made.<br/>You are attempting to submit the same employee details that are already saved";
         }
-        if(!isValid){
-            state.form.errorMsg = "Error: Invalid entry detected.<br/>Please review and correct the input.";
+        if (!isValid) {
+            state.form.errorMsg = "Invalid entry detected.<br/>Please review and correct the input.";
         }
     }
     updateButtonStyle();
 }
-

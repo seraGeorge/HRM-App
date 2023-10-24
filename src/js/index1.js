@@ -27,7 +27,11 @@ if (dataStr !== undefined) {
         empToEditArrayIndex = dataObj.employees.findIndex((employee) => employee.id === empIdToEdit);
         //Setting form values
         setFormData(empToEdit);
-        localStorage.removeItem("empId")
+        localStorage.removeItem("empId");
+        state.form.errorMsg = "No changes have been made.<br/>You are attempting to submit the same employee details that are already saved"
+    }
+    else {
+        state.form.errorMsg = "Enter all the required fields correctly."
     }
 
 
@@ -54,9 +58,9 @@ if (dataStr !== undefined) {
             }
         }
         else {
-            console.log("hi")
-            if (state.form.errorMsg)
-                showSnackbar(state.form.errorMsg);
+            if (state.form.errorMsg) {
+                showSnackbar("cancel", "Error", state.form.errorMsg);
+            }
             submitBtn.classList.remove("loader");
         }
     })

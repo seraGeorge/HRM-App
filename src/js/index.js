@@ -116,7 +116,7 @@ result.then(data => {
         // Check if a snackbar message is present and display it
         if (snackbarMessage) {
             // Use your showSnackbar function to display the message
-            showSnackbar(decodeURIComponent(snackbarMessage));
+            showSnackbar("check_circle", "Success", decodeURIComponent(snackbarMessage));
             //Clearing the url from the snackbar msg once it the snackbar is gone
             const updatedURL = window.location.href.replace(/\?snackbarMessage=.*/, '');
             history.replaceState(null, '', updatedURL);
