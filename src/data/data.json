@@ -320,6 +320,22 @@
         {
             "id": "CSV123",
             "name": "Customer Service"
+        },
+        {
+          "id": "ROR123",
+          "name":"Ruby on Rails"
+        },
+        {
+          "id": "GIT567",
+          "name": "Github"
+        },
+        {
+          "id": "SWIFT123",
+          "name": "Swift"
+        },
+        {
+          "id": "ANG897",
+          "name": "Angular JS"
         }
     ],
     "designations": [
