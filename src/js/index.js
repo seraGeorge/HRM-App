@@ -12,23 +12,20 @@ year.innerHTML = getYear()
 //Loader before the table Data
 displayLoading();
 
-let dataCopy;
 const result = readUserData(`/`);
 
 result.then(data => {
     hideLoading()
-    dataCopy = data;
-    console.log(dataCopy)
-    let employeeList = dataCopy.employees;
+    let employeeList = data.employees;
 
 
     if ((employeeList !== null) || (employeeList !== undefined)) {
 
 
         state.sort = 0
-        localStorage.setItem('data', JSON.stringify(dataCopy));
+        localStorage.setItem('data', JSON.stringify(data));
         setTableData(employeeList)
-        setFilterDropdownData(dataCopy)
+        setFilterDropdownData(data)
 
         //sort btn on click
         sortBtnList.forEach((sortBtn, index) =>
