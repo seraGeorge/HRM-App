@@ -491,3 +491,13 @@ textarea {
     opacity: 0;
   }
 }
+  .notify-bubble {
+    position: absolute;
+    top: -25px;
+    right: -7px;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px gray;
+  }

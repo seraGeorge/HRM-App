@@ -1,9 +1,9 @@
 import { state } from "./context.js";
-import { addEmployeeBtn, applyAllBtn, deleteModal, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, mainFilterDropDown, overlay, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon, viewModal } from "./elements.js";
+import { addEmployeeBtn, applyAllBtn, deleteModal, departmentDropDownBtn, departmentOptionsList, designationDropDownBtn, designationOptionsList, filterBtn, filterBubble, mainFilterDropDown, overlay, searchDropDown, searchDropDownBtn, searchDropDownBtnText, searchFilterList, searchText, skillsDropDownBtn, skillsOptionsList, sortBtnList, sortIcon, viewModal } from "./elements.js";
 import { readUserData } from "./firebase.js";
 import { displayLoading, getQueryParam, hideLoading, removeOverlay, showSnackbar, toggleBtn } from "./handlers.js";
 import { getYear } from "./helperFunctions.js";
-import { hideDropdownIfNotTarget, setFilterDropdownData } from "./dropdown.js";
+import { hideDropdownIfNotTarget, setFilterBubble, setFilterDropdownData } from "./dropdown.js";
 import { setTableData } from "./setTable.js";
 import { getFilterChips } from "./actions.js";
 
@@ -64,6 +64,9 @@ result.then(data => {
             state.filter.designationFilters = designationFilters;
             state.filter.departmentFilters = departmentFilters;
             state.filter.skillsFilters = skillsFilters;
+
+            const filtersChipBtns = document.querySelectorAll(".chip-heading");
+            setFilterBubble(filtersChipBtns)
 
             setTableData(employeeList);
         });

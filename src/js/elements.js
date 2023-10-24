@@ -50,6 +50,7 @@ export const empSkillsList = document.getElementById("skill-list")
 export const empSkillsVal = document.querySelectorAll(".skill-card");
 export const empAddressVal = document.getElementById("address-val");
 export const addEmployeeBtn = document.getElementById("add-employee-btn");
+export const filterBubble = document.getElementById("notify-bubble");
 
 export const snackbar = document.getElementById("snackbar");
 export const snackbarIcon = document.getElementById("snackbar-icon");
