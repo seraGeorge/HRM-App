@@ -6,10 +6,7 @@ import { getYear } from "./helperFunctions.js";
 import { hideDropdownIfNotTarget, setFilterBubble, setFilterDropdownData } from "./dropdown.js";
 import { setTableData } from "./setTable.js";
 import { getFilterChips } from "./actions.js";
-import { PopUpInfo } from "./customElement.js";
 
-// Define the new element
-customElements.define("popup-info", PopUpInfo);
 year.innerHTML = getYear()
 
 //Loader before the table Data

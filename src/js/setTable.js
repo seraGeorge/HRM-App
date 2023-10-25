@@ -1,6 +1,5 @@
 import { filterData, getSearchedData, sortBtnHandler } from "./actions.js";
 import { state } from "./context.js";
-import { PopUpInfo } from "./customElement.js";
 import { hideDropdownIfNotTarget } from "./dropdown.js";
 import { body, deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, overlay, skillsList, snackbar, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
@@ -136,12 +135,14 @@ const employeeEditAction = (employees, editSelector, employeeIdVal) => {
         localStorage.setItem('empId', employeeIdVal);
     })
 }
-const skillsBubbleAction = (skills, skillsBubble,skillsList) => {
+const skillsBubbleAction = (skills, skillsBubble, skillsList) => {
 
-    skillsBubble.addEventListener("click", () => {
-        const popUp = document.createElement("popup-info");
-        popUp.setAttribute("info", skills);
-        skillsList.appendChild(popUp)
+    skillsBubble.addEventListener("mouseover", () => {
+        const popUp = document.createElement("span");
+        skillsBubble.classList.add("tooltip");
+        popUp.classList.add("tooltiptext");
+        popUp.innerHTML = skills;
+        skillsBubble.appendChild(popUp)
     })
 }
 const setEmployeeSkillsList = (skillsSet, tableRow) => {
@@ -166,5 +167,5 @@ const setEmployeeSkillsList = (skillsSet, tableRow) => {
     else {
         skillsBubble.classList.add("no-display")
     }
-    skillsBubbleAction(skills, skillsBubble,skillsList);
+    skillsBubbleAction(skills, skillsBubble, skillsList);
 }
