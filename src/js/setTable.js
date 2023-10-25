@@ -137,10 +137,10 @@ const employeeEditAction = (employees, editSelector, employeeIdVal) => {
 }
 const skillsBubbleAction = (skills, skillsBubble, skillsList) => {
 
-    skillsBubble.addEventListener("mouseover", () => {
+    skillsBubble.addEventListener("click", () => {
         const popUp = document.createElement("span");
-        skillsBubble.classList.add("tooltip");
-        popUp.classList.add("tooltiptext");
+        skillsBubble.classList.add("extra-skills");
+        popUp.classList.add("extra-skills-text");
         popUp.innerHTML = skills;
         skillsBubble.appendChild(popUp)
     })

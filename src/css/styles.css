@@ -510,13 +510,13 @@ textarea {
   border-radius: 50%;
   box-shadow: 1px 1px 1px gray;
 }
-.tooltip {
+.extra-skills {
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
 }
 
-.tooltip .tooltiptext {
+.extra-skills .extra-skills-text {
   visibility: hidden;
   width: 120px;
   color: black;
@@ -534,7 +534,13 @@ textarea {
   transition: opacity 1s;
 }
 
-.tooltip:hover .tooltiptext {
+.extra-skills:hover .extra-skills-text {
   visibility: visible;
   opacity: 1;
+}
+
+.skills-entry-selected-list{
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
