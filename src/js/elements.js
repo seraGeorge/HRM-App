@@ -76,7 +76,6 @@ export const dateList = document.querySelectorAll(".date");
 export const clearBtn = document.querySelector("#clear-btn");
 export const inpValidateIcon = document.querySelectorAll(".input-icon");
 export const inpErrorMsg = document.querySelectorAll(".error-msg")
-export const inputs = document.querySelectorAll(".input");
 
 
 

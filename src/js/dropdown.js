@@ -13,19 +13,19 @@ export const setFilterDropdownData = (data) => {
     setDropDown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
 
     designationResetBtn.addEventListener("click", () => {
-        resetAndSetDropdown(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
+        resetAndSetFilter(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
     })
     departmentResetBtn.addEventListener("click", () => {
-        resetAndSetDropdown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
+        resetAndSetFilter(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
     })
     skillsResetBtn.addEventListener("click", () => {
-        resetAndSetDropdown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
+        resetAndSetFilter(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
     })
     resetAllBtn.addEventListener("click", (event) => {
         event.stopPropagation()
-        resetAndSetDropdown(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
-        resetAndSetDropdown(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
-        resetAndSetDropdown(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
+        resetAndSetFilter(designationsDataList, designationOptionsList, designationSelectedList, "designation-filter")
+        resetAndSetFilter(departmentsDataList, departmentOptionsList, departmentSelectedList, "department-filter")
+        resetAndSetFilter(skillsDataList, skillsOptionsList, skillsSelectedList, "skills-filter")
         state.filter.designationFilters = [];
         state.filter.departmentFilters = [];
         state.filter.skillsFilters = [];
@@ -110,7 +110,7 @@ const createChip = (text, className) => {
     return listItemChip;
 };
 //Reset button action
-export const resetAndSetDropdown = (dataList, optionsList, selectedlist, className) => {
+export const resetAndSetFilter = (dataList, optionsList, selectedlist, className) => {
     selectedlist.innerHTML = "";
     optionsList.innerHTML = "";
     setDropDown(dataList, optionsList, selectedlist, className)

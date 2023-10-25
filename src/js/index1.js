@@ -1,11 +1,11 @@
-import { clearBtn, inpErrorMsg, inpValidateIcon, inputs, otherEntryField, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
+import { clearBtn, inpErrorMsg, inpValidateIcon, otherEntryField, pageTitle, skillsFormEntryBtn, skillsFormEntryList, skillsFormEntrySelectedList, submitBtnText, } from "./elements.js";
 import { getSelectedSkills, showSnackbar, updateButtonStyle, } from "./handlers.js";
 import { hasSkillArrayChanged } from "./helperFunctions.js";
 import { hideDropdownIfNotTarget } from "./dropdown.js";
 import { form, submitBtn } from "./elements.js"
 import { setFormUI, setFormData, submitForm, hasFormChanged } from "./formInteractions.js";
 import { getLatestFormData, getNewEmpId } from "./formInput.js";
-import { checkFormValidity, handleValidation, isElligibleToSubmit, validateSkills } from "./validationService.js";
+import { checkFormValidity, isElligibleToSubmit, validateSkills } from "./validationService.js";
 import { state } from "./context.js";
 
 const dataStr = localStorage['data'];
@@ -60,7 +60,6 @@ if (dataStr !== undefined) {
     submitBtn.addEventListener("click", (event) => {
         event.preventDefault();
         submitBtn.classList.add("loader")
-       
         //Check if valid to add employee
         if (state.form.isValid && state.form.hasChanged && !state.form.isEmpty) {
             if (!empToEdit) {
@@ -71,10 +70,6 @@ if (dataStr !== undefined) {
             }
         }
         else {
-            inputs.forEach(input => {
-                handleValidation(input, input)
-            });
-            validateSkills(skillsFormEntrySelectedList);
             if (state.form.errorMsg) {
                 showSnackbar("cancel", "Error", state.form.errorMsg);
             }
