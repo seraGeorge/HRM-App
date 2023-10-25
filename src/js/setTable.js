@@ -1,7 +1,8 @@
 import { filterData, getSearchedData, sortBtnHandler } from "./actions.js";
 import { state } from "./context.js";
+import { PopUpInfo } from "./customElement.js";
 import { hideDropdownIfNotTarget } from "./dropdown.js";
-import { body, deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, overlay, snackbar, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
+import { body, deleteModal, deleteModalCancelBtn, deleteModalCloseBtn, deleteModalConfirmBtn, empAddressVal, empDOBVal, empDOJVal, empDepartmentVal, empDesignationVal, empEmailVal, empGenderVal, empIdToDlt, empModeVal, empName, empPhoneNoVal, empSkillsList, empWorkExpVal, overlay, skillsList, snackbar, tableBody, viewModal, viewModalCloseBtn } from "./elements.js";
 import { writeUserData } from "./firebase.js";
 import { displayLoading, formatDate, hideLoading, showSnackbar, toggleBtn, removeOverlay, addOverlay } from "./handlers.js";
 
@@ -21,21 +22,25 @@ export const setTableData = (employees) => {
     else {
         searchedEmployees.forEach((employee) => {
 
-            let skillSet = employee.skills;
+            let skillsSet = employee.skills;
             let skills = ""
-            for (let j = 0; j < skillSet.length; j++) {
-                let skill = skillSet[j]
+            let skillsLength = skillsSet.length;
+            let skillsLimit = skillsLength > 2 ? 2 : skillsSet.length;
+            for (let j = 0; j < skillsLimit; j++) {
+                let skill = skillsSet[j]
                 skills += `<span class="skill-card"> ${skill.name} </span>`
             }
+            skills += `
+            <button class=" button common-flex skills-bubble no-display">
+            +<span class="skills-number">5</span></button> `
 
             const tableRow = document.createElement('tr');
-
             tableRow.innerHTML = `
             <td class="employee-data employee-id" data-id="${employee.id}">${employee.id}</td>
             <td class="employee-data">${employee.emp_name}</td>
             <td class="employee-data">${employee.designation}</td>
             <td class="employee-data">${employee.department}</td>
-            <td class="employee-data"><div class="skill-list"> ${skills} </div></td>
+            <td class="employee-data"><div class="skill-list" id="skill-list-table"> ${skills} </div></td>
             <td class="employee-data"><div class=" actions-list common-flex"> 
             <button class="button material-symbols-outlined employee-view" >visibility</button> 
             <button class="button material-symbols-outlined employee-edit">edit</button> 
@@ -50,7 +55,10 @@ export const setTableData = (employees) => {
             const employeeIdVal = employeeIdTag.dataset.id;
             employeeDeleteBtnAction(employees, deleteSelector, employeeIdVal);
             employeeViewAction(employees, viewSelector, employeeIdVal);
-            employeeEditAction(employees, editSelector, employeeIdVal)
+            employeeEditAction(employees, editSelector, employeeIdVal);
+            if (skillsLength > 2) {
+                setEmployeeSkillsList(skillsSet, tableRow);
+            }
         })
         toggleBtn(deleteModalCloseBtn, deleteModal, true);
         toggleBtn(deleteModalCancelBtn, deleteModal, true);
@@ -127,4 +135,36 @@ const employeeEditAction = (employees, editSelector, employeeIdVal) => {
         window.location.href = './src/pages/employeeDetails.html';
         localStorage.setItem('empId', employeeIdVal);
     })
+}
+const skillsBubbleAction = (skills, skillsBubble,skillsList) => {
+
+    skillsBubble.addEventListener("click", () => {
+        const popUp = document.createElement("popup-info");
+        popUp.setAttribute("info", skills);
+        skillsList.appendChild(popUp)
+    })
+}
+const setEmployeeSkillsList = (skillsSet, tableRow) => {
+    const skillsList = tableRow.querySelector(".skill-list")
+    const skillsExtraNumber = tableRow.querySelector(".skills-number");
+    const skillsBubble = tableRow.querySelector(".skills-bubble")
+
+
+    let skills = "";
+    let totalSkillsLength = skillsSet.length;
+
+
+
+    if (skillsSet.length > 2) {
+        skillsBubble.classList.remove("no-display")
+        skillsExtraNumber.innerHTML = totalSkillsLength - 2;
+        for (let j = 2; j < skillsSet.length; j++) {
+            let skill = skillsSet[j]
+            skills += skill.name + " "
+        }
+    }
+    else {
+        skillsBubble.classList.add("no-display")
+    }
+    skillsBubbleAction(skills, skillsBubble,skillsList);
 }

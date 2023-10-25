@@ -14,3 +14,6 @@ A JSON-based web application to manage an organization's human resources.
 - Users will have the option to filter the employees according to their assigned skills. 
 - Details of a particular employee will be displayed on a modal/dialog.
 - A confirmation message will be displayed before deleting an employee.
+
+
+**App is currently active at https://serageorge.github.io/HRM-App/**

@@ -1,5 +1,5 @@
 import { state } from "./context.js";
-import { departmentOptionsList, departmentResetBtn, departmentSelectedList, designationOptionsList, designationResetBtn, designationSelectedList, mainFilterDropDown, resetAllBtn, skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
+import { departmentOptionsList, departmentResetBtn, departmentSelectedList, designationOptionsList, designationResetBtn, designationSelectedList, filterBubble, mainFilterDropDown, resetAllBtn, skillsOptionsList, skillsResetBtn, skillsSelectedList } from "./elements.js";
 import { setTableData } from "./setTable.js";
 
 //Setting data for the dropdown
@@ -29,7 +29,11 @@ export const setFilterDropdownData = (data) => {
         state.filter.designationFilters = [];
         state.filter.departmentFilters = [];
         state.filter.skillsFilters = [];
-        setTableData(data.employees)
+        setTableData(data.employees);
+
+        const filtersChipBtns = document.querySelectorAll(".chip-heading");
+        setFilterBubble(filtersChipBtns)
+
     })
 }
 //Creating the dropdown
@@ -59,7 +63,6 @@ export const addSelection = (item, listItem, selectedlist, optionsList, classNam
 
     //List Item Chip in the selectedList
     const listItemChip = createChip(item, listItemClass);
-
     selectedlist.appendChild(listItemChip)
     optionsList.removeChild(listItem)
 
@@ -76,16 +79,12 @@ export const addSelection = (item, listItem, selectedlist, optionsList, classNam
     selectedlist.dispatchEvent(selectionChangeEvent);
 
 
-
-
     //Cancel Button interaction
     const chipCancelBtn = listItemChip.querySelector("#chip-cancel-btn")
     chipCancelBtn.addEventListener("click", (event) => {
         event.stopPropagation();
         selectedlist.removeChild(listItemChip)
         optionsList.appendChild(listItem)
-
-
 
         // Create a custom event for changes in selectedlist
         const removalEvent = new CustomEvent("selectionChange", {
@@ -122,5 +121,15 @@ export const hideDropdownIfNotTarget = (dropdown, button, event) => {
         if (!dropdown.classList.contains("no-display")) {
             dropdown.classList.add("no-display");
         }
+    }
+}
+//Set filter Bubble value
+export const setFilterBubble = (filtersChipBtns) => {
+    if (filtersChipBtns.length === 0) {
+        filterBubble.classList.add("no-display")
+    }
+    else {
+        filterBubble.classList.remove("no-display")
+        filterBubble.innerHTML = filtersChipBtns.length;
     }
 }
